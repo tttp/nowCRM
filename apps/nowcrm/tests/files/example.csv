@@ -1,0 +1,2 @@
+email,first_name,last_name,address_line1,address_line2,plz,zip,location,canton,country,language,function,phone,mobile_phone,salutation,gender,website_url,linkedin_url,facebook_url,twitter_url,birth_date,organization,department,description
+john@example.com,John,Doe,123 Main St,Apt 4B,12345,54321,New York,NY,USA,English,Manager,+1234567890,+1987654321,Mr.,Male,www.johndoe.com,linkedin.com/johndoe,facebook.com/johndoe,twitter.com/johndoe,1990-01-01,ACME Corp,Sales,Experienced sales manager

@@ -1,0 +1,67 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+	"extends": ["../biome.json"],
+	"files": {
+		"includes": [
+			"app/**",
+			"components/**",
+			"hooks/**",
+			"i18n/**",
+			"lib/**",
+			"!components/editor/**",
+			"!components/ui/**",
+			"!components/event-calendar/**"
+		]
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"nursery": {
+				"useUniqueElementIds": "off",
+				"noNestedComponentDefinitions": "warn",
+				"useSortedClasses": {
+					"level": "warn",
+					"fix": "safe",
+					"options": {
+						"attributes": ["classList"],
+						"functions": ["clsx", "cva", "cn"]
+					}
+				}
+			},
+			"a11y": {
+				"noStaticElementInteractions": "off",
+				"noSvgWithoutTitle": "off",
+				"useAriaPropsSupportedByRole": "warn",
+				"useKeyWithClickEvents": "off",
+				"useSemanticElements": "off",
+				"useFocusableInteractive": "off",
+				"noLabelWithoutControl": "off"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "off"
+			},
+			"recommended": true,
+			"correctness": {
+				"useExhaustiveDependencies": "off",
+				"noUnusedImports": "off"
+			},
+			"performance": {
+				"noImgElement": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noConfusingVoidType": "off",
+				"noArrayIndexKey": "off"
+			},
+			"style": {
+				"noUselessElse": "off",
+				"noNonNullAssertion": "off",
+				"noParameterAssign": "warn"
+			},
+			"complexity": {
+				"noBannedTypes": "off",
+				"noForEach": "off"
+			}
+		}
+	}
+}

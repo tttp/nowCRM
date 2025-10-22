@@ -1,0 +1,304 @@
+"use client";
+
+import type { Session } from "next-auth";
+import * as React from "react";
+import { fetchDataForVisibleColumns } from "@/components/dataTable/actions/fetchDataForVisibleColumns";
+import DataTable, {
+	useUrlState,
+} from "@/components/dataTable/dataTableContacts";
+import { transformFilters } from "@/lib/actions/filters/filtersSearch";
+import AdvancedFilters from "../../contacts/components/advancedFilters/advancedFilters";
+import AddToListDialog from "./components/addToListDialog";
+import { columns } from "./components/columns/ContactColumns";
+import MassActionsContacts from "./components/massActions/MassActions";
+
+type Props = {
+	initialData: any[];
+	initialPagination: {
+		page: number;
+		pageSize: number;
+		pageCount: number;
+		total: number;
+	};
+	sortBy: string;
+	sortOrder: "asc" | "desc";
+	tableTitle: string;
+	tableName: string;
+	session?: Session;
+	serverFilters?: any;
+};
+
+// Helper function to restore filters from localStorage
+function getInitialFilters(serverFilters?: any) {
+	// Only access localStorage on the client side
+	if (typeof window === "undefined") {
+		return serverFilters ?? {};
+	}
+
+	try {
+		const storedFilters = localStorage.getItem("contacts.filters.v2");
+		if (storedFilters) {
+			const parsed = JSON.parse(storedFilters);
+			const strapiFilters = transformFilters(parsed);
+
+			if (strapiFilters && Object.keys(strapiFilters).length > 0) {
+				return serverFilters && Object.keys(serverFilters).length > 0
+					? { $and: [serverFilters, strapiFilters] }
+					: strapiFilters;
+			}
+		}
+	} catch (error) {
+		console.error("Failed to restore filters from localStorage:", error);
+	}
+	return serverFilters ?? {};
+}
+
+export default function ContactsTableClient({
+	initialData,
+	initialPagination,
+	sortBy,
+	sortOrder,
+	tableTitle,
+	tableName,
+	session,
+	serverFilters,
+}: Props) {
+	const [data, setData] = React.useState(initialData);
+	const [pagination, setPagination] = React.useState(initialPagination);
+	const [isLoading, setIsLoading] = React.useState(false);
+	const [searchTerm, setSearchTerm] = React.useState("");
+	const [filters, setFilters] = React.useState<any>(() =>
+		getInitialFilters(serverFilters),
+	);
+	const { getParam, updateUrl } = useUrlState();
+	const selectedTag = getParam("tag");
+	const selectedCountry = getParam("country");
+
+	const combineWithSearch = React.useCallback(
+		(transformed: any, term: string) => {
+			const baseOr: any[] = !term
+				? []
+				: [
+						{ email: { $containsi: term } },
+						{ phone: { $containsi: term } },
+						{ first_name: { $containsi: term } },
+						{ last_name: { $containsi: term } },
+						{ contact_types: { name: { $containsi: term } } },
+						{ subscriptions: { channel: { name: { $containsi: term } } } },
+						{
+							actions: {
+								action_normalized_type: { name: { $containsi: term } },
+							},
+						},
+					];
+			if (!baseOr.length) return transformed || {};
+			const isEmptyFilter = (obj: any) =>
+				!obj || (typeof obj === "object" && Object.keys(obj).length === 0);
+			if (isEmptyFilter(transformed)) return { $or: baseOr };
+			return { $and: [transformed, { $or: baseOr }] };
+		},
+		[],
+	);
+
+	const effectiveFilters = React.useMemo(() => {
+		let baseFilters = combineWithSearch(filters, searchTerm);
+
+		if (selectedTag) {
+			const tagFilter = { tags: { id: { $eq: selectedTag } } };
+			baseFilters = baseFilters
+				? { $and: [baseFilters, tagFilter] }
+				: tagFilter;
+		}
+
+		if (selectedCountry) {
+			const countryFilter = { country: { $eq: selectedCountry } };
+			baseFilters = baseFilters
+				? { $and: [baseFilters, countryFilter] }
+				: countryFilter;
+		}
+
+		return baseFilters;
+	}, [filters, searchTerm, selectedTag, selectedCountry, combineWithSearch]);
+
+	const fetchData = React.useCallback(
+		async (params: {
+			page?: number;
+			pageSize?: number;
+			sortBy?: string;
+			sortOrder?: "asc" | "desc";
+			filters?: any;
+		}) => {
+			setIsLoading(true);
+
+			const visibleColumns = columns
+				.map((c: any) => c.id ?? c.accessorKey)
+				.filter(Boolean);
+			const res = await fetchDataForVisibleColumns({
+				visibleIds: visibleColumns,
+				page: params.page ?? pagination.page,
+				pageSize: params.pageSize ?? pagination.pageSize,
+				sortBy: params.sortBy ?? sortBy,
+				sortOrder: params.sortOrder ?? sortOrder,
+				filters: params.filters ?? effectiveFilters,
+				serviceName: "contactService",
+			});
+			if (res?.success) {
+				setData(res.data ?? []);
+				if (res.meta?.pagination) {
+					setPagination(res.meta.pagination);
+				}
+			}
+			setIsLoading(false);
+		},
+		[pagination.page, pagination.pageSize, sortBy, sortOrder, effectiveFilters],
+	);
+
+	const debouncedFetch = React.useMemo(() => {
+		let timeoutId: NodeJS.Timeout;
+		return (params: Parameters<typeof fetchData>[0]) => {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => fetchData(params), 300);
+		};
+	}, [fetchData]);
+
+	const handleSearchChange = React.useCallback(
+		(term: string) => {
+			console.log("[v0] Search term changed:", term);
+			setSearchTerm(term);
+
+			updateUrl({ page: 1 }); // Reset to page 1 for search
+			debouncedFetch({
+				page: 1,
+				filters: combineWithSearch(filters, term),
+			});
+		},
+		[updateUrl, debouncedFetch, filters, combineWithSearch],
+	);
+
+	const handleVisibleColumnsChange = React.useCallback(
+		(_ids: string[], opts?: { page: number; pageSize: number }) => {
+			// Reset page if column visibility changes
+			fetchData({
+				page: opts?.page ?? 1,
+				pageSize: opts?.pageSize ?? pagination.pageSize,
+				filters: effectiveFilters,
+				sortBy,
+				sortOrder,
+			});
+		},
+		[fetchData, pagination.pageSize, effectiveFilters, sortBy, sortOrder],
+	);
+
+	const handlePaginationChange = React.useCallback(
+		(page: number, pageSize: number) => {
+			updateUrl({ page, pageSize });
+			fetchData({ page, pageSize });
+		},
+		[updateUrl, fetchData],
+	);
+
+	const handleSortingChange = React.useCallback(
+		(newSortBy: string, newSortOrder: "asc" | "desc") => {
+			console.log("[v0] Sorting change:", newSortBy, newSortOrder);
+
+			updateUrl({ sortBy: newSortBy, sortOrder: newSortOrder, page: 1 });
+			fetchData({
+				sortBy: newSortBy,
+				sortOrder: newSortOrder,
+				page: 1,
+			});
+		},
+		[updateUrl, fetchData],
+	);
+
+	const handleFiltersApplied = React.useCallback(
+		({
+			strapiFilters,
+			query,
+		}: {
+			uiFilters: any;
+			strapiFilters: any;
+			query?: string;
+		}) => {
+			console.log("[v0] Filters applied:", strapiFilters);
+
+			// Merge advanced filters with serverFilters instead of replacing
+			const hasAdvancedFilters =
+				strapiFilters && Object.keys(strapiFilters).length > 0;
+			const hasServerFilters =
+				serverFilters && Object.keys(serverFilters).length > 0;
+
+			const mergedFilters = hasServerFilters
+				? hasAdvancedFilters
+					? { $and: [serverFilters, strapiFilters] }
+					: serverFilters
+				: (strapiFilters ?? {});
+
+			setFilters(mergedFilters);
+			if (typeof query === "string") {
+				setSearchTerm(query);
+			}
+
+			updateUrl({ page: 1 });
+			const newFilters = combineWithSearch(mergedFilters, query || searchTerm);
+			fetchData({ page: 1, filters: newFilters });
+		},
+		[updateUrl, fetchData, searchTerm, combineWithSearch, serverFilters],
+	);
+
+	// Memoize with STABLE function reference - never recreate
+	const advancedFiltersComponent = React.useMemo(
+		() => {
+			const FilterComponent = (props: any) => (
+				<AdvancedFilters
+					{...props}
+					currentSearchTerm={searchTerm}
+					historyType="contacts"
+					onSubmitComplete={handleFiltersApplied}
+					isLoading={isLoading}
+					key="advanced-filters-singleton" // Force single instance
+				/>
+			);
+			return FilterComponent;
+		},
+		[], // EMPTY - never recreate the component function
+	);
+
+	return (
+		<DataTable
+			data={data}
+			columns={columns}
+			table_name={tableName}
+			table_title={tableTitle}
+			mass_actions={(props) => (
+				<MassActionsContacts
+					{...props}
+					refreshData={() =>
+						fetchData({
+							page: pagination.page,
+							pageSize: pagination.pageSize,
+							sortBy,
+							sortOrder,
+							filters: effectiveFilters,
+						})
+					}
+				/>
+			)}
+			pagination={pagination}
+			advancedFilters={advancedFiltersComponent}
+			createDialog={AddToListDialog}
+			session={session}
+			showStatusModal
+			sorting={{ sortBy, sortOrder }}
+			onVisibleColumnsChange={handleVisibleColumnsChange}
+			onSearchChange={handleSearchChange}
+			onSortingChange={handleSortingChange}
+			onPaginationChange={handlePaginationChange}
+			filtersActive={
+				Boolean(searchTerm) || (filters && Object.keys(filters).length > 0)
+			}
+			onFiltersApplied={handleFiltersApplied}
+			isLoading={isLoading}
+		/>
+	);
+}

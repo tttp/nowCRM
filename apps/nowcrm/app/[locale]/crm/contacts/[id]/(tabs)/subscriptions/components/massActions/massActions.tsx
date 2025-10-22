@@ -1,0 +1,45 @@
+// ContactsMassActions.tsx
+"use client";
+
+import {
+	type ActionsConfig,
+	massActionsGenerator,
+} from "@/components/generativeComponents/MassActionsGenerator";
+import { massActivateSubscriptions } from "./massActivateSubscriptions";
+import { massDeactivateSubscriptions } from "./massDeactivateSubscription";
+import { massDeleteSubscriptions } from "./massDeleteSubscriptions";
+
+// Get your translations/messages
+
+// Define the actions configuration for contacts
+const actionsConfig: ActionsConfig = {
+	activateSubscriptions: {
+		label: "Activate",
+		onAction: async (selectedRows: number[]) => {
+			return await massActivateSubscriptions(selectedRows);
+		},
+		successMessage: "Subscriptions activated",
+		errorMessage: "Error activating subscriptions",
+	},
+	deactivateSubscriptions: {
+		label: "Deactivate",
+		onAction: async (selectedRows: number[]) => {
+			return await massDeactivateSubscriptions(selectedRows);
+		},
+		successMessage: "Subscriptions deactivated",
+		errorMessage: "Error deactivating subscriptions",
+	},
+	deleteSubscription: {
+		label: "Delete",
+		onAction: async (selectedRows: number[]) => {
+			return await massDeleteSubscriptions(selectedRows);
+		},
+		successMessage: "Subscriptions deleted",
+		errorMessage: "Error deleting subscriptions",
+	},
+};
+
+// Create the MassActions component using the generator
+const ContactsSubscriptionsMassActions = massActionsGenerator(actionsConfig);
+
+export default ContactsSubscriptionsMassActions;

@@ -1,0 +1,7 @@
+[
+	{ "label": "English", "value": "en" },
+	{ "label": "Deutsch", "value": "de" },
+	{ "label": "Francais", "value": "fr" },
+	{ "label": "Italiano", "value": "it" },
+	{ "label": "Other", "value": "other" }
+]

@@ -1,0 +1,1427 @@
+{
+  "common": {
+    "actions": {
+      "name": "Name",
+      "create": "Create",
+      "createNew": "Create New",
+      "createList": "Create List",
+      "created": "created",
+      "continueCreating": "Continue Creating",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "close": "Close",
+      "view": "View",
+      "next": "Next",
+      "back": "Back",
+      "continue": "Continue",
+      "submit": "Submit",
+      "saveChanges": "Save Changes",
+      "actions": "Actions",
+      "openMenu": "Open menu",
+      "select": "Select List",
+      "update": "Update",
+      "returnHome": "Return Home"
+    },
+    "status": {
+      "saving": "Saving..."
+    },
+    "years": "years",
+    "labels": {
+      "email": "Email",
+      "password": "Password",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "fullName": "Full Name",
+      "username": "Username",
+      "address_line1": "Address Line 1",
+      "language": "Language",
+      "selectLanguage": "Select language",
+      "description": "Description",
+      "confirmPassword": "Confirm Password",
+      "newPassword": "New Password"
+    },
+    "languages": {
+      "en": "English",
+      "de": "Deutsch",
+      "fr": "Français",
+      "it": "Italiano"
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "salutation": {
+      "dear_mr": "Dear Mr",
+      "dear_mrs": "Dear Mrs",
+      "dear_ms": "Dear Ms",
+      "dear_dr": "Dear Dr",
+      "dear_prof": "Dear Prof",
+      "dear_sir": "Dear Sir",
+      "dear_madam": "Dear Madam",
+      "dear": "Dear"
+    },
+    "title": {
+      "mr": "Mr",
+      "mrs": "Mrs",
+      "ms": "Ms",
+      "miss": "Miss",
+      "dr": "Dr",
+      "prof": "Prof"
+    }
+  },
+  "AdvancedFilters": {
+    "title": "Advanced Filters",
+    "description": "Apply advanced filters to refine your search",
+    "actions": {
+      "apply": "Apply Filters",
+      "reset": "Reset Filters"
+    },
+    "status": {
+      "new": "new",
+      "closed": "closed",
+      "contacted": "contacted",
+      "negotiating": "negotiating",
+      "registered": "registered",
+      "backfill": "backfill"
+    },
+    "sections": {
+      "personal": "Personal Information",
+      "contact": "Contact Information",
+      "lastAccess": "Last Access",
+      "social": "Social Media",
+      "preferences": "Preferences",
+      "organization": "Organizations and Types",
+      "other": "Other Filters",
+      "journeys": "Journeys"
+    },
+    "fields": {
+      "title": "Title",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "birth_date": "Birth Date",
+      "email": "Email",
+      "gender": "Gender",
+      "phone": "Phone",
+      "mobilePhone": "Mobile Phone",
+      "address_line1": "Address Line 1",
+      "address_line2": "Address Line 2",
+      "location": "Location",
+      "canton": "Canton",
+      "plz": "ZIP",
+      "country": "Country",
+      "last_access_from": "Last Access From",
+      "last_access_to": "Last Access To",
+      "website_url": "Website URL",
+      "website": "Website",
+      "linkedin_url": "LinkedIn URL",
+      "linkedin": "LinkedIn",
+      "facebook_url": "Facebook URL",
+      "facebook": "Facebook",
+      "twitter_url": "Twitter (X) URL",
+      "twitter": "Twitter (X)",
+      "language": "Language",
+      "contact_types": "Contact Type",
+      "contact_interests": "Contact Interests",
+      "subscriptions": "Subscription",
+      "rank": "Rank",
+      "department": "Department",
+      "job_title": "Job Title",
+      "action_type": "Action Type",
+      "media_type": "Media Type",
+      "organization": "Organization",
+      "status": "Status",
+      "priority": "Priority",
+      "tag": "Tag",
+      "description": "Description",
+      "salutation": "Salutation",
+      "function": "Function",
+      "source": "Source",
+      "list": "List",
+      "journeys": "Journeys",
+      "journey_step": "Journey Step",
+      "journey_finished": "Journey Finished",
+      "navigator": "Navigator",
+      "send_navigator": "Send Navigator",
+      "zip": "ZIP",
+      "keywords": "Keywords",
+      "lists": "Lists",
+      "role": "Role",
+      "industry": "Industry",
+      "job_description": "Job Description",
+      "duration_role": "Duration in Role (years)",
+      "connection_degree": "Connection Degree",
+      "action_normalized_type": "Action Type",
+      "survey_items_question": "Survey Responses - Question",
+      "survey_items_answer": "Survey Responses - Answer",
+      "event_composition": "Event - Composition",
+      "event_channel": "Event - Channel",
+      "journey_steps": "Journey Steps"
+    },
+    "placeholders": {
+      "title": "Enter title",
+      "first_name": "Enter first name",
+      "last_name": "Enter last name",
+      "gender": "Select gender",
+      "email": "Enter email",
+      "contact_types": "Select contact type",
+      "phone": "Enter phone number",
+      "mobilePhone": "Enter mobile phone",
+      "address_line": "Enter address",
+      "location": "Enter location",
+      "canton": "Enter canton",
+      "plz": "Enter ZIP",
+      "country": "Enter country",
+      "last_access_from": "Enter from date",
+      "last_access_to": "Enter to date",
+      "website_url": "Enter Website URL",
+      "linkedin_url": "Enter LinkedIn URL",
+      "facebook_url": "Enter Facebook URL",
+      "twitter_url": "Enter Twitter URL",
+      "language": "Select language",
+      "department": "Enter department",
+      "job_title": "Enter job title",
+      "action_type": "Enter action type",
+      "media_type": "Enter media type",
+      "organization": "Enter organization",
+      "status": "Select status",
+      "priority": "Select priority",
+      "tag": "Enter tag",
+      "description": "Enter description",
+      "job_description": "Enter job description",
+      "duration_role": "Enter duration in years",
+      "connection_degree": "Enter connection degree",
+      "salutation": "Enter salutation",
+      "function": "Enter function",
+      "source": "Enter source",
+      "list": "Enter list",
+      "journeys": "Enter journeys",
+      "journey_step": "Enter journey step",
+      "journey_finished": "Enter journey finished",
+      "navigator": "Enter navigator",
+      "send_navigator": "Enter send navigator",
+      "action_normalized_type": "Action Type",
+      "survey_items_question": "Survey Responses - Question",
+      "survey_items_answer": "Survey Responses - Answer",
+      "event_composition": "Event - Composition",
+      "event_channel": "Event - Channel",
+      "journey_steps": "Journey Steps"
+    }
+  },
+  "Layout": {
+    "TopBar": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "admin_panel": "Admin Panel",
+      "exit": "Log out"
+    }
+  },
+  "TopBar": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "admin_panel": "Admin Panel",
+    "exit": "Log out"
+  },
+  "Auth": {
+    "Layout": {
+      "metaTitle": "Crm authentication",
+      "metaDescription": "Routes which handles all crm authentication"
+    },
+    "common": {
+      "signIn": "Sign In",
+      "register": "Register",
+      "termsAndPrivacy": {
+        "terms": "Terms of Service",
+        "and": "and",
+        "policy": "Privacy Policy",
+        "agreementRegister": "By creating account, you agree to our",
+        "agreementLogin": "By clicking continue, you agree to our"
+      }
+    },
+    "Unauthorized": {
+      "metaTitle": "Unauthorized page",
+      "metaDescription": "Please contact the administrator for assistance or check your credentials.",
+      "errors": {
+        "Configuration": {
+          "title": "Configuration Error",
+          "message": "There was an issue with the server configuration. Please check the server settings."
+        },
+        "AccessDenied": {
+          "title": "Access Denied",
+          "message": "Your email address does not match the corporate address of the company. If you believe you need to log in with this address, please wait until it is activated."
+        },
+        "Verification": {
+          "title": "Verification Error",
+          "message": "There was a problem with verification. The authorization token has expired or has already been used."
+        },
+        "Default": {
+          "title": "Unknown Error",
+          "message": "An unexpected error occurred. Please try again later."
+        }
+      },
+      "errorCode": "Error code: {error}",
+      "contactAdmin": "If the issue persists, please contact the administrator.",
+      "returnToLogin": "Return to login page"
+    },
+    "Login": {
+      "metaTitle": "Login - CRM",
+      "metaDescription": "Authenticate and access your CRM account.",
+      "header": {
+        "title": "Login CRM",
+        "subtitle": "Enter your email below to access your account"
+      },
+      "footer": {
+        "noAccount": "Don't have an account?"
+      },
+      "form": {
+        "emailError": "Please enter a valid email address",
+        "loginFailed": "Login failed:",
+        "forgotPassword": "Forgot password?",
+        "placeholderPassword": "Your password"
+      }
+    },
+    "Register": {
+      "metaTitle": "Register - CRM",
+      "metaDescription": "Authenticate and access your  CRM account.",
+      "header": {
+        "title": "Create an account",
+        "subtitle": "Enter your email below to create your account"
+      },
+      "footer": "Already have an account?",
+      "errors": {
+        "emailRegistered": "This email is already registered"
+      },
+      "form": {
+        "placeholderName": "Your name",
+        "placeholderPassword": "Your password",
+        "usernameSchema": "Full Name must be at least 5 characters",
+        "emailSchema": "Please enter a valid email address",
+        "passwordSchema1": "Password must be at least 8 characters",
+        "passwordSchema2": "Password must contain at least one uppercase letter",
+        "passwordSchema3": "Password must contain at least one lowercase letter",
+        "passwordSchema4": "Password must contain at least one number",
+        "passwordError": "Error resetting password",
+        "passwordMatchError": "Password don't match"
+      },
+      "toast": {
+        "success": {
+          "accountCreated": "Account created successfully"
+        },
+        "error": {
+          "accountCreatedError": "Registration failed - "
+        }
+      }
+    },
+    "ResetPassword": {
+      "metaTitle": "Reset Password",
+      "metaDescription": "Enter new password",
+      "header": {
+        "title": "Reset password",
+        "subtitle": "Enter new password"
+      },
+      "actions": {
+        "sendLink": "Send reset link",
+        "rememberMe": "Know your password? Go ahead and",
+        "requestNewLink": "Request new link",
+        "resetPassword": "Reset password"
+      },
+      "errors": {
+        "missingCode": "Reset code isn't supplied",
+        "resetFailed": "Password Reset failed"
+      },
+      "success": {
+        "passwordReset": "Password reset succesfully"
+      }
+    },
+    "ForgotPassword": {
+      "metaTitle": "Forgot Password?",
+      "metaDescription": "Enter your email if you forgot password?",
+      "header": {
+        "title": "Forgot password",
+        "subtitle": "Enter your email address and we'll send you a link to reset your password."
+      },
+      "actions": {
+        "sendLink": "Send reset link",
+        "rememberMe": "Know your password? Go ahead and"
+      },
+      "success": {
+        "emailSent": "Email sent succesfully"
+      },
+      "errors": {
+        "failed": "Failed to send reset email link"
+      }
+    },
+    "VerifyOtp": {
+      "metaTitle": "Verify Otp",
+      "header": {
+        "title": "Two-Factor Authentication",
+        "subtitle": "Enter the verification code sent to your email or device to complete the sign-in process."
+      },
+      "form": {
+        "label": "Verification Code",
+        "placeholder": "Enter your 6-digit code",
+        "otpSchema1": "OTP code must be at least 6 characters",
+        "otpSchema2": "OTP code cannot be longer than 8 characters",
+        "otpSchema3": "OTP must contain only numbers"
+      },
+      "actions": {
+        "verify": "Verify",
+        "resend": "Resend",
+        "return": "Return to Sign In"
+      },
+      "toast": {
+        "success": {
+          "verificationSent": "New verification code sent"
+        },
+        "error": {
+          "verificationError": "Verification failed: "
+        }
+      }
+    }
+  },
+  "Admin": {
+    "Layout": {
+      "metaTitle": "Admin Panel",
+      "metaDescription": "Admin panel helps to manage users, skus, sku-types and sku-concerns",
+      "Panel": "Admin Panel",
+      "TopBar": {
+        "taxonomy": "Taxonomy",
+        "industry": "Industry",
+        "tags": "Tag",
+        "campaigns": "Campaigns",
+        "campaign_categories": "Campaign Categories",
+        "job_titles": "Job Titles",
+        "contact_titles": "Contact Titles",
+        "contact_salutations": "Contact Salutations",
+        "unipile_indetities": "Unipile Identities",
+        "text_blocks": "Text Blocks",
+        "channels": "Channels",
+        "identities": "Identities",
+        "unpile_identities": "Unipile Identities",
+        "organization_type": "Organization Types",
+        "frequency": "Frequency",
+        "action_type": "Action Type",
+        "media_type": "Media Types"
+      }
+    },
+    "common": {
+      "name": "Name",
+      "delete": "Delete"
+    },
+    "TextBlock": {
+      "table_title": "Text Blocks",
+      "toast": {
+        "delete": "Text block deleted",
+        "createOrganizationTypeError": "Error creating text block",
+        "updateTextBlockError": "error during updating textblock:",
+        "organization": "Text block",
+        "created": "created",
+        "updated": "updated"
+      },
+      "action": {
+        "create": "Create",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "updateTextBlock": "Update text block",
+        "createOrganizationType": "Create Text Block"
+      },
+      "dialog": {
+        "title": "Create New Text Block",
+        "editTitle": "Edit text block"
+      },
+      "form": {
+        "label": "Textblock Name",
+        "placeholder": "Enter textblock name...",
+        "textLabel": "Textblock text",
+        "textPlaceholder": "Enter text...",
+        "tooltip_row_1": "Text blocks are usually used for multilanguage compositions",
+        "tooltip_row_2": "If use textblock in composition and send it to contact it will automaticly map to contact language"
+      }
+    },
+    "OrganizationType": {
+      "table_title": "Organization Types",
+      "toast": {
+        "delete": "Organization Type deleted",
+        "createOrganizationTypeError": "Error creating organization type",
+        "organization": "Organization Type"
+      },
+      "action": {
+        "createOrganizationType": "Create Organization Type"
+      },
+      "dialog": {
+        "title": "Create New Organization Type"
+      },
+      "form": {
+        "label": "Organization Type Name",
+        "placeholder": "Enter organization type name..."
+      }
+    },
+    "Tags": {
+      "table_title": "Tags",
+      "toast": {
+        "delete": "Tag deleted",
+        "createOrganizationTypeError": "Error creating tag",
+        "organization": "Tag"
+      },
+      "action": {
+        "createOrganizationType": "Create tag"
+      },
+      "dialog": {
+        "title": "Create New Tag"
+      },
+      "form": {
+        "label": "Tag Name",
+        "placeholder": "Enter Tag name..."
+      }
+    },
+    "ActionType": {
+      "table_title": "Action Types",
+      "toast": {
+        "delete": "Action Type deleted",
+        "createActionTypeError": "Error creating action type",
+        "action": "Action type"
+      },
+      "action": {
+        "createActionType": "Create Action Type"
+      },
+      "dialog": {
+        "title": "Create New action Type"
+      },
+      "form": {
+        "label": "Action Type Name",
+        "placeholder": "Enter action type name..."
+      }
+    },
+    "MediaType": {
+      "table_title": "Media Types",
+      "toast": {
+        "delete": "Media Type deleted",
+        "createMediaTypeError": "Error creating media type",
+        "mediaType": "Media Type"
+      },
+      "action": {
+        "createMediaType": "Create Media Type"
+      },
+      "dialog": {
+        "title": "Create New Media Type"
+      },
+      "form": {
+        "label": "Media Type Name",
+        "placeholder": "Enter media type name..."
+      }
+    },
+    "Frequency": {
+      "table_title": "Frequencies",
+      "toast": {
+        "delete": "Frequency deleted",
+        "createFrequencyError": "Error creating indentity",
+        "frequency": "Frequency"
+      },
+      "action": {
+        "createFrequency": "Create Frequency"
+      },
+      "dialog": {
+        "title": "Create New Frequency"
+      },
+      "form": {
+        "label": "Frequency Name",
+        "placeholder": "Enter frequency name..."
+      }
+    },
+    "Identity": {
+      "table_title": "Indentities",
+      "dialog": {
+        "title": "Create New Identity",
+        "editTitle": "Edit Identity"
+      },
+      "form": {
+        "label": "Identity Name",
+        "indentitySchema": "Invalid format. Expected 'Name Surname <email@example.com>' with only spaces allowed between name and email and no special symbols.",
+        "defaultName": "Name Surname <example@gmail.com>",
+        "placeholder": "Enter identity email...",
+        "tooltipFormat": "Expected format: Name Surname <email@example.com>",
+        "tooltip": "With only spaces allowed between name and email and no special symbols."
+      },
+      "toast": {
+        "createIndentityError": "Error creating indentity",
+        "updateIndentityError": "Error creating indentity",
+        "identity": "Identity"
+      },
+      "action": {
+        "createIdentity": "Create Identity"
+      }
+    },
+    "Industry": {
+      "table_title": "Industries",
+      "action": {
+        "createIndustry": "Create Industry"
+      },
+      "toast": {
+        "delete": "Industry deleted",
+        "createIndustryError": "Error creating industry",
+        "industry": "Industry"
+      },
+      "dialog": {
+        "title": "Create new industry",
+        "description": "create new industry"
+      },
+      "form": {
+        "label": "Industry Name",
+        "placeholder": "Enter list name...",
+        "description": "Choose a unique name for your new list.",
+        "industrySchema": "Industry name must be at least 2 characters.",
+        "createButton": "Create Industry"
+      }
+    },
+    "Campaign": {
+      "table_title": "Campaigns",
+      "action": {
+        "create": "Create Campaign",
+        "update": "Update Campaign"
+      },
+      "toast": {
+        "delete": "Campaign deleted",
+        "createError": "Error creating campaign",
+        "campaign": "Campaign"
+      },
+      "dialog": {
+        "title": "Create new campaign",
+        "description": "Create a new campaign to organize your activities",
+        "editTitle": "Edit campaign",
+        "editDescription": "Update campaign details"
+      },
+      "form": {
+        "nameLabel": "Campaign Name",
+        "namePlaceholder": "Enter campaign name...",
+        "nameDescription": "Choose a unique name for your campaign.",
+        "nameSchema": "Campaign name must be at least 2 characters.",
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Enter campaign description...",
+        "descriptionDescription": "Describe the purpose of this campaign.",
+        "categoryLabel": "Campaign Category",
+        "categoryPlaceholder": "Select a category...",
+        "categoryDescription": "Assign this campaign to a category."
+      }
+    },
+    "CampaignCategory": {
+      "table_title": "Campaign Categories",
+      "action": {
+        "create": "Create Campaign Category",
+        "update": "Update Campaign Category"
+      },
+      "toast": {
+        "delete": "Campaign category deleted",
+        "createError": "Error creating campaign category",
+        "campaignCategory": "Campaign Category"
+      },
+      "dialog": {
+        "title": "Create new campaign category",
+        "description": "Create a new category to organize your campaigns",
+        "editTitle": "Edit campaign category",
+        "editDescription": "Update campaign category details"
+      },
+      "form": {
+        "nameLabel": "Category Name",
+        "namePlaceholder": "Enter category name...",
+        "nameDescription": "Choose a unique name for your category.",
+        "nameSchema": "Category name must be at least 2 characters.",
+        "descriptionLabel": "Description",
+        "descriptionPlaceholder": "Enter category description...",
+        "descriptionDescription": "Describe the purpose of this category."
+      }
+    },
+    "JobTitle": {
+      "table_title": "Job Titles",
+      "action": {
+        "create": "Create Job Title",
+        "update": "Update Job Title"
+      },
+      "toast": {
+        "delete": "Job title deleted",
+        "createError": "Error creating job title",
+        "jobTitle": "Job Title"
+      },
+      "dialog": {
+        "title": "Create new job title",
+        "description": "Create a new job title for contacts",
+        "editTitle": "Edit job title",
+        "editDescription": "Update job title details"
+      },
+      "form": {
+        "nameLabel": "Job Title Name",
+        "namePlaceholder": "Enter job title...",
+        "nameDescription": "Choose a descriptive name for the job title.",
+        "nameSchema": "Job title name must be at least 2 characters."
+      }
+    },
+    "ContactTitle": {
+      "table_title": "Contact Titles",
+      "action": {
+        "create": "Create Contact Title",
+        "update": "Update Contact Title"
+      },
+      "toast": {
+        "delete": "Contact title deleted",
+        "createError": "Error creating contact title",
+        "contactTitle": "Contact Title"
+      },
+      "dialog": {
+        "title": "Create new contact title",
+        "description": "Create a new title for contacts (e.g., Dr., Prof., Eng.)",
+        "editTitle": "Edit contact title",
+        "editDescription": "Update contact title details"
+      },
+      "form": {
+        "nameLabel": "Title Name",
+        "namePlaceholder": "Enter title (e.g., Dr., Prof.)...",
+        "nameDescription": "Choose a title for contacts.",
+        "nameSchema": "Title name must be at least 2 characters."
+      }
+    },
+    "ContactSalutation": {
+      "table_title": "Contact Salutations",
+      "action": {
+        "create": "Create Contact Salutation",
+        "update": "Update Contact Salutation"
+      },
+      "toast": {
+        "delete": "Contact salutation deleted",
+        "createError": "Error creating contact salutation",
+        "contactSalutation": "Contact Salutation"
+      },
+      "dialog": {
+        "title": "Create new contact salutation",
+        "description": "Create a new salutation for contacts (e.g., Mr., Ms., Mrs.)",
+        "editTitle": "Edit contact salutation",
+        "editDescription": "Update contact salutation details"
+      },
+      "form": {
+        "nameLabel": "Salutation Name",
+        "namePlaceholder": "Enter salutation (e.g., Mr., Ms.)...",
+        "nameDescription": "Choose a salutation for contacts.",
+        "nameSchema": "Salutation name must be at least 2 characters."
+      }
+    },
+    "Channels": {
+      "metaTitle": "Channels Health Check",
+      "metaDescription": "Manage channels credentials and status",
+      "common": {
+        "name": "Name",
+        "status": "Status",
+        "errorDetails": "Error Details",
+        "runHealthCheck": "Run Health Check",
+        "healthCheck": "Health Check Initiated",
+        "connectionStatusTitle": "Connection Status",
+        "failedAuthUrl": "Failed to get authorization URL",
+        "errorRefreshToken": "Please at first refresh your access token",
+        "refreshAccessToken": "Refresh Access Token",
+        "invalidCredentials": "Invalid Credentials",
+        "refreshAccessTokenInProgress": "Getting URL...",
+        "authorizationRequired": "Authorization Required",
+        "saveButton": {
+          "defaultText": "Save Credentials",
+          "savingText": "Saving...",
+          "save": "Save"
+        },
+        "action": {
+          "verify": "verify",
+          "ignore": "ignore"
+        }
+      },
+      "settings": {
+        "title": "Subscription Settings",
+        "description": "Manage channels subscription status",
+        "form": {
+          "subscription": {
+            "label": "Subscription Check",
+            "placeholder": "Select subscription check"
+          },
+          "unscubscribe": {
+            "title": "Unsubscribe",
+            "description": "Manage email unsubscribe text",
+            "label": "Unsubscribe Text",
+            "tooltip": "Please dont forget to add link with email=@contact.email",
+            "placeholderEdit": "Enter your description..."
+          }
+        }
+      },
+      "toast": {
+        "updateSettings": "Settings updated successfully",
+        "updateSettingsError": "Failed to update settings",
+        "linkcopied": "Link copied to clipboard"
+      },
+      "setup_info": {
+        "setup_title": "Setup Information",
+        "pricing_title": "Pricing Information",
+        "default_email": "Default installation is shipped with email integration",
+        "info": "Other channels require additional setup and configuration"
+      },
+      "email": {
+        "title": "Email Health Check",
+        "description": "View and manage your email channel status",
+        "runningCheck": "Running Check...",
+        "toast": {
+          "checked": "Channel Checked"
+        },
+        "tooltip": {
+          "title": "Email Integration",
+          "description": "Send automated emails to your contacts with customizable templates and tracking capabilities.",
+          "price": "Email: 0.20 CHF/1000 emails, plus 0.19 CHF per GB of attachments",
+          "limits": "Typical starting limit: 50,000 emails per 24 hours as per AWS SES"
+        }
+      },
+      "linkedin": {
+        "title": "LinkedIn Configuration",
+        "description": "Manage your LinkedIn integration credentials and check connection status",
+        "authorizationTooltip": "Account should be associated with LinkedIn APP credentials",
+        "authorizeLinkedinAccess": "Authorize LinkedIn Access",
+        "linkAccess": "Click the link below to authorize access to your LinkedIn account:",
+        "tooltip": {
+          "title": "LinkedIn Integration",
+          "description": "Connect with your professional network and share updates automatically to your company page.",
+          "info": "Requires LinkedIn App credentials"
+        },
+        "form": {
+          "clientId": {
+            "placeholder": "Enter LinkedIn Client ID",
+            "errorMessage": "Client ID is required"
+          },
+          "organizationUrn": {
+            "tooltip": "Organization URN - it's the number in the URL of your organization",
+            "placeholder": "Enter Organization URN",
+            "errorMessage": "Organization URN is required"
+          },
+          "clientSecret": {
+            "placeholder": "Enter LinkedIn Client Secret",
+            "errorMessage": "Client Secret is required"
+          }
+        },
+        "toast": {
+          "success": {
+            "connectionSuccess": "Please click the link to authorize LinkedIn access",
+            "tokenRefreshed": "Your LinkedIn access token has been refreshed automatically",
+            "credentialsUpdated": "LinkedIn credentials updated successfully"
+          },
+          "error": {
+            "updateCredentialsError": "Error updating credentials for LinkedIn",
+            "failedCredentialsError": "Failed to update LinkedIn credentials",
+            "refreshTokenError": "Failed to get authorization URL"
+          }
+        }
+      },
+      "sms": {
+        "title": "SMS Configuration",
+        "description": "Manage your SMS integration credentials and check connection status",
+        "tooltip": {
+          "title": "SMS Integration",
+          "description": "Send text messages to your customers for time-sensitive notifications and alerts.",
+          "price": "Pay-as-you-go: 0.14 CHF per SMS",
+          "info": "Rates vary by country and volume"
+        },
+        "form": {
+          "accessKey": {
+            "placeholder": "Enter Business Account ID",
+            "errorMessage": "Access Key ID is required"
+          },
+          "accessToken": {
+            "placeholder": "Enter Access Token",
+            "errorMessage": "Secret Access Key is required"
+          },
+          "snsRegion": {
+            "placeholder": "Select region",
+            "errorMessage": "Region is required"
+          }
+        },
+        "toast": {
+          "success": {
+            "credentialsUpdated": "SNS credentials updated successfully"
+          },
+          "error": {
+            "updateCredentialsError": "Error updating credentials for SNS",
+            "failedCredentialsError": "Failed to update SNS credentials"
+          }
+        }
+      },
+      "telegram": {
+        "title": "Telegram Configuration",
+        "description": "Manage your Telegram integration credentials and check connection status",
+        "tooltip": {
+          "title": "Telegram Integration",
+          "description": "Create and manage Telegram bots for customer engagement and automated notifications.",
+          "price": "Free tier available",
+          "info": "Requires Telegram Bot API token"
+        },
+        "toast": {
+          "success": {
+            "credentialsUpdated": "Telegram credentials updated successfully"
+          },
+          "error": {
+            "updateCredentialsError": "Error updating credentials for Telegram",
+            "failedCredentialsError": "Failed to update Telegram credentials"
+          }
+        },
+        "form": {
+          "accessToken": {
+            "placeholder": "Enter Telegram API Token",
+            "errorMessage": "API Token is required"
+          },
+          "organizationUrn": {
+            "placeholder": "Enter Organization URN",
+            "tooltip": "To obtain channel id utilize telegram bots, such as GET-MY-ID",
+            "errorMessage": "Channel ID is required"
+          }
+        }
+      },
+      "twitter": {
+        "title": "Twitter(X) Configuration",
+        "description": "Manage your Twitter(X) integration credentials and check connection status",
+        "authorizationTooltip": "Account should be associated with TTwitter(X) APP credentials",
+        "authorizeLinkedinAccess": "Authorize Twitter(X) Access",
+        "linkAccess": "Click the link below to authorize access to your Twitter(X) account:",
+        "tooltip": {
+          "title": "Twitter Integration",
+          "description": "Schedule and automate tweets to engage with your audience and promote your content.",
+          "price": "Free tier available. 2,400 tweets per account per day (including retweets), with further limits on half-hour intervals to prevent spam (these are Twitter/X’s official limits, regardless of the tool used).",
+          "info": "Requires Twitter Developer API access"
+        },
+        "toast": {
+          "success": {
+            "connectionSuccess": "Please click the link to authorize Twitter(X) access",
+            "tokenRefreshed": "Your Twitter(X) access token has been refreshed automatically",
+            "credentialsUpdated": "Twitter(X) credentials updated successfully"
+          },
+          "error": {
+            "updateCredentialsError": "Error updating credentials for Twitter(X)",
+            "failedCredentialsError": "Failed to update Twitter(X) credentials",
+            "refreshTokenError": "Failed to get authorization URL"
+          }
+        },
+        "form": {
+          "clientId": {
+            "placeholder": "Enter Twitter(X) Client ID",
+            "errorMessage": "Client ID is required"
+          },
+          "clientSecret": {
+            "placeholder": "Enter Twitter(X) Client Secret",
+            "errorMessage": "Client Secret is required"
+          },
+          "advancedCredentials": {
+            "label": "Advanced Twitter(X); API Credentials",
+            "placeholderAppKey": "Enter Twitter(X) App Key",
+            "placeholderAppSecret": "Enter Twitter(X) App Secret",
+            "placeholderAppToken": "Enter Twitter(X) Access Token",
+            "placeholderAccessSecret": "Enter Twitter(X) Access Secret",
+            "tooltip": "These 4 credentials will be used for media uploading to Twitter(X).",
+            "toggle": "Toggle advanced credentials"
+          }
+        }
+      },
+      "whatsApp": {
+        "title": "WhatsApp Configuration",
+        "description": "Manage your WhatsApp integration credentials and check connection status",
+        "tooltip": {
+          "title": "WhatsApp Integration",
+          "description": "Engage with customers through WhatsApp Business API for direct messaging and support.",
+          "price": "Starting at 0.22 CHF per message",
+          "info": "Requires WhatsApp Business API approval"
+        },
+        "toast": {
+          "success": {
+            "tokenRefreshed": "Your WhatsApp access token has been refreshed automatically",
+            "credentialsUpdated": "WhatsApp credentials updated successfully"
+          },
+          "error": {
+            "updateCredentialsError": "Error updating credentials for WhatsApp",
+            "failedCredentialsError": "Failed to update WhatsApp credentials"
+          }
+        },
+        "form": {
+          "clientId": {
+            "placeholder": "Enter Business Account ID",
+            "errorMessage": "Client Secret is required"
+          },
+          "accessToken": {
+            "placeholder": "Enter Access Token",
+            "errorMessage": "Client ID is required"
+          }
+        }
+      },
+      "wordPress": {
+        "title": "WordPress Configuration",
+        "description": "Manage your WordPress integration credentials and check connection status",
+        "tooltip": {
+          "title": "WordPress Integration",
+          "description": "Automatically publish content to your WordPress blog and manage your site remotely.",
+          "price": "Free tier available.",
+          "info": "Requires WordPress REST API credentials"
+        },
+        "toast": {
+          "success": {
+            "credentialsUpdated": "WordPress credentials updated successfully"
+          },
+          "error": {
+            "updateCredentialsError": "Error updating credentials for WordPress",
+            "failedCredentialsError": "Failed to update WordPress credentials"
+          }
+        },
+        "form": {
+          "wpUrl": {
+            "placeholder": "Enter WordPress URL",
+            "errorMessage": "WordPress URL is required"
+          },
+          "clientId": {
+            "tooltip": "Admin Panel account username and password",
+            "placeholderName": "Enter account name",
+            "placeholderPassword": "Enter account password",
+            "errorMessage": "Client ID is required"
+          }
+        }
+      },
+      "unipile_linkedin": {
+        "tooltip": {
+          "title": "Unipile Integration",
+          "description": "Streamline LinkedIn messaging through Unipile's unified API. Manage professional communications and automate LinkedIn outreach campaigns.",
+          "price": "Basic account: 24 CHF. Linkedin Messaging Limits: 100 per week.",
+          "info": "Includes LinkedIn messages"
+        }
+      }
+    }
+  },
+  "UserInfo": {
+    "noUserFound": "User not found",
+    "editProfile": "Edit Profile",
+    "form": {
+      "subtitle": "Profile Information",
+      "description": "Update your profile details and picture.",
+      "usernameSchema": "Username must be at least 3 characters",
+      "emailSchema": "Enter a valid email",
+      "changePictureLabel": "Change Picture",
+      "pictureNote": "Upload a new profile picture (JPG, PNG).",
+      "usernameDescription": "Your unique username for the platform.",
+      "emailDescription": "Your email address for notifications."
+    },
+    "status": {
+      "succes": "Profile updated successfully!",
+      "info": "No changes were made.",
+      "error": "Unknown error occurred."
+    },
+    "card": {
+      "title": "Profile Information",
+      "defaultRole": "User",
+      "role": "Role",
+      "strapiId": "Strapi ID",
+      "twoFA": "Two-Factor Authentication"
+    }
+  },
+  "Composer": {
+    "tabs": {
+      "scheduled": "Scheduled Compositions",
+      "active": "Compositions"
+    },
+    "steps": {
+      "label": "Step"
+    },
+    "errors": {
+      "step1Required": "Please complete step 1 first",
+      "step2Required": "Please wait for content generation to complete",
+      "generateFailed": "Failed to generate content",
+      "submitFailed": "Failed to submit composition",
+      "createScratchFailed": "Failed to create composition from scratch"
+    },
+    "scratch": {
+      "name": "Scratch Composition"
+    },
+    "initialForm": {
+      "step1Title": "Step 1: Initial Data",
+      "creating": "Creating...",
+      "createFromScratch": "Create from scratch",
+      "selectCategory": "Select a Category",
+      "selectPromptBase": "Select a Prompt Base for",
+      "completeComposition": "Complete Your Composition",
+      "title": "Title",
+      "prompt": "Prompt",
+      "model": "Model",
+      "selectModelPlaceholder": "Select model",
+      "compositionTitlePlaceholder": "Enter Composition title",
+      "tooltipImportant": "Important Format Requirements:",
+      "tooltipIncludeFields": "Include these fields in square brackets:",
+      "tooltip": "Include Category/Topic: [Marketing], Language: [English], and Persona: [Professional] in your prompt.",
+      "generateComposition": "Generate composition",
+      "tooltipFields": {
+        "category": "Category/Topic: [Category]",
+        "language": "Language: [English | German | Italian | French]",
+        "persona": "Persona: [e.g., Marketing email writer]"
+      },
+      "tooltipNote1": "These fields are required for correct prompt functioning and data handling.",
+      "tooltipNote2": "If missing, default values from selected prompt will be used."
+    },
+    "textEditor": {
+      "stepTitle": "Step 2: Edit Generated Content",
+      "loading": "Generating your content...",
+      "placeholder": "Enter your description...",
+      "unsubscribeLabel": "Include unsubscribe link",
+      "unsubscribeTooltip": "When enabled, emails will include an unsubscribe link at the bottom",
+      "regenerate": "Regenerate",
+      "regenerating": "Regenerating...",
+      "nextButton": "Next: Channel Customizations"
+    },
+    "channelAdditions": {
+      "title": "Step 3: Channel Customizations (Optional)",
+      "description": "Select channels you want to customize and add specific additional prompts for them.",
+      "included": "Will be included",
+      "clickToInclude": "Click to include",
+      "additionalPrompt": "Additional Prompt",
+      "tooltip": "If you leave the prompt addition empty, the same result will be used for this channel.",
+      "textareaPlaceholder": "e.g., Add hashtags, Format for mobile, etc.",
+      "submitting": "Submitting...",
+      "nextButton": "Next: Finalize Composition"
+    },
+    "processingScreen": {
+      "stepTitle": "Step 4: Finalize Composition",
+      "submittedTitle": "Composition Submitted!",
+      "submittedDescription": "Your composition is currently being processed and will appear in your dashboard soon.",
+      "readyTitle": "Ready to Submit",
+      "readyDescription": "Your composition is ready to be processed. Click the button below to submit.",
+      "createNew": "Compose Another",
+      "submitButton": "Submit Composition",
+      "processing": "Processing..."
+    },
+    "channelContent": {
+      "preview": "Preview",
+      "regenerate": "Regenerate",
+      "regenerating": "Regenerating...",
+      "additionalPromptLabel": "Additional Prompt",
+      "resultLabel": "Result",
+      "placeholder": "Enter your description...",
+      "attachedFilesLabel": "Attached files",
+      "viewFile": "View file",
+      "content": "Content",
+      "newTag": "(New)",
+      "maxFilesReached": "Maximum of 5 attachments reached",
+      "noAttachments": "No attachments",
+      "fileAddedToast": "file(s) added",
+      "regenerateToastSuccess": "channel regenerated",
+      "regenerateToastError": "Failed to regenerate content",
+      "addChannel": "Add Channel",
+      "addingChannel": "Adding Channel",
+      "successAdd": "All channels have been added",
+      "viewCompositions": "View All",
+      "viewComposition": "View Composition",
+      "overview": {
+        "overview": "Overview",
+        "cardTitle": "Basic Information",
+        "cardDescription": "General details about this composition",
+        "fields": {
+          "title": "Subject",
+          "category": "Category",
+          "language": "Language",
+          "persona": "Persona",
+          "model": "Model",
+          "selectLanguage": "Select Language",
+          "selectModel": "Select Model",
+          "unsubscribeLabel": "Add unsubscribe",
+          "unsubscribeCheckbox": "Include unsubscribe link",
+          "unsubscribeTooltip": "When enabled, emails will include an unsubscribe link at the bottom",
+          "yes": "Yes",
+          "no": "No"
+        },
+        "reference": {
+          "title": "Reference",
+          "description": "Reference information",
+          "prompt": "Reference Prompt",
+          "result": "Reference Result",
+          "placeholder": "Enter your description..."
+        },
+        "toasts": {
+          "channelAddedSuccess": "channel added successfully",
+          "channelAddedError": "Failed to add",
+          "compositionUpdateSuccess": "Composition updated successfully",
+          "compositionUpdateError": "Failed to update composition:"
+        }
+      }
+    }
+  },
+  "DataTable": {
+    "noResults": "no results",
+    "ViewOptions": {
+      "view": "view",
+      "toggleColumns": "Toggle columns",
+      "export": "export",
+      "bestOffers": "Show best offers",
+      "allOffers": "Show all offers",
+      "create": "Create new",
+      "status": "Previous jobs"
+    },
+    "Pagination": {
+      "rowsSelected": "row(s) selected",
+      "rowsPerPage": "Rows per page",
+      "page": "Page",
+      "of": "of",
+      "goToFirst": "Go to first page",
+      "goToPrevious": "Go to previous page",
+      "goToNext": "Go to next page",
+      "goToLast": "Go to last page"
+    }
+  },
+  "Contacts": {
+    "table_title": "Contacts",
+    "metaTitle": "Manage contacts",
+    "metaDescription": "Helps to manage contacts",
+    "deleteContact": "Contact Deleted!",
+    "topBar": {
+      "details": "Details",
+      "subscriptions": "Subscriptions",
+      "lists": "Lists",
+      "transactions": "Transactions",
+      "transaction_subscriptions": "Transaction Subscriptions",
+      "surveys": "Surveys",
+      "events": "History",
+      "tasks": "Tasks",
+      "actions": "Actions",
+      "activity_logs": "Logs",
+      "documents": "Documents"
+    },
+    "toasts": {
+      "actionsdeleted": "Actions deleted",
+      "errorActivityLog": "Error creating activity log: {error}",
+      "logCreated": "`Log {action} created`"
+    },
+    "createContact": {
+      "title": "Create Contact",
+      "description": "Create a new contact.",
+      "contactSchema": "Contact name must be at least 2 characters.",
+      "toast": {
+        "success": "Contact {name} created",
+        "error": "Error creating contact {error} "
+      }
+    },
+    "activityLog": {
+      "activityDeleted": "Activity Log deleted",
+      "createLog": "Create Log",
+      "action": "Action",
+      "description": "Description",
+      "dialog": {
+        "title": "Create Task",
+        "description": "Create a new task with details."
+      }
+    },
+    "details": {
+      "address": {
+        "title": "Address Information",
+        "description": "Location and address details",
+        "noAddress": "No address information available",
+        "hintCanton": "Select Switzerland to enable canton selection.",
+        "dialog": {
+          "title": "Edit Address Information",
+          "description": "Make changes to the contact's address details here."
+        },
+        "success": "Contact address updated",
+        "error": "Error during updating contact: "
+      },
+      "personal": {
+        "details": {
+          "title": "Personal Details",
+          "description": "Additional information about ",
+          "lastAccess": "Last Access",
+          "anonymize": {
+            "title": "Anonymize user data",
+            "anonymizing": "Anonymizing...",
+            "dialogTitle": "Are you absolutely sure?",
+            "dialogDescription": "This action will anonymize the contact's personal information and cannot be reversed. All personally identifiable information will be permanently removed.",
+            "important": "Important:",
+            "info1": "This process is not reversible",
+            "info2": "It's okay to leave data fields empty after anonymization",
+            "info3": "Required system fields will be filled with placeholder values",
+            "success": "Contact anonymized successfully",
+            "error": "Unexpected anonymization error"
+          },
+          "export": {
+            "title": "Export user data",
+            "exporting": "Exporting",
+            "description": "Download contact data as a JSON file",
+            "success": "Contact data exported successfully!",
+            "error": "Export failed. Please try again."
+          }
+        },
+        "edit": {
+          "title": "Edit Personal Information",
+          "description": "Make changes to the contact's personal information here.",
+          "nameSchema": "First name is required",
+          "emailSchema": "Enter a valid email",
+          "phoneSchema": "Phone can only contain numbers and +",
+          "mobileSchema": "Mobile phone can only contain numbers and +",
+          "error": "Error updating contact",
+          "success": "Contact {name} updated"
+        },
+        "info": {
+          "title": "Personal Information",
+          "details": "Basic contact details",
+          "unsubscribeToken": "Unsubcribe Token",
+          "viewAdditional": "View Additional Details",
+          "viewContact": "View contact types, and other details",
+          "viewNotes": "View Notes"
+        }
+      },
+      "professional": {
+        "title": "Professional Information",
+        "description": "Work and social media details",
+        "editTitle": "Edit Professional Information",
+        "descriptionEdit": "Make changes to the contact's professional details here.",
+        "success": "Contact updated",
+        "error": "Error updating contact",
+        "noInformation": "No professional information available"
+      }
+    },
+    "documents": {
+      "table_title": "Documents",
+      "documentDeleted": "Document deleted!",
+      "linkCopied": "Copy Link",
+      "failedLinkCopied": "Failed to copy the link!"
+    },
+    "events": {
+      "table_title": "History",
+      "eventDeleted": "Event deleted!"
+    },
+    "lists": {
+      "table_title": "Lists",
+      "listDeleted": "List deleted!",
+      "addlist": "Add list",
+      "titleLists": "Add Contacts to List",
+      "createListDescription": "Create a new list",
+      "addNewList": "Add new list",
+      "error": "Error adding contact to list: {message}",
+      "success": "Contact added to list {name}"
+    },
+    "addToList": {
+      "title": "Add contacts to list",
+      "description": "Select list",
+      "fields": {
+        "label": "List Name",
+        "placeholder": "Enter list name...",
+        "description": "Choose a unique name for your new list.",
+        "message": "List name must be at least 2 characters."
+      }
+    },
+    "subscriptions": {
+      "table_title": "Contact subscriptions",
+      "subscriptionDeleted": "Subscription deleted!",
+      "statusChange": "Subscription {status}",
+      "activated": "activated",
+      "deactivated": "deactivated",
+      "button": "Add subscription",
+      "title": "Add new Subscription",
+      "channel": "Channel",
+      "success": "Subscription on channel {channel} added",
+      "dublicate": "You are already subscribed to {channel}",
+      "error": "Error adding subscription: {error}"
+    },
+    "surveys": {
+      "table_title": "Survey",
+      "surveyDeleted": "Survey deleted!",
+      "question": "Question",
+      "answer": "Answer"
+    },
+    "tasks": {
+      "table_title": "Tasks",
+      "taskDeleted": "Task deleted!",
+      "success": "Task {name} created",
+      "error": "Error creating task:",
+      "createTask": "Create Task",
+      "description": "Create a new task with details",
+      "fields": {
+        "name": "Name",
+        "description": "Description",
+        "action": "Action",
+        "dueDate": "Due Date",
+        "assignTo": "Assign to",
+        "status": "Status",
+        "selectStatus": "Select status",
+        "statusOptions": {
+          "planned": "planned",
+          "in progress": "in progress",
+          "done": "done",
+          "expired": "expired"
+        }
+      }
+    },
+    "transactionSubscription": {
+      "table_title": "Donation Subscriptions",
+      "transactionSubscriptionDeleted": "Donation Subscriptions deleted!",
+      "error": "Error creating donation subscription: ",
+      "success": "Donation subscription for {name} created",
+      "createTransaction": "Create Donation Subscription",
+      "createSubscription": "Create subscription",
+      "description": "Create a new subscription",
+      "fields": {
+        "payment_method": "Payment Method",
+        "currency": "Currency",
+        "amount": "Amount",
+        "payment_provider": "Payment Provider",
+        "interval": "Interval",
+        "subscription_token": "Subscription Token",
+        "raw_data": "Raw Data"
+      }
+    },
+    "transactions": {
+      "table_title": "Donation Transactions",
+      "transactionDeleted": "Donation Transactions deleted!",
+      "editTitle": "Update Transaction",
+      "createTitle": "Create Transaction",
+      "descriptionCreate": "Create a new Transaction",
+      "success": "Transaction for {name} updated",
+      "error": "Error creating transaction:",
+      "cardSchema": "Card holder name must be at least 2 characters.",
+      "fields": {
+        "user_ip": "User IP",
+        "user_agent": "User Agend",
+        "epp_transaction_id": "EPP Transaction ID",
+        "status": "Status",
+        "card_holder_name": "Card Holder Name",
+        "campaign_id": "Campaign ID",
+        "campaign_name": "Campaign Name",
+        "purpose": "Purpose",
+        "payment_method": "Payment Method",
+        "currency": "Currency",
+        "amount": "Amount",
+        "payment_provider": "Payment Provider",
+        "interval": "Interval",
+        "subscription_token": "Subscription Token",
+        "raw_data": "Raw Data"
+      }
+    },
+    "MassActions": {
+      "create": "Create new",
+      "button": "Mass Actions",
+      "delete": "Delete",
+      "deleteSuccess": "Contacts deleted successfuly",
+      "deleteError": "Error occuried during deleting contacts",
+      "addToList": "Add to list",
+      "addToListSuccess": "Contacts were added to list",
+      "addToListError": "Error occuried during adding contacts",
+      "Dialog": {
+        "addContact": "Add Contact",
+        "select": "Please select a",
+        "list": "list",
+        "titleLists": "Add Contacts to List",
+        "descriptionLists": "Add a new contact to the list",
+        "cancel": "cancel",
+        "addToList": "Add to list"
+      }
+    }
+  },
+  "Forms": {
+    "Layout": {
+      "metaTitle": "Forms from nowCMR",
+      "metaDescription": "nowCRM Forms - Participate in survery, share your opinion, request suppoer",
+      "Panel": "Forms Panel"
+    },
+    "Share": {
+      "valid_email": "Please enter a valid email",
+      "valid_number": "Must be a number"
+    }
+  }
+}

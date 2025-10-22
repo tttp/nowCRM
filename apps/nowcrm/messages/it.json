@@ -1,0 +1,1425 @@
+{
+  "common": {
+    "actions": {
+      "create": "Crea",
+      "createNew": "Crea nuovo",
+      "createList": "Crea elenco",
+      "created": "creato",
+      "continueCreating": "Continua a creare",
+      "edit": "Modifica",
+      "delete": "Elimina",
+      "save": "Salva",
+      "cancel": "Annulla",
+      "confirm": "Conferma",
+      "close": "Chiudi",
+      "view": "Visualizza",
+      "next": "Avanti",
+      "back": "Indietro",
+      "continue": "Continua",
+      "submit": "Invia",
+      "saveChanges": "Salva modifiche",
+      "actions": "Azioni",
+      "openMenu": "Apri menu",
+      "select": "Seleziona elenco",
+      "update": "Aggiorna",
+      "returnHome": "Retourner",
+      "name": "Nome"
+    },
+    "status": {
+      "saving": "Salvataggio..."
+    },
+    "years": "anni",
+    "labels": {
+      "email": "Email",
+      "password": "Password",
+      "first_name": "Nome",
+      "last_name": "Cognome",
+      "fullName": "Nome completo",
+      "username": "Nome utente",
+      "address_line1": "Indirizzo linea 1",
+      "language": "Lingua",
+      "selectLanguage": "Seleziona lingua",
+      "description": "Descrizione",
+      "confirmPassword": "Confirm Password",
+      "newPassword": "New Password"
+    },
+    "languages": {
+      "en": "Inglese",
+      "de": "Tedesco",
+      "fr": "Francese",
+      "it": "Italiano"
+    },
+    "gender": {
+      "male": "Maschio",
+      "female": "Femmina",
+      "other": "Altro"
+    },
+    "salutation": {
+      "dear_mr": "Egregio Signore",
+      "dear_mrs": "Egregia Signora",
+      "dear_ms": "Egregia Signora",
+      "dear_dr": "Egregio Dottore",
+      "dear_prof": "Egregio Professore",
+      "dear_sir": "Egregio Signore",
+      "dear_madam": "Egregia Signora",
+      "dear": "Gentile"
+    },
+    "title": {
+      "mr": "Signore",
+      "mrs": "Signora",
+      "ms": "Signora",
+      "miss": "Signorina",
+      "dr": "Dottore",
+      "prof": "Professore"
+    }
+  },
+  "AdvancedFilters": {
+    "title": "Filtri avanzati",
+    "description": "Applica filtri avanzati per perfezionare la tua ricerca",
+    "actions": {
+      "apply": "Applica filtri",
+      "reset": "Reimposta filtri"
+    },
+    "status": {
+      "new": "nuovo",
+      "closed": "chiuso",
+      "contacted": "contattato",
+      "negotiating": "in trattativa",
+      "registered": "registrato",
+      "backfill": "sostituzione"
+    },
+    "sections": {
+      "personal": "Informazioni personali",
+      "contact": "Informazioni di contatto",
+      "lastAccess": "Ultimo accesso",
+      "social": "Social media",
+      "preferences": "Preferenze",
+      "organization": "Organizzazioni e tipi",
+      "other": "Altri filtri",
+      "journeys": "Percorsi"
+    },
+    "fields": {
+      "title": "Titolo",
+      "first_name": "Nome",
+      "last_name": "Cognome",
+      "birth_date": "Data di nascita",
+      "email": "Email",
+      "gender": "Genere",
+      "phone": "Telefono",
+      "mobilePhone": "Telefono cellulare",
+      "address_line1": "Indirizzo linea 1",
+      "address_line2": "Indirizzo linea 2",
+      "location": "Località",
+      "canton": "Cantone",
+      "plz": "CAP",
+      "country": "Paese",
+      "last_access_from": "Ultimo accesso da",
+      "last_access_to": "Ultimo accesso a",
+      "website_url": "URL del sito web",
+      "website": "Sito web",
+      "linkedin_url": "URL LinkedIn",
+      "linkedin": "LinkedIn",
+      "facebook_url": "URL Facebook",
+      "facebook": "Facebook",
+      "twitter_url": "URL Twitter (X)",
+      "twitter": "Twitter (X)",
+      "language": "Lingua",
+      "contact_types": "Tipi di contatto",
+      "contact_interests": "Interessi di contatto",
+      "subscriptions": "Abbonamento",
+      "rank": "Grado",
+      "department": "Dipartimento",
+      "job_title": "Titolo professionale",
+      "action_type": "Tipo di azione",
+      "media_type": "Tipo di media",
+      "organization": "Organizzazione",
+      "status": "Stato",
+      "priority": "Priorità",
+      "tag": "Etichetta",
+      "description": "Descrizione",
+      "salutation": "Saluto",
+      "function": "Funzione",
+      "source": "Fonte",
+      "list": "Lista",
+      "journeys": "Percorsi",
+      "journey_step": "Fase del percorso",
+      "journey_finished": "Percorso completato",
+      "navigator": "Navigatore",
+      "send_navigator": "Invia navigatore",
+      "zip": "CAP",
+      "keywords": "Parole chiave",
+      "lists": "Liste",
+      "role": "Ruolo",
+      "industry": "Settore",
+      "job_description": "Descrizione del lavoro",
+      "duration_role": "Durata nel ruolo (anni)",
+      "connection_degree": "Grado di connessione",
+      "action_normalized_type": "Action Type",
+      "survey_items_question": "Survey Responses - Question",
+      "survey_items_answer": "Survey Responses - Answer",
+      "event_composition": "Event - Composition",
+      "event_channel": "Event - Channel",
+      "journey_steps": "Journey Steps"
+    },
+    "placeholders": {
+      "title": "Inserisci il titolo",
+      "first_name": "Inserisci il nome",
+      "last_name": "Inserisci il cognome",
+      "gender": "Seleziona il genere",
+      "email": "Inserisci l'email",
+      "contact_types": "Seleziona il tipo di contatto",
+      "phone": "Inserisci il numero di telefono",
+      "mobilePhone": "Inserisci il cellulare",
+      "address_line": "Inserisci l'indirizzo",
+      "location": "Inserisci la località",
+      "canton": "Inserisci il cantone",
+      "plz": "Inserisci il CAP",
+      "country": "Inserisci il paese",
+      "last_access_from": "Inserisci la data iniziale",
+      "last_access_to": "Inserisci la data finale",
+      "website_url": "Inserisci l'URL del sito web",
+      "linkedin_url": "Inserisci l'URL LinkedIn",
+      "facebook_url": "Inserisci l'URL Facebook",
+      "twitter_url": "Inserisci l'URL Twitter",
+      "language": "Seleziona la lingua",
+      "department": "Inserisci il dipartimento",
+      "job_title": "Inserisci il titolo professionale",
+      "action_type": "Inserisci il tipo di azione",
+      "media_type": "Inserisci il tipo di media",
+      "organization": "Inserisci l’organizzazione",
+      "status": "Seleziona lo stato",
+      "priority": "Seleziona la priorità",
+      "tag": "Inserisci l’etichetta",
+      "description": "Inserisci la descrizione",
+      "job_description": "Inserisci la descrizione del lavoro",
+      "duration_role": "Inserisci la durata in anni",
+      "connection_degree": "Inserisci il grado di connessione",
+      "salutation": "Inserisci il saluto",
+      "function": "Inserisci la funzione",
+      "source": "Inserisci la fonte",
+      "list": "Inserisci la lista",
+      "journeys": "Inserisci i percorsi",
+      "journey_step": "Inserisci la fase del percorso",
+      "journey_finished": "Inserisci completamento del percorso",
+      "navigator": "Inserisci il navigatore",
+      "send_navigator": "Inserisci invio navigatore",
+      "action_normalized_type": "Action Type",
+      "survey_items_question": "Survey Responses - Question",
+      "survey_items_answer": "Survey Responses - Answer",
+      "event_composition": "Event - Composition",
+      "event_channel": "Event - Channel",
+      "journey_steps": "Journey Steps"
+    }
+  },
+  "Layout": {
+    "TopBar": {
+      "profile": "Profilo",
+      "settings": "Impostazioni",
+      "admin_panel": "Pannello di amministrazione",
+      "exit": "Disconnetti"
+    }
+  },
+  "TopBar": {
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "admin_panel": "Pannello di amministrazione",
+    "exit": "Disconnetti"
+  },
+  "Auth": {
+    "Layout": {
+      "metaTitle": "Autenticazione CRM",
+      "metaDescription": "Percorsi che gestiscono tutta l'autenticazione del CRM"
+    },
+    "common": {
+      "signIn": "Accedi",
+      "register": "Registrati",
+      "termsAndPrivacy": {
+        "terms": "Termini di servizio",
+        "and": "e",
+        "policy": "Informativa sulla privacy",
+        "agreementRegister": "Creando un account, accetti i nostri",
+        "agreementLogin": "Cliccando su continua, accetti i nostri"
+      }
+    },
+    "Unauthorized": {
+      "metaTitle": "Pagina non autorizzata",
+      "metaDescription": "Contatta l'amministratore per assistenza o verifica le tue credenziali.",
+      "errors": {
+        "Configuration": {
+          "title": "Errore di configurazione",
+          "message": "Si è verificato un problema con la configurazione del server. Controlla le impostazioni del server."
+        },
+        "AccessDenied": {
+          "title": "Accesso negato",
+          "message": "Il tuo indirizzo email non corrisponde a quello aziendale. Se ritieni di dover accedere con questo indirizzo, attendi l'attivazione."
+        },
+        "Verification": {
+          "title": "Errore di verifica",
+          "message": "Si è verificato un problema con la verifica. Il token di autorizzazione è scaduto o è già stato utilizzato."
+        },
+        "Default": {
+          "title": "Errore sconosciuto",
+          "message": "Si è verificato un errore imprevisto. Riprova più tardi."
+        }
+      },
+      "errorCode": "Codice errore: {error}",
+      "contactAdmin": "Se il problema persiste, contatta l'amministratore.",
+      "returnToLogin": "Torna alla pagina di accesso"
+    },
+    "Login": {
+      "metaTitle": "Accesso – CRM",
+      "metaDescription": "Autenticati e accedi al tuo account CRM.",
+      "header": {
+        "title": "Accesso CRM",
+        "subtitle": "Inserisci la tua email qui sotto per accedere al tuo account"
+      },
+      "footer": {
+        "noAccount": "Non hai un account?"
+      },
+      "form": {
+        "emailError": "Inserisci un indirizzo email valido",
+        "loginFailed": "Accesso fallito:",
+        "forgotPassword": "Password dimenticata?",
+        "placeholderPassword": "La tua password"
+      }
+    },
+    "Register": {
+      "metaTitle": "Registrazione – CRM",
+      "metaDescription": "Autenticati e accedi al tuo account CRM.",
+      "header": {
+        "title": "Crea un account",
+        "subtitle": "Inserisci la tua email qui sotto per creare il tuo account"
+      },
+      "footer": "Hai già un account?",
+      "errors": {
+        "emailRegistered": "Questa email è già registrata"
+      },
+      "form": {
+        "placeholderName": "Il tuo nome",
+        "placeholderPassword": "La tua password",
+        "usernameSchema": "Il nome completo deve contenere almeno 5 caratteri",
+        "emailSchema": "Inserisci un indirizzo email valido",
+        "passwordSchema1": "La password deve contenere almeno 8 caratteri",
+        "passwordSchema2": "La password deve contenere almeno una lettera maiuscola",
+        "passwordSchema3": "La password deve contenere almeno una lettera minuscola",
+        "passwordSchema4": "La password deve contenere almeno un numero",
+        "passwordError": "Errore durante il reset della password",
+        "passwordMatchError": "Le password non corrispondono"
+      },
+      "toast": {
+        "success": {
+          "accountCreated": "Account creato con successo"
+        },
+        "error": {
+          "accountCreatedError": "Registrazione fallita – "
+        }
+      }
+    },
+    "ResetPassword": {
+      "metaTitle": "Reimposta password",
+      "metaDescription": "Autenticati e accedi al tuo account Ses CRM.",
+      "header": {
+        "title": "Reimposta la password",
+        "subtitle": "Inserisci il tuo indirizzo email e ti invieremo un link per reimpostare la password."
+      },
+      "actions": {
+        "sendLink": "Invia link di reimpostazione",
+        "rememberMe": "Ricordi la password? Allora",
+        "requestNewLink": "Request new link",
+        "resetPassword": "Reset password"
+      },
+      "errors": {
+        "missingCode": "Reset code isn't supplied",
+        "resetFailed": "Password Reset failed"
+      },
+      "success": {
+        "passwordReset": "Password reset succesfully"
+      }
+    },
+    "ForgotPassword": {
+      "metaTitle": "Reimposta password",
+      "metaDescription": "Autenticati e accedi al tuo account Ses CRM.",
+      "header": {
+        "title": "Reimposta la password",
+        "subtitle": "Inserisci il tuo indirizzo email e ti invieremo un link per reimpostare la password."
+      },
+      "actions": {
+        "sendLink": "Invia link di reimpostazione",
+        "rememberMe": "Ricordi la password? Allora"
+      },
+      "success": {
+        "emailSent": "Email sent succesfully"
+      },
+      "errors": {
+        "failed": "Failed to send reset email link"
+      }
+    },
+    "VerifyOtp": {
+      "metaTitle": "Verifica OTP",
+      "header": {
+        "title": "Autenticazione a due fattori",
+        "subtitle": "Inserisci il codice di verifica inviato alla tua email o al tuo dispositivo per completare l’accesso."
+      },
+      "form": {
+        "label": "Codice di verifica",
+        "placeholder": "Inserisci il tuo codice a 6 cifre",
+        "otpSchema1": "Il codice OTP deve contenere almeno 6 caratteri",
+        "otpSchema2": "Il codice OTP non può superare gli 8 caratteri",
+        "otpSchema3": "Il codice OTP deve contenere solo numeri"
+      },
+      "actions": {
+        "verify": "Verifica",
+        "resend": "Invia di nuovo",
+        "return": "Torna al login"
+      },
+      "toast": {
+        "success": {
+          "verificationSent": "Nuovo codice di verifica inviato"
+        },
+        "error": {
+          "verificationError": "Verifica fallita: "
+        }
+      }
+    }
+  },
+  "Admin": {
+    "Layout": {
+      "metaTitle": "Pannello di Amministrazione",
+      "metaDescription": "Il pannello di amministrazione aiuta a gestire utenti, SKU, tipi di SKU e problematiche legate agli SKU",
+      "Panel": "Pannello di Amministrazione",
+      "TopBar": {
+        "taxonomy": "Tassonomia",
+        "industry": "Settore",
+        "unipile_indetities": "Identità Unipile",
+        "text_blocks": "Blocchi di testo",
+        "channels": "Canali",
+        "identities": "Identità",
+        "unpile_identities": "Identità Unipile",
+        "organization_type": "Tipi di organizzazione",
+        "frequency": "Frequenza",
+        "media_type": "Tipi di media",
+        "tags": "Tags",
+        "action_type": "Tipo di azione",
+        "campaigns": "Campagne",
+        "campaign_categories": "Categorie di campagna",
+        "job_titles": "Titoli di lavoro",
+        "contact_titles": "Titoli di contatto",
+        "contact_salutations": "Saluti di contatto"
+      }
+    },
+    "common": {
+      "name": "Name",
+      "delete": "Delete"
+    },
+    "TextBlock": {
+      "table_title": "Blocchi di testo",
+      "toast": {
+        "delete": "Blocco di testo eliminato",
+        "createOrganizationTypeError": "Errore durante la creazione del blocco di testo",
+        "updateTextBlockError": "errore durante l'aggiornamento del blocco di testo:",
+        "organization": "Blocco di testo",
+        "created": "creato",
+        "updated": "aggiornato"
+      },
+      "action": {
+        "create": "Crea",
+        "confirm": "Conferma",
+        "cancel": "Annulla",
+        "edit": "Modifica",
+        "updateTextBlock": "Aggiorna blocco di testo",
+        "createOrganizationType": "Crea blocco di testo"
+      },
+      "dialog": {
+        "title": "Crea un nuovo blocco di testo",
+        "editTitle": "Modifica blocco di testo"
+      },
+      "form": {
+        "label": "Nome del blocco di testo",
+        "placeholder": "Inserisci il nome del blocco di testo...",
+        "textLabel": "Testo del blocco",
+        "textPlaceholder": "Inserisci il testo...",
+        "tooltip_row_1": "I blocchi di testo vengono generalmente utilizzati per composizioni multilingue",
+        "tooltip_row_2": "Se il blocco di testo viene usato in una composizione e inviato a un contatto, verrà automaticamente adattato alla lingua del contatto"
+      }
+    },
+    "OrganizationType": {
+      "table_title": "Tipi di organizzazione",
+      "toast": {
+        "delete": "Tipo di organizzazione eliminato",
+        "createOrganizationTypeError": "Errore durante la creazione del tipo di organizzazione",
+        "organization": "Tipo di organizzazione"
+      },
+      "action": {
+        "createOrganizationType": "Crea tipo di organizzazione"
+      },
+      "dialog": {
+        "title": "Crea un nuovo tipo di organizzazione"
+      },
+      "form": {
+        "label": "Nome del tipo di organizzazione",
+        "placeholder": "Inserisci il nome del tipo di organizzazione..."
+      }
+    },
+    "MediaType": {
+      "table_title": "Tipi di media",
+      "toast": {
+        "delete": "Tipo di media eliminato",
+        "createMediaTypeError": "Errore durante la creazione del tipo di media",
+        "mediaType": "Tipo di media"
+      },
+      "action": {
+        "createMediaType": "Crea tipo di media"
+      },
+      "dialog": {
+        "title": "Crea un nuovo tipo di media"
+      },
+      "form": {
+        "label": "Nome del tipo di media",
+        "placeholder": "Inserisci il nome del tipo di media..."
+      }
+    },
+    "Frequency": {
+      "table_title": "Frequenze",
+      "toast": {
+        "delete": "Frequenza eliminata",
+        "createFrequencyError": "Errore durante la creazione della frequenza",
+        "frequency": "Frequenza"
+      },
+      "action": {
+        "createFrequency": "Crea frequenza"
+      },
+      "dialog": {
+        "title": "Crea una nuova frequenza"
+      },
+      "form": {
+        "label": "Nome della frequenza",
+        "placeholder": "Inserisci il nome della frequenza..."
+      }
+    },
+    "ActionType": {
+      "table_title": "Action Types",
+      "toast": {
+        "delete": "Action Type deleted",
+        "createActionTypeError": "Error creating action type",
+        "action": "Action type"
+      },
+      "action": {
+        "createActionType": "Create Action Type"
+      },
+      "dialog": {
+        "title": "Create New action Type"
+      },
+      "form": {
+        "label": "Action Type Name",
+        "placeholder": "Enter action type name..."
+      }
+    },
+    "Tags": {
+      "table_title": "Tags",
+      "toast": {
+        "delete": "Tag deleted",
+        "createOrganizationTypeError": "Error creating tag",
+        "organization": "Tag"
+      },
+      "action": {
+        "createOrganizationType": "Create tag"
+      },
+      "dialog": {
+        "title": "Create New Tag"
+      },
+      "form": {
+        "label": "Tag Name",
+        "placeholder": "Enter Tag name..."
+      }
+    },
+    "Identity": {
+      "table_title": "Identità",
+      "dialog": {
+        "title": "Crea una nuova identità",
+        "editTitle": "Modifica identità"
+      },
+      "form": {
+        "label": "Nome dell'identità",
+        "indentitySchema": "Formato non valido. Formato previsto: 'Nome Cognome <email@example.com>' con solo spazi tra nome ed email e senza simboli speciali.",
+        "defaultName": "Nome Cognome <example@gmail.com>",
+        "placeholder": "Inserisci l'email dell'identità...",
+        "tooltipFormat": "Formato previsto: Nome Cognome <email@example.com>",
+        "tooltip": "Solo spazi tra nome ed email, senza simboli speciali."
+      },
+      "toast": {
+        "createIndentityError": "Errore durante la creazione dell'identità",
+        "updateIndentityError": "Errore durante l'aggiornamento dell'identità",
+        "identity": "Identità"
+      },
+      "action": {
+        "createIdentity": "Crea identità"
+      }
+    },
+    "Industry": {
+      "table_title": "Settori",
+      "action": {
+        "createIndustry": "Crea settore"
+      },
+      "toast": {
+        "delete": "Settore eliminato",
+        "createIndustryError": "Errore nella creazione del settore",
+        "industry": "Settore"
+      },
+      "dialog": {
+        "title": "Crea un nuovo settore",
+        "description": "Crea un nuovo settore"
+      },
+      "form": {
+        "label": "Nome del settore",
+        "placeholder": "Inserisci il nome dell'elenco...",
+        "description": "Scegli un nome univoco per il tuo nuovo elenco.",
+        "industrySchema": "Il nome del settore deve contenere almeno 2 caratteri.",
+        "createButton": "Crea settore"
+      }
+    },
+    "Campaign": {
+      "table_title": "Campagne",
+      "action": {
+        "create": "Crea campagna",
+        "update": "Aggiorna campagna"
+      },
+      "toast": {
+        "delete": "Campagna eliminata",
+        "createError": "Errore nella creazione della campagna",
+        "campaign": "Campagna"
+      },
+      "dialog": {
+        "title": "Crea nuova campagna",
+        "description": "Crea una nuova campagna per organizzare le tue attività di marketing",
+        "editTitle": "Modifica campagna",
+        "editDescription": "Aggiorna i dettagli della campagna"
+      },
+      "form": {
+        "nameLabel": "Nome campagna",
+        "namePlaceholder": "Inserisci il nome della campagna...",
+        "nameDescription": "Scegli un nome univoco per la tua campagna.",
+        "nameSchema": "Il nome della campagna deve contenere almeno 2 caratteri.",
+        "descriptionLabel": "Descrizione",
+        "descriptionPlaceholder": "Inserisci la descrizione della campagna...",
+        "descriptionDescription": "Descrivi lo scopo di questa campagna."
+      }
+    },
+    "CampaignCategory": {
+      "table_title": "Categorie di campagna",
+      "action": {
+        "create": "Crea categoria di campagna",
+        "update": "Aggiorna categoria di campagna"
+      },
+      "toast": {
+        "delete": "Categoria di campagna eliminata",
+        "createError": "Errore nella creazione della categoria di campagna",
+        "campaignCategory": "Categoria di campagna"
+      },
+      "dialog": {
+        "title": "Crea nuova categoria di campagna",
+        "description": "Crea una nuova categoria per organizzare le tue campagne",
+        "editTitle": "Modifica categoria di campagna",
+        "editDescription": "Aggiorna i dettagli della categoria di campagna"
+      },
+      "form": {
+        "nameLabel": "Nome categoria",
+        "namePlaceholder": "Inserisci il nome della categoria...",
+        "nameDescription": "Scegli un nome univoco per la tua categoria.",
+        "nameSchema": "Il nome della categoria deve contenere almeno 2 caratteri.",
+        "descriptionLabel": "Descrizione",
+        "descriptionPlaceholder": "Inserisci la descrizione della categoria...",
+        "descriptionDescription": "Descrivi lo scopo di questa categoria."
+      }
+    },
+    "JobTitle": {
+      "table_title": "Titoli di lavoro",
+      "action": {
+        "create": "Crea titolo di lavoro",
+        "update": "Aggiorna titolo di lavoro"
+      },
+      "toast": {
+        "delete": "Titolo di lavoro eliminato",
+        "createError": "Errore nella creazione del titolo di lavoro",
+        "jobTitle": "Titolo di lavoro"
+      },
+      "dialog": {
+        "title": "Crea nuovo titolo di lavoro",
+        "description": "Crea un nuovo titolo di lavoro per i contatti",
+        "editTitle": "Modifica titolo di lavoro",
+        "editDescription": "Aggiorna i dettagli del titolo di lavoro"
+      },
+      "form": {
+        "nameLabel": "Nome titolo di lavoro",
+        "namePlaceholder": "Inserisci il titolo di lavoro...",
+        "nameDescription": "Scegli un nome descrittivo per il titolo di lavoro.",
+        "nameSchema": "Il nome del titolo di lavoro deve contenere almeno 2 caratteri."
+      }
+    },
+    "ContactTitle": {
+      "table_title": "Titoli di contatto",
+      "action": {
+        "create": "Crea titolo di contatto",
+        "update": "Aggiorna titolo di contatto"
+      },
+      "toast": {
+        "delete": "Titolo di contatto eliminato",
+        "createError": "Errore nella creazione del titolo di contatto",
+        "contactTitle": "Titolo di contatto"
+      },
+      "dialog": {
+        "title": "Crea nuovo titolo di contatto",
+        "description": "Crea un nuovo titolo per i contatti (ad es. Dott., Prof., Ing.)",
+        "editTitle": "Modifica titolo di contatto",
+        "editDescription": "Aggiorna i dettagli del titolo di contatto"
+      },
+      "form": {
+        "nameLabel": "Nome titolo",
+        "namePlaceholder": "Inserisci il titolo (ad es. Dott., Prof.)...",
+        "nameDescription": "Scegli un titolo per i contatti.",
+        "nameSchema": "Il nome del titolo deve contenere almeno 2 caratteri."
+      }
+    },
+    "ContactSalutation": {
+      "table_title": "Saluti di contatto",
+      "action": {
+        "create": "Crea saluto di contatto",
+        "update": "Aggiorna saluto di contatto"
+      },
+      "toast": {
+        "delete": "Saluto di contatto eliminato",
+        "createError": "Errore nella creazione del saluto di contatto",
+        "contactSalutation": "Saluto di contatto"
+      },
+      "dialog": {
+        "title": "Crea nuovo saluto di contatto",
+        "description": "Crea un nuovo saluto per i contatti (ad es. Sig., Sig.ra, Sig.na)",
+        "editTitle": "Modifica saluto di contatto",
+        "editDescription": "Aggiorna i dettagli del saluto di contatto"
+      },
+      "form": {
+        "nameLabel": "Nome saluto",
+        "namePlaceholder": "Inserisci il saluto (ad es. Sig., Sig.ra)...",
+        "nameDescription": "Scegli un saluto per i contatti.",
+        "nameSchema": "Il nome del saluto deve contenere almeno 2 caratteri."
+      }
+    },
+    "Channels": {
+      "metaTitle": "Controllo stato canali",
+      "metaDescription": "Gestisci le credenziali e lo stato dei canali",
+      "common": {
+        "name": "Nome",
+        "status": "Stato",
+        "errorDetails": "Dettagli errore",
+        "runHealthCheck": "Avvia controllo stato",
+        "healthCheck": "Controllo stato avviato",
+        "connectionStatusTitle": "Stato della connessione",
+        "failedAuthUrl": "Impossibile ottenere l'URL di autorizzazione",
+        "errorRefreshToken": "Aggiorna prima il tuo token di accesso",
+        "refreshAccessToken": "Aggiorna token di accesso",
+        "invalidCredentials": "Credenziali non valide",
+        "refreshAccessTokenInProgress": "Recupero URL...",
+        "authorizationRequired": "Autorizzazione richiesta",
+        "saveButton": {
+          "defaultText": "Salva credenziali",
+          "savingText": "Salvataggio in corso...",
+          "save": "Salva"
+        },
+        "action": {
+          "verify": "Verifica",
+          "ignore": "Ignora"
+        }
+      },
+      "settings": {
+        "title": "Impostazioni di abbonamento",
+        "description": "Gestisci lo stato di abbonamento dei canali",
+        "form": {
+          "subscription": {
+            "label": "Controllo abbonamento",
+            "placeholder": "Seleziona controllo abbonamento"
+          },
+          "unscubscribe": {
+            "title": "Annulla iscrizione",
+            "description": "Gestisci il testo per l'annullamento dell'iscrizione via email",
+            "label": "Testo di annullamento iscrizione",
+            "tooltip": "Non dimenticare di aggiungere il link con email=@contact.email",
+            "placeholderEdit": "Inserisci la tua descrizione..."
+          }
+        }
+      },
+      "toast": {
+        "updateSettings": "Impostazioni aggiornate con successo",
+        "updateSettingsError": "Errore durante l'aggiornamento delle impostazioni",
+        "linkcopied": "Link copiato negli appunti"
+      },
+      "setup_info": {
+        "setup_title": "Informazioni sulla configurazione",
+        "pricing_title": "Informazioni sui prezzi",
+        "default_email": "L'installazione predefinita include l'integrazione con l'e-mail",
+        "info": "Altri canali richiedono configurazioni e impostazioni aggiuntive"
+      },
+      "email": {
+        "title": "Controllo stato email",
+        "description": "Visualizza e gestisci lo stato del tuo canale email",
+        "runningCheck": "Controllo in corso...",
+        "toast": {
+          "checked": "Canale verificato"
+        },
+        "tooltip": {
+          "title": "Integrazione Email",
+          "description": "Invia email automatizzate ai tuoi contatti con modelli personalizzabili e funzionalità di tracciamento.",
+          "price": "Email: 0,20 CHF ogni 1000 email, più 0,19 CHF per GB di allegati",
+          "limits": "Limite iniziale tipico: 50.000 email ogni 24 ore secondo AWS SES"
+        }
+      },
+      "linkedin": {
+        "title": "Configurazione LinkedIn",
+        "description": "Gestisci le credenziali di integrazione LinkedIn e verifica lo stato della connessione",
+        "authorizationTooltip": "L'account deve essere associato alle credenziali dell'app LinkedIn",
+        "authorizeLinkedinAccess": "Autorizza l’accesso a LinkedIn",
+        "linkAccess": "Clicca sul link qui sotto per autorizzare l’accesso al tuo account LinkedIn:",
+        "tooltip": {
+          "title": "Integrazione LinkedIn",
+          "description": "Collegati alla tua rete professionale e condividi automaticamente aggiornamenti sulla pagina aziendale.",
+          "info": "Richiede le credenziali dell'app LinkedIn"
+        },
+        "form": {
+          "clientId": {
+            "placeholder": "Inserisci LinkedIn Client ID",
+            "errorMessage": "Client ID obbligatorio"
+          },
+          "organizationUrn": {
+            "tooltip": "URN dell’organizzazione – è il numero nell’URL della tua organizzazione",
+            "placeholder": "Inserisci Organization URN",
+            "errorMessage": "Organization URN obbligatorio"
+          },
+          "clientSecret": {
+            "placeholder": "Inserisci LinkedIn Client Secret",
+            "errorMessage": "Client Secret obbligatorio"
+          }
+        },
+        "toast": {
+          "success": {
+            "connectionSuccess": "Fai clic sul link per autorizzare l’accesso a LinkedIn",
+            "tokenRefreshed": "Il tuo token di accesso LinkedIn è stato aggiornato automaticamente",
+            "credentialsUpdated": "Credenziali LinkedIn aggiornate con successo"
+          },
+          "error": {
+            "updateCredentialsError": "Errore durante l’aggiornamento delle credenziali LinkedIn",
+            "failedCredentialsError": "Impossibile aggiornare le credenziali LinkedIn",
+            "refreshTokenError": "Impossibile ottenere l’URL di autorizzazione"
+          }
+        }
+      },
+      "sms": {
+        "title": "Configurazione SMS",
+        "description": "Gestisci le credenziali di integrazione SMS e verifica lo stato della connessione",
+        "tooltip": {
+          "title": "Integrazione SMS",
+          "description": "Invia messaggi di testo ai tuoi clienti per notifiche urgenti e avvisi.",
+          "price": "Pagamento a consumo: 0,14 CHF per SMS",
+          "info": "Le tariffe variano in base al paese e al volume"
+        },
+        "form": {
+          "accessKey": {
+            "placeholder": "Inserisci ID account aziendale",
+            "errorMessage": "Access Key ID è obbligatorio"
+          },
+          "accessToken": {
+            "placeholder": "Inserisci Access Token",
+            "errorMessage": "Secret Access Key è obbligatorio"
+          },
+          "snsRegion": {
+            "placeholder": "Seleziona la regione",
+            "errorMessage": "Regione obbligatoria"
+          }
+        },
+        "toast": {
+          "success": {
+            "credentialsUpdated": "Credenziali SNS aggiornate con successo"
+          },
+          "error": {
+            "updateCredentialsError": "Errore durante l’aggiornamento delle credenziali SNS",
+            "failedCredentialsError": "Impossibile aggiornare le credenziali SNS"
+          }
+        }
+      },
+      "telegram": {
+        "title": "Configurazione Telegram",
+        "description": "Gestisci le credenziali di integrazione Telegram e verifica lo stato della connessione",
+        "tooltip": {
+          "title": "Integrazione Telegram",
+          "description": "Crea e gestisci bot Telegram per coinvolgere i clienti e inviare notifiche automatiche.",
+          "price": "Disponibile piano gratuito",
+          "info": "Richiede token API del bot Telegram"
+        },
+        "toast": {
+          "success": {
+            "credentialsUpdated": "Credenziali Telegram aggiornate con successo"
+          },
+          "error": {
+            "updateCredentialsError": "Errore durante l’aggiornamento delle credenziali Telegram",
+            "failedCredentialsError": "Impossibile aggiornare le credenziali Telegram"
+          }
+        },
+        "form": {
+          "accessToken": {
+            "placeholder": "Inserisci il token API di Telegram",
+            "errorMessage": "Token API obbligatorio"
+          },
+          "organizationUrn": {
+            "placeholder": "Inserisci Organization URN",
+            "tooltip": "Per ottenere l’ID del canale, usa bot Telegram come GET-MY-ID",
+            "errorMessage": "ID del canale obbligatorio"
+          }
+        }
+      },
+      "twitter": {
+        "title": "Configurazione Twitter(X)",
+        "description": "Gestisci le credenziali di integrazione Twitter(X) e verifica lo stato della connessione",
+        "authorizationTooltip": "L’account deve essere associato alle credenziali dell’app Twitter(X)",
+        "authorizeLinkedinAccess": "Autorizza l’accesso a Twitter(X)",
+        "linkAccess": "Clicca sul link qui sotto per autorizzare l’accesso al tuo account Twitter(X):",
+        "tooltip": {
+          "title": "Integrazione Twitter",
+          "description": "Pianifica e automatizza i tweet per coinvolgere il tuo pubblico e promuovere i tuoi contenuti.",
+          "price": "Disponibile piano gratuito. 2.400 tweet per account al giorno (inclusi i retweet), con ulteriori limiti ogni mezz'ora per evitare spam (questi sono i limiti ufficiali di Twitter/X, indipendentemente dallo strumento utilizzato).",
+          "info": "Richiede l'accesso all'API per sviluppatori di Twitter"
+        },
+        "toast": {
+          "success": {
+            "connectionSuccess": "Clicca sul link per autorizzare l’accesso a Twitter(X)",
+            "tokenRefreshed": "Il token di accesso Twitter(X) è stato aggiornato automaticamente",
+            "credentialsUpdated": "Credenziali Twitter(X) aggiornate con successo"
+          },
+          "error": {
+            "updateCredentialsError": "Errore durante l’aggiornamento delle credenziali Twitter(X)",
+            "failedCredentialsError": "Impossibile aggiornare le credenziali Twitter(X)",
+            "refreshTokenError": "Impossibile ottenere l’URL di autorizzazione"
+          }
+        },
+        "form": {
+          "clientId": {
+            "placeholder": "Inserisci Twitter(X) Client ID",
+            "errorMessage": "Client ID obbligatorio"
+          },
+          "clientSecret": {
+            "placeholder": "Inserisci Twitter(X) Client Secret",
+            "errorMessage": "Client Secret obbligatorio"
+          },
+          "advancedCredentials": {
+            "label": "Credenziali API avanzate Twitter(X)",
+            "placeholderAppKey": "Inserisci Twitter(X) App Key",
+            "placeholderAppSecret": "Inserisci Twitter(X) App Secret",
+            "placeholderAppToken": "Inserisci Twitter(X) Access Token",
+            "placeholderAccessSecret": "Inserisci Twitter(X) Access Secret",
+            "tooltip": "Queste 4 credenziali verranno utilizzate per il caricamento di media su Twitter(X).",
+            "toggle": "Mostra/nascondi credenziali avanzate"
+          }
+        }
+      },
+      "whatsApp": {
+        "title": "Configurazione WhatsApp",
+        "description": "Gestisci le credenziali di integrazione WhatsApp e verifica lo stato della connessione",
+        "tooltip": {
+          "title": "Integrazione WhatsApp",
+          "description": "Interagisci con i clienti tramite l'API di WhatsApp Business per messaggi diretti e assistenza.",
+          "price": "A partire da 0,22 CHF per messaggio",
+          "info": "Richiede l'approvazione dell'API WhatsApp Business"
+        },
+        "toast": {
+          "success": {
+            "tokenRefreshed": "Il token di accesso WhatsApp è stato aggiornato automaticamente",
+            "credentialsUpdated": "Credenziali WhatsApp aggiornate con successo"
+          },
+          "error": {
+            "updateCredentialsError": "Errore durante l’aggiornamento delle credenziali WhatsApp",
+            "failedCredentialsError": "Impossibile aggiornare le credenziali WhatsApp"
+          }
+        },
+        "form": {
+          "clientId": {
+            "placeholder": "Inserisci ID account aziendale",
+            "errorMessage": "Client Secret obbligatorio"
+          },
+          "accessToken": {
+            "placeholder": "Inserisci Access Token",
+            "errorMessage": "Client ID obbligatorio"
+          }
+        }
+      },
+      "wordPress": {
+        "title": "Configurazione WordPress",
+        "description": "Gestisci le credenziali di integrazione WordPress e verifica lo stato della connessione",
+        "tooltip": {
+          "title": "Integrazione WordPress",
+          "description": "Pubblica automaticamente contenuti sul tuo blog WordPress e gestisci il sito da remoto.",
+          "price": "Disponibile piano gratuito.",
+          "info": "Richiede le credenziali dell'API REST di WordPress"
+        },
+        "toast": {
+          "success": {
+            "credentialsUpdated": "Credenziali WordPress aggiornate con successo"
+          },
+          "error": {
+            "updateCredentialsError": "Errore durante l’aggiornamento delle credenziali WordPress",
+            "failedCredentialsError": "Impossibile aggiornare le credenziali WordPress"
+          }
+        },
+        "form": {
+          "wpUrl": {
+            "placeholder": "Inserisci l’URL di WordPress",
+            "errorMessage": "L’URL di WordPress è obbligatorio"
+          },
+          "clientId": {
+            "tooltip": "Nome utente e password del pannello di amministrazione",
+            "placeholderName": "Inserisci il nome dell’account",
+            "placeholderPassword": "Inserisci la password dell’account",
+            "errorMessage": "Client ID obbligatorio"
+          }
+        }
+      },
+      "unipile_linkedin": {
+        "tooltip": {
+          "title": "Integrazione Unipile",
+          "description": "Ottimizza la messaggistica LinkedIn tramite l'API unificata di Unipile. Gestisci le comunicazioni professionali e automatizza le campagne su LinkedIn.",
+          "price": "Account base: 24 CHF. Limite messaggi LinkedIn: 100 a settimana.",
+          "info": "Include i messaggi LinkedIn"
+        }
+      }
+    }
+  },
+  "UserInfo": {
+    "noUserFound": "Utente non trovato",
+    "editProfile": "Modifica profilo",
+    "form": {
+      "subtitle": "Informazioni del profilo",
+      "description": "Aggiorna i dettagli del tuo profilo e la foto.",
+      "usernameSchema": "Il nome utente deve contenere almeno 3 caratteri",
+      "emailSchema": "Inserisci un indirizzo email valido",
+      "changePictureLabel": "Cambia immagine",
+      "pictureNote": "Carica una nuova immagine del profilo (JPG, PNG).",
+      "usernameDescription": "Il tuo nome utente unico per la piattaforma.",
+      "emailDescription": "Il tuo indirizzo email per le notifiche."
+    },
+    "status": {
+      "succes": "Profilo aggiornato con successo!",
+      "info": "Nessuna modifica apportata.",
+      "error": "Si è verificato un errore sconosciuto."
+    },
+    "card": {
+      "title": "Informazioni del profilo",
+      "defaultRole": "Utente",
+      "role": "Ruolo",
+      "strapiId": "ID Strapi",
+      "twoFA": "Autenticazione a due fattori"
+    }
+  },
+  "Composer": {
+    "tabs": {
+      "scheduled": "Composizioni programmate",
+      "active": "Composizioni"
+    },
+    "steps": {
+      "label": "Passaggio"
+    },
+    "errors": {
+      "step1Required": "Completa prima il passaggio 1",
+      "step2Required": "Attendi il completamento della generazione del contenuto",
+      "generateFailed": "Generazione del contenuto non riuscita",
+      "submitFailed": "Invio della composizione non riuscito",
+      "createScratchFailed": "Creazione della composizione da zero non riuscita"
+    },
+    "scratch": {
+      "name": "Composizione vuota"
+    },
+    "initialForm": {
+      "step1Title": "Passaggio 1: Dati iniziali",
+      "creating": "Creazione in corso...",
+      "createFromScratch": "Crea da zero",
+      "selectCategory": "Seleziona una categoria",
+      "selectPromptBase": "Seleziona una base di prompt per",
+      "completeComposition": "Completa la tua composizione",
+      "title": "Titolo",
+      "prompt": "Prompt",
+      "model": "Modello",
+      "selectModelPlaceholder": "Seleziona un modello",
+      "compositionTitlePlaceholder": "Inserisci il titolo della composizione",
+      "tooltipImportant": "Requisiti di formato importanti:",
+      "tooltipIncludeFields": "Includi questi campi tra parentesi quadre:",
+      "tooltip": "Includi Categoria/Argomento: [Marketing], Lingua: [Inglese] e Persona: [Professionale] nel tuo prompt.",
+      "generateComposition": "Genera composizione",
+      "tooltipFields": {
+        "category": "Categoria/Argomento: [Categoria]",
+        "language": "Lingua: [Inglese | Tedesco | Italiano | Francese]",
+        "persona": "Persona: [es. scrittore di email di marketing]"
+      },
+      "tooltipNote1": "Questi campi sono richiesti per il corretto funzionamento del prompt e la gestione dei dati.",
+      "tooltipNote2": "Se mancanti, verranno utilizzati i valori predefiniti del prompt selezionato."
+    },
+    "textEditor": {
+      "stepTitle": "Passaggio 2: Modifica del contenuto generato",
+      "loading": "Generazione del contenuto...",
+      "placeholder": "Inserisci la tua descrizione...",
+      "unsubscribeLabel": "Includi link di annullamento iscrizione",
+      "unsubscribeTooltip": "Se abilitato, le email includeranno un link per annullare l'iscrizione in fondo",
+      "regenerate": "Rigenera",
+      "regenerating": "Rigenerazione...",
+      "nextButton": "Avanti: Personalizzazione dei canali"
+    },
+    "channelAdditions": {
+      "title": "Passaggio 3: Personalizzazione dei canali (Opzionale)",
+      "description": "Seleziona i canali che desideri personalizzare e aggiungi prompt aggiuntivi specifici.",
+      "included": "Sarà incluso",
+      "clickToInclude": "Clicca per includere",
+      "additionalPrompt": "Prompt aggiuntivo",
+      "tooltip": "Se lasci il prompt aggiuntivo vuoto, verrà utilizzato lo stesso risultato per questo canale.",
+      "textareaPlaceholder": "es. Aggiungi hashtag, formatta per mobile, ecc.",
+      "submitting": "Invio...",
+      "nextButton": "Avanti: Elaborazione della composizione"
+    },
+    "processingScreen": {
+      "stepTitle": "Passaggio 4: Finalizza la composizione",
+      "submittedTitle": "Composizione inviata!",
+      "submittedDescription": "La tua composizione è attualmente in fase di elaborazione e apparirà presto nel tuo dashboard.",
+      "readyTitle": "Pronto per l'invio",
+      "readyDescription": "La tua composizione è pronta per essere elaborata. Clicca sul pulsante qui sotto per inviarla.",
+      "createNew": "Componi un altro",
+      "submitButton": "Invia composizione",
+      "processing": "Elaborazione in corso..."
+    },
+    "channelContent": {
+      "preview": "Anteprima",
+      "regenerate": "Rigenera",
+      "regenerating": "Rigenerazione...",
+      "additionalPromptLabel": "Prompt aggiuntivo",
+      "resultLabel": "Risultato",
+      "placeholder": "Inserisci la tua descrizione...",
+      "attachedFilesLabel": "File allegati",
+      "viewFile": "Visualizza file",
+      "content": "Contenuto",
+      "newTag": "(Nuovo)",
+      "maxFilesReached": "Raggiunto il massimo di 5 allegati",
+      "noAttachments": "Nessun allegato",
+      "fileAddedToast": "File aggiunto(i)",
+      "regenerateToastSuccess": "Canale rigenerato con successo",
+      "regenerateToastError": "Impossibile rigenerare il contenuto",
+      "addChannel": "Aggiungi canale",
+      "addingChannel": "Aggiunta del canale in corso",
+      "successAdd": "Tutti i canali sono stati aggiunti",
+      "viewCompositions": "Visualizza tutto",
+      "viewComposition": "Visualizza composizione",
+      "overview": {
+        "overview": "Panoramica",
+        "cardTitle": "Informazioni di base",
+        "cardDescription": "Dettagli generali su questa composizione",
+        "fields": {
+          "title": "Titolo",
+          "category": "Categoria",
+          "language": "Lingua",
+          "persona": "Persona",
+          "model": "Modello",
+          "selectLanguage": "Seleziona lingua",
+          "selectModel": "Seleziona modello",
+          "unsubscribeLabel": "Aggiungi annullamento iscrizione",
+          "unsubscribeCheckbox": "Includi link di annullamento iscrizione",
+          "unsubscribeTooltip": "Se abilitato, verrà aggiunto un link di annullamento iscrizione in fondo all'email",
+          "yes": "Sì",
+          "no": "No"
+        },
+        "reference": {
+          "title": "Riferimento",
+          "description": "Informazioni di riferimento",
+          "prompt": "Prompt di riferimento",
+          "result": "Risultato di riferimento",
+          "placeholder": "Inserisci la tua descrizione..."
+        },
+        "toasts": {
+          "channelAddedSuccess": "Canale aggiunto con successo",
+          "channelAddedError": "Errore nell'aggiunta",
+          "compositionUpdateSuccess": "Composizione aggiornata con successo",
+          "compositionUpdateError": "Errore nell'aggiornamento della composizione:"
+        }
+      }
+    }
+  },
+  "DataTable": {
+    "noResults": "Nessun risultato",
+    "ViewOptions": {
+      "view": "Visualizza",
+      "toggleColumns": "Mostra/Nascondi colonne",
+      "export": "Esporta",
+      "bestOffers": "Mostra le migliori offerte",
+      "allOffers": "Mostra tutte le offerte",
+      "create": "Crea nuovo",
+      "status": "Status"
+    },
+    "Pagination": {
+      "rowsSelected": "riga/e selezionata/e",
+      "rowsPerPage": "Righe per pagina",
+      "page": "Pagina",
+      "of": "di",
+      "goToFirst": "Vai alla prima pagina",
+      "goToPrevious": "Vai alla pagina precedente",
+      "goToNext": "Vai alla pagina successiva",
+      "goToLast": "Vai all'ultima pagina"
+    }
+  },
+  "Contacts": {
+    "table_title": "Contatti",
+    "metaTitle": "Gestisci contatti",
+    "metaDescription": "Aiuta a gestire i contatti",
+    "deleteContact": "Contatto eliminato!",
+    "topBar": {
+      "details": "Dettagli",
+      "subscriptions": "Abbonamenti",
+      "lists": "Liste",
+      "transactions": "Transazioni",
+      "transaction_subscriptions": "Abbonamenti alle donazioni",
+      "surveys": "Sondaggi",
+      "events": "Cronologia",
+      "tasks": "Attività",
+      "actions": "Azioni",
+      "activity_logs": "Log",
+      "documents": "Documenti"
+    },
+    "toasts": {
+      "actionsdeleted": "Azioni eliminate",
+      "errorActivityLog": "Errore durante la creazione del log delle attività: {error}",
+      "logCreated": "`Log {action} creato`"
+    },
+    "createContact": {
+      "title": "Crea contatto",
+      "description": "Crea un nuovo contatto.",
+      "contactSchema": "Il nome del contatto deve contenere almeno 2 caratteri.",
+      "toast": {
+        "success": "Contatto {name} creato",
+        "error": "Errore durante la creazione del contatto {error}"
+      }
+    },
+    "activityLog": {
+      "activityDeleted": "Registro attività eliminato",
+      "createLog": "Crea registro",
+      "action": "Azione",
+      "description": "Descrizione",
+      "dialog": {
+        "title": "Crea attività",
+        "description": "Crea una nuova attività con dettagli."
+      }
+    },
+    "details": {
+      "address": {
+        "title": "Informazioni sull'indirizzo",
+        "description": "Dettagli su posizione e indirizzo",
+        "noAddress": "Nessuna informazione sull'indirizzo disponibile",
+        "hintCanton": "Seleziona la Svizzera per abilitare la selezione del cantone.",
+        "dialog": {
+          "title": "Modifica informazioni sull'indirizzo",
+          "description": "Modifica qui i dettagli dell'indirizzo del contatto."
+        },
+        "success": "Indirizzo del contatto aggiornato",
+        "error": "Errore durante l'aggiornamento del contatto: "
+      },
+      "personal": {
+        "details": {
+          "title": "Dettagli personali",
+          "description": "Informazioni aggiuntive su",
+          "lastAccess": "Ultimo accesso",
+          "anonymize": {
+            "title": "Annulla l’identificazione dei dati utente",
+            "anonymizing": "Annullamento in corso...",
+            "dialogTitle": "Sei assolutamente sicuro?",
+            "dialogDescription": "Questa azione annullerà l’identificazione delle informazioni personali del contatto e non può essere annullata. Tutte le informazioni personali verranno rimosse in modo permanente.",
+            "important": "Importante:",
+            "info1": "Questo processo non è reversibile",
+            "info2": "È accettabile lasciare i campi vuoti dopo l’anonimizzazione",
+            "info3": "I campi di sistema obbligatori saranno riempiti con valori segnaposto",
+            "success": "Contatto anonimizzato con successo",
+            "error": "Errore imprevisto durante l’anonimizzazione"
+          },
+          "export": {
+            "title": "Esporta i dati utente",
+            "exporting": "Esportazione in corso",
+            "description": "Scarica i dati del contatto come file JSON",
+            "success": "Dati del contatto esportati con successo!",
+            "error": "Esportazione fallita. Riprova."
+          }
+        },
+        "edit": {
+          "title": "Modifica informazioni personali",
+          "description": "Modifica qui le informazioni personali del contatto.",
+          "nameSchema": "Il nome è obbligatorio",
+          "emailSchema": "Inserisci un'e-mail valida",
+          "phoneSchema": "Il telefono può contenere solo numeri e +",
+          "mobileSchema": "Il cellulare può contenere solo numeri e +",
+          "error": "Errore durante l'aggiornamento del contatto",
+          "success": "Contatto {name} aggiornato"
+        },
+        "info": {
+          "title": "Informazioni personali",
+          "details": "Dettagli di contatto di base",
+          "unsubscribeToken": "Token di disiscrizione",
+          "viewAdditional": "Visualizza dettagli aggiuntivi",
+          "viewContact": "Visualizza tipi di contatto e altri dettagli",
+          "viewNotes": "Visualizza note"
+        }
+      },
+      "professional": {
+        "title": "Informazioni professionali",
+        "description": "Dettagli lavorativi e social media",
+        "editTitle": "Modifica informazioni professionali",
+        "descriptionEdit": "Modifica qui i dettagli professionali del contatto.",
+        "success": "Contatto aggiornato",
+        "error": "Errore durante l'aggiornamento del contatto",
+        "noInformation": "Nessuna informazione professionale disponibile"
+      }
+    },
+    "documents": {
+      "table_title": "Documenti",
+      "documentDeleted": "Documento eliminato!",
+      "linkCopied": "Link copiato",
+      "failedLinkCopied": "Copia del link non riuscita!"
+    },
+    "events": {
+      "table_title": "Cronologia",
+      "eventDeleted": "Evento eliminato!"
+    },
+    "lists": {
+      "table_title": "Liste",
+      "listDeleted": "Lista eliminata!",
+      "addlist": "Aggiungi lista",
+      "titleLists": "Aggiungi contatti alla lista",
+      "createListDescription": "Crea una nuova lista",
+      "addNewList": "Aggiungi nuova lista",
+      "error": "Errore durante l'aggiunta del contatto alla lista: {message}",
+      "success": "Contatto aggiunto alla lista {name}"
+    },
+    "addToList": {
+      "title": "Aggiungi contatti alla lista",
+      "description": "Seleziona lista",
+      "fields": {
+        "label": "Nome della lista",
+        "placeholder": "Inserisci il nome della lista...",
+        "description": "Scegli un nome univoco per la nuova lista.",
+        "message": "Il nome della lista deve contenere almeno 2 caratteri."
+      }
+    },
+    "subscriptions": {
+      "table_title": "Abbonamenti contatto",
+      "subscriptionDeleted": "Abbonamento eliminato!",
+      "statusChange": "Abbonamento {status}",
+      "activated": "attivato",
+      "deactivated": "disattivato",
+      "button": "Aggiungi abbonamento",
+      "title": "Aggiungi nuovo abbonamento",
+      "channel": "Canale",
+      "success": "Abbonamento al canale {channel} aggiunto",
+      "duplicate": "Sei già iscritto a {channel}.",
+      "dublicate": "Sei già iscritto a {channel}",
+      "error": "Errore durante l'aggiunta dell'abbonamento: {error}"
+    },
+    "surveys": {
+      "table_title": "Sondaggio",
+      "surveyDeleted": "Sondaggio eliminato!",
+      "question": "Domanda",
+      "answer": "Risposta"
+    },
+    "tasks": {
+      "table_title": "Attività",
+      "taskDeleted": "Attività eliminata!",
+      "success": "Attività {name} creata",
+      "error": "Errore durante la creazione dell'attività:",
+      "createTask": "Crea attività",
+      "description": "Crea una nuova attività con dettagli",
+      "fields": {
+        "name": "Nome",
+        "description": "Descrizione",
+        "action": "Azione",
+        "dueDate": "Data di scadenza",
+        "assignTo": "Assegna a",
+        "status": "Stato",
+        "selectStatus": "Seleziona stato",
+        "statusOptions": {
+          "planned": "pianificato",
+          "in progress": "in corso",
+          "done": "completato",
+          "expired": "scaduto"
+        }
+      }
+    },
+    "transactionSubscription": {
+      "table_title": "Abbonamenti alle donazioni",
+      "transactionSubscriptionDeleted": "Abbonamenti alle donazioni eliminati!",
+      "error": "Errore durante la creazione dell'abbonamento alla donazione: ",
+      "success": "Abbonamento alla donazione per {name} creato",
+      "createTransaction": "Crea abbonamento alla donazione",
+      "createSubscription": "Crea abbonamento",
+      "description": "Crea un nuovo abbonamento",
+      "fields": {
+        "payment_method": "Metodo di pagamento",
+        "currency": "Valuta",
+        "amount": "Importo",
+        "payment_provider": "Fornitore di pagamento",
+        "interval": "Intervallo",
+        "subscription_token": "Token abbonamento",
+        "raw_data": "Dati grezzi"
+      }
+    },
+    "transactions": {
+      "table_title": "Transazioni di donazione",
+      "transactionDeleted": "Transazioni di donazione eliminate!",
+      "editTitle": "Aggiorna transazione",
+      "createTitle": "Crea transazione",
+      "descriptionCreate": "Crea una nuova transazione",
+      "success": "Transazione per {name} aggiornata",
+      "error": "Errore durante la creazione della transazione:",
+      "cardSchema": "Il nome del titolare della carta deve contenere almeno 2 caratteri.",
+      "fields": {
+        "user_ip": "IP utente",
+        "user_agent": "User agent",
+        "epp_transaction_id": "ID transazione EPP",
+        "status": "Stato",
+        "card_holder_name": "Nome del titolare della carta",
+        "campaign_id": "ID campagna",
+        "campaign_name": "Nome della campagna",
+        "purpose": "Scopo",
+        "payment_method": "Metodo di pagamento",
+        "currency": "Valuta",
+        "amount": "Importo",
+        "payment_provider": "Fornitore di pagamento",
+        "interval": "Intervallo",
+        "subscription_token": "Token abbonamento",
+        "raw_data": "Dati grezzi"
+      }
+    },
+    "MassActions": {
+      "create": "Crea nuovo",
+      "button": "Azioni di massa",
+      "delete": "Elimina",
+      "deleteSuccess": "Contatti eliminati con successo",
+      "deleteError": "Errore durante l'eliminazione dei contatti",
+      "addToList": "Aggiungi alla lista",
+      "addToListSuccess": "Contatti aggiunti alla lista",
+      "addToListError": "Errore durante l'aggiunta dei contatti",
+      "Dialog": {
+        "addContact": "Aggiungi contatto",
+        "select": "Seleziona una",
+        "list": "lista",
+        "titleLists": "Aggiungi contatti alla lista",
+        "descriptionLists": "Aggiungi un nuovo contatto alla lista",
+        "cancel": "annulla",
+        "addToList": "Aggiungi alla lista"
+      }
+    }
+  },
+  "Forms": {
+    "Layout": {
+      "metaTitle": "Moduli da nowCRM",
+      "metaDescription": "Moduli nowCRM – Partecipa ai sondaggi, condividi la tua opinione, richiedi supporto",
+      "Panel": "Pannello moduli"
+    },
+    "Share": {
+      "valid_email": "Inserisci un'e-mail valida",
+      "valid_number": "Deve essere un numero"
+    }
+  }
+}
