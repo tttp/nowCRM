@@ -1,0 +1,19 @@
+{
+  "name": "nowcrm",
+  "version": "1.0.0",
+  "description": "your open source CRM with multichannel outreach capabilities and efficient data management at scale.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1",
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
+  "dependencies": {
+    "typescript": "^5.9.3"
+  }
+}
