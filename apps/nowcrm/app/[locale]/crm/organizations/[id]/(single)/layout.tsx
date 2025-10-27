@@ -10,7 +10,7 @@ import organizationService from "@/lib/services/new_type/organizations.service";
 
 interface LayoutProps {
 	children: React.ReactNode;
-	params: Promise<{ id: number }>;
+	params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,8 +24,8 @@ export default async function Layout(props: LayoutProps) {
 	const params = await props.params;
 
 	const { children } = props;
-
-	const organization = await organizationService.findOne(params.id);
+	const organizationId = Number.parseInt(params.id);
+	const organization = await organizationService.findOne(organizationId);
 	if (!organization.data) {
 		return <ErrorMessage response={organization} />;
 	}
@@ -45,7 +45,7 @@ export default async function Layout(props: LayoutProps) {
 					successMessage="Organization deleted"
 					redirectURL={RouteConfig.organizations.base}
 					serviceName="organizationService"
-					id={params.id}
+					id={organizationId}
 				/>
 			</header>
 			<Separator className="my-4" />

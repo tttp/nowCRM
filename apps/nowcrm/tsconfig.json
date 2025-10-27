@@ -36,9 +36,9 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@parse-me/services": ["../../libs/services/src/index.ts"],
-      "@parse-me/services/server": ["../../libs/services/src/server.ts"],
-      "@parse-me/services/client": ["../../libs/services/src/client.ts"]
+      "@nowcrm/services": ["../../libs/services/src/index.ts"],
+      "@nowcrm/services/server": ["../../libs/services/src/server.ts"],
+      "@nowcrm/services/client": ["../../libs/services/src/client.ts"]
       },
     "target": "ES2017"
   },
@@ -51,7 +51,7 @@
     ".next/types/**/*.ts",
     "jest",
     "node",
-    "@parse-me/services",
+    "@nowcrm/services",
   ],
   "exclude": [
     "node_modules",

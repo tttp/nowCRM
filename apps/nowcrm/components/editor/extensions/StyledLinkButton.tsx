@@ -1,6 +1,5 @@
 "use client";
 
-import type { Editor } from "@tiptap/react";
 import { BadgePlus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -22,7 +21,7 @@ import {
 } from "@/components/ui/tooltip";
 
 interface StyledLinkButtonProps {
-	editor: Editor;
+	editor: any;
 }
 
 const buttonStyles = {

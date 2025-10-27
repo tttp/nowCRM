@@ -21,6 +21,7 @@ export async function GET(req: NextRequest) {
 			swiftRes.headers.get("content-type") || "application/octet-stream";
 		const buffer = await swiftRes.arrayBuffer();
 
+		//@ts-expect-error
 		return new NextResponse(Buffer.from(buffer), {
 			status: 200,
 			headers: {

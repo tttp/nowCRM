@@ -179,7 +179,7 @@ export const StyledLink = Node.create<StyledLinkOptions>({
 				// Select this node
 				if (typeof getPos === "function") {
 					const pos = getPos();
-					editor.commands.setNodeSelection(pos);
+					editor.commands.setNodeSelection(pos as number);
 
 					// Dispatch custom event to open edit dialog
 					const editEvent = new CustomEvent("editButtonLink", {

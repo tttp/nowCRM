@@ -11,7 +11,7 @@ import TopBarContacts from "./components/topbar";
 
 interface LayoutProps {
 	children: React.ReactNode;
-	params: Promise<{ id: number }>;
+	params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,7 +25,8 @@ export default async function Layout(props: LayoutProps) {
 	const params = await props.params;
 	const t = await getTranslations();
 	const { children } = props;
-	const contact = await contactsService.findOne(params.id);
+	const contactId = Number.parseInt(params.id);
+	const contact = await contactsService.findOne(contactId);
 	if (!contact.data) {
 		return <ErrorMessage response={contact} />;
 	}
@@ -43,10 +44,10 @@ export default async function Layout(props: LayoutProps) {
 					successMessage={t("Contacts.deleteContact")}
 					redirectURL={RouteConfig.contacts.base}
 					serviceName="contactService"
-					id={params.id}
+					id={contactId}
 				/>
 			</header>
-			<TopBarContacts id={params.id} />
+			<TopBarContacts id={contactId} />
 			<Separator className="my-2" />
 			<main>{children}</main>
 		</div>

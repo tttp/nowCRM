@@ -16,9 +16,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@parse-me/source"],
+    "customConditions": ["@nowcrm/source"],
     "paths": {
-      "@parse-me/services": ["libs/services/src/index.ts"]
+      "@nowcrm/services": ["libs/services/src/index.ts"]
     }
   }
   

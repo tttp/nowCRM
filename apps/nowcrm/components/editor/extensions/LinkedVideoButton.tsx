@@ -224,6 +224,7 @@ export default function LinkedVideoToolbarButton({ editor }: { editor: any }) {
 
 		video.src = "";
 		video.load();
+		//@ts-expect-error
 		return new Blob([bytes], { type: "image/gif" });
 	};
 

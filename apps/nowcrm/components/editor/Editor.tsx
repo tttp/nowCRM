@@ -181,7 +181,7 @@ export default function Editor(props: EditorProps) {
 				onChangeContent={props.onChange}
 				hideToolbar={props.disableToolbar}
 				disabled={props.disableToolbar}
-				extensions={extensions}
+				extensions={extensions as any}
 				toolbar={{
 					render: (toolbarProps, _toolbarItems, dom, containerDom) => {
 						const contentWithCustomButtons = (
