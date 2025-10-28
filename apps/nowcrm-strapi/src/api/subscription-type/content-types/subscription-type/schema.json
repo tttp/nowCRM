@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscription_types",
+  "info": {
+    "singularName": "subscription-type",
+    "pluralName": "subscription-types",
+    "displayName": "SubscriptionType"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    }
+  }
+}

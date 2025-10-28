@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_salutations",
+  "info": {
+    "singularName": "contact-salutation",
+    "pluralName": "contact-salutations",
+    "displayName": "ContactSalutation"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    }
+  }
+}

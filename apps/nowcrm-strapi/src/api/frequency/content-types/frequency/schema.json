@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "frequencies",
+  "info": {
+    "singularName": "frequency",
+    "pluralName": "frequencies",
+    "displayName": "Frequency"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    }
+  }
+}

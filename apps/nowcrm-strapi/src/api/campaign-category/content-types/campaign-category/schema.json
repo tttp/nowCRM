@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "campaign_categories",
+  "info": {
+    "singularName": "campaign-category",
+    "pluralName": "campaign-categories",
+    "displayName": "CampaignCategory"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

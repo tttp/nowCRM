@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "consents",
+  "info": {
+    "singularName": "consent",
+    "pluralName": "consents",
+    "displayName": "Consent"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "version": {
+      "type": "text"
+    },
+    "text": {
+      "type": "blocks"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  }
+}

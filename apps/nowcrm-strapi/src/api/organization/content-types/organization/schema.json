@@ -1,0 +1,120 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organizations",
+  "info": {
+    "singularName": "organization",
+    "pluralName": "organizations",
+    "displayName": "Organization"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "contacts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contact.contact",
+      "mappedBy": "organization"
+    },
+    "email": {
+      "type": "email"
+    },
+    "address_line1": {
+      "type": "text"
+    },
+    "contact_person": {
+      "type": "text"
+    },
+    "location": {
+      "type": "text"
+    },
+    "frequency": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::frequency.frequency"
+    },
+    "media_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::media-type.media-type"
+    },
+    "zip": {
+      "type": "text"
+    },
+    "country": {
+      "type": "string"
+    },
+    "url": {
+      "type": "text"
+    },
+    "organization_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::organization-type.organization-type"
+    },
+    "twitter_url": {
+      "type": "string"
+    },
+    "facebook_url": {
+      "type": "string"
+    },
+    "whatsapp_channel": {
+      "type": "string"
+    },
+    "linkedin_url": {
+      "type": "string"
+    },
+    "telegram_url": {
+      "type": "string"
+    },
+    "telegram_channel": {
+      "type": "string"
+    },
+    "instagram_url": {
+      "type": "string"
+    },
+    "tiktok_url": {
+      "type": "string"
+    },
+    "whatsapp_phone": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
+    },
+    "description": {
+      "type": "text"
+    },
+    "canton": {
+      "type": "text"
+    },
+    "language": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::source.source"
+    },
+    "industries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::industry.industry"
+    },
+    "city": {
+      "type": "text"
+    },
+    "company_size": {
+      "type": "text"
+    }
+  }
+}

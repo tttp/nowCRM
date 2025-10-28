@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "unipile_identities",
+  "info": {
+    "singularName": "unipile-identity",
+    "pluralName": "unipile-identities",
+    "displayName": "UnipileIdentity"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "unipile_status": {
+      "type": "text"
+    },
+    "account_id": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contacts",
+  "info": {
+    "singularName": "contact",
+    "pluralName": "contacts",
+    "displayName": "Contact"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "text"
+    },
+    "last_name": {
+      "type": "text"
+    },
+    "function": {
+      "type": "text"
+    },
+    "address_line1": {
+      "type": "text"
+    },
+    "address_line2": {
+      "type": "text"
+    },
+    "location": {
+      "type": "text"
+    },
+    "canton": {
+      "type": "text"
+    },
+    "organization": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::organization.organization",
+      "inversedBy": "contacts"
+    },
+    "lists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::list.list",
+      "inversedBy": "contacts"
+    },
+    "phone": {
+      "type": "text"
+    },
+    "contact_interests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contact-interest.contact-interest"
+    },
+    "department": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::department.department"
+    },
+    "consent": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::consent.consent"
+    },
+    "language": {
+      "type": "text"
+    },
+    "gender": {
+      "type": "text"
+    },
+    "mobile_phone": {
+      "type": "text"
+    },
+    "plz": {
+      "type": "text"
+    },
+    "journey_steps": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::journey-step.journey-step",
+      "inversedBy": "contacts"
+    },
+    "journeys": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::journey.journey",
+      "inversedBy": "contacts"
+    },
+    "subscriptions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subscription.subscription",
+      "mappedBy": "contact"
+    },
+    "actions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::action.action",
+      "mappedBy": "contact"
+    },
+    "priority": {
+      "type": "text"
+    },
+    "contact_status": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "contact_documents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contact-document.contact-document",
+      "mappedBy": "contact"
+    },
+    "country": {
+      "type": "text"
+    },
+    "linkedin_url": {
+      "type": "text"
+    },
+    "facebook_url": {
+      "type": "text"
+    },
+    "twitter_url": {
+      "type": "text"
+    },
+    "journey_passed_steps": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::journey-passed-step.journey-passed-step",
+      "mappedBy": "contact"
+    },
+    "keywords": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::keyword.keyword"
+    },
+    "last_access": {
+      "type": "datetime"
+    },
+    "account_created_at": {
+      "type": "datetime"
+    },
+    "ranks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contact-rank.contact-rank"
+    },
+    "contact_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contact-type.contact-type"
+    },
+    "sources": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::source.source"
+    },
+    "zip": {
+      "type": "integer"
+    },
+    "website_url": {
+      "type": "text"
+    },
+    "contact_notes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contact-note.contact-note",
+      "mappedBy": "contact"
+    },
+    "industry": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::industry.industry"
+    },
+    "unsubscribe_token": {
+      "type": "uid"
+    },
+    "birth_date": {
+      "type": "date"
+    },
+    "media_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::media-type.media-type"
+    },
+    "events": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::event.event",
+      "mappedBy": "contact"
+    },
+    "surveys": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::survey.survey",
+      "mappedBy": "contact"
+    },
+    "donation_transactions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::donation-transaction.donation-transaction",
+      "mappedBy": "contact"
+    },
+    "donation_subscriptions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::donation-subscription.donation-subscription",
+      "mappedBy": "contact"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tag.tag"
+    },
+    "title": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::contact-title.contact-title"
+    },
+    "salutation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::contact-salutation.contact-salutation"
+    },
+    "job_title": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::contact-job-title.contact-job-title"
+    },
+    "job_description": {
+      "type": "text"
+    },
+    "duration_role": {
+      "type": "text"
+    },
+    "connection_degree": {
+      "type": "text"
+    }
+  }
+}

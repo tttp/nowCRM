@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "media_types",
+  "info": {
+    "singularName": "media-type",
+    "pluralName": "media-types",
+    "displayName": "MediaType"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "suvery_items",
+  "info": {
+    "singularName": "suvery-item",
+    "pluralName": "suvery-items",
+    "displayName": "SuveryItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "question": {
+      "type": "text"
+    },
+    "answer": {
+      "type": "text"
+    },
+    "survey": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::survey.survey",
+      "inversedBy": "suvery_items"
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

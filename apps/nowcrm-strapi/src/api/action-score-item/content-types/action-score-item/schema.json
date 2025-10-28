@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "action_score_items",
+  "info": {
+    "singularName": "action-score-item",
+    "pluralName": "action-score-items",
+    "displayName": "Action-ScoreItem"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "action": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::action.action",
+      "inversedBy": "score_items"
+    },
+    "value": {
+      "type": "decimal"
+    }
+  }
+}

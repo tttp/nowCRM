@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_notes",
+  "info": {
+    "singularName": "contact-note",
+    "pluralName": "contact-notes",
+    "displayName": "Contact-Note"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "text": {
+      "type": "blocks"
+    },
+    "contact": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::contact.contact",
+      "inversedBy": "contact_notes"
+    }
+  }
+}

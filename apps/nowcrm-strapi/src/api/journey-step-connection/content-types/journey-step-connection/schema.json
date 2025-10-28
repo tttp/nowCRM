@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "journey_step_connections",
+  "info": {
+    "singularName": "journey-step-connection",
+    "pluralName": "journey-step-connections",
+    "displayName": "JourneyStepConnection"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "priority": {
+      "type": "integer"
+    },
+    "target_step": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::journey-step.journey-step",
+      "inversedBy": "connections_to_this_step"
+    },
+    "source_step": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::journey-step.journey-step",
+      "inversedBy": "connections_from_this_step"
+    },
+    "condition_type": {
+      "type": "text"
+    },
+    "journey_step_rules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::journey-step-rule.journey-step-rule",
+      "mappedBy": "journey_step_connection"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_titles",
+  "info": {
+    "singularName": "contact-title",
+    "pluralName": "contact-titles",
+    "displayName": "ContactTitle"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    }
+  }
+}

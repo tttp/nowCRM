@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "channels",
+  "info": {
+    "singularName": "channel",
+    "pluralName": "channels",
+    "displayName": "Channel"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "editor_text_type": {
+      "type": "enumeration",
+      "enum": [
+        "html",
+        "text"
+      ]
+    },
+    "removeHtml": {
+      "type": "boolean",
+      "default": false
+    },
+    "max_content_lenght": {
+      "type": "integer"
+    },
+    "file_upload_type": {
+      "type": "enumeration",
+      "enum": [
+        "image",
+        "all",
+        "none"
+      ]
+    },
+    "throttle": {
+      "type": "integer"
+    },
+    "max_sending_quota": {
+      "type": "integer"
+    },
+    "max_sending_rate": {
+      "type": "integer"
+    }
+  }
+}

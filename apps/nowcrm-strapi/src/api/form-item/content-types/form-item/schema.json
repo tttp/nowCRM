@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "form_items",
+  "info": {
+    "singularName": "form-item",
+    "pluralName": "form-items",
+    "displayName": "FormItem"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "form": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::form.form",
+      "inversedBy": "form_items"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "text",
+        "email",
+        "number",
+        "text_area",
+        "checkbox",
+        "select",
+        "date",
+        "single_choice",
+        "multi_choice",
+        "attachment",
+        "multi_checkbox"
+      ]
+    },
+    "label": {
+      "type": "text"
+    },
+    "options": {
+      "type": "json"
+    },
+    "rank": {
+      "type": "biginteger"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "hidden": {
+      "type": "boolean"
+    }
+  }
+}

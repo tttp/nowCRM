@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_job_titles",
+  "info": {
+    "singularName": "contact-job-title",
+    "pluralName": "contact-job-titles",
+    "displayName": "ContactJobTitle"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    }
+  }
+}

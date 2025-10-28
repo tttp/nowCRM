@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "journeys",
+  "info": {
+    "singularName": "journey",
+    "pluralName": "journeys",
+    "displayName": "Journey"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "campaign": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::campaign.campaign",
+      "inversedBy": "journeys"
+    },
+    "contacts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::contact.contact",
+      "mappedBy": "journeys"
+    },
+    "flow": {
+      "type": "json"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "journey_passed_steps": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::journey-passed-step.journey-passed-step",
+      "mappedBy": "journey"
+    },
+    "journey_steps": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::journey-step.journey-step",
+      "mappedBy": "journey"
+    }
+  }
+}

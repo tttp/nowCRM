@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "search_history_templates",
+  "info": {
+    "singularName": "search-history-template",
+    "pluralName": "search-history-templates",
+    "displayName": "SearchHistory-Template"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "filters": {
+      "type": "json"
+    },
+    "query": {
+      "type": "json"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "contacts",
+        "organizations"
+      ]
+    },
+    "favorite": {
+      "type": "boolean"
+    }
+  }
+}

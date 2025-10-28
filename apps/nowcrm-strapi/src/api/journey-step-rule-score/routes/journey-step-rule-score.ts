@@ -1,0 +1,7 @@
+/**
+ * journey-step-rule-score router
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::journey-step-rule-score.journey-step-rule-score');
