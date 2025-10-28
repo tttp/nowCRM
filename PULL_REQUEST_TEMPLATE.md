@@ -35,10 +35,6 @@ Example: "Implements contact filter and improves DAL queue handling." -->
 
 <!--
 Describe how reviewers can test this PR locally.
-Example:
-1. Start Strapi and Composer with `docker-compose-dev.yaml`
-2. Run `yarn dev`
-3. Visit `/contacts` and test new filter logic
 -->
 
 ---
@@ -46,10 +42,9 @@ Example:
 ##  Checklist
 
 Before submitting, make sure you have:
-- [ ] Run `yarn lint:fix` without errors  
-- [ ] Run all tests successfully (`yarn test`)  
+- [ ] Run `pnpm lint:fix && pnpm test` without errors  
 - [ ] Updated or added documentation if needed  
-- [ ] Linked related issues or tasks  
+- [ ] Linked related issues or tasks
 - [ ] Verified functionality locally  
 
 ---

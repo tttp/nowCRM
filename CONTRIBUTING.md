@@ -72,7 +72,7 @@ Before opening a new issue, please:
 ## Code Guidelines
 
 * Use **TypeScript** consistently across all services.
-* Follow existing project **linting and formatting rules** (`yarn lint:fix`).
+* Follow existing project **linting and formatting rules** (`pnpm lint:fix`).
 * Never hardcode URLs, keys, or secrets — always use `.env` variables.
 * Keep commits **small and descriptive**:
 
