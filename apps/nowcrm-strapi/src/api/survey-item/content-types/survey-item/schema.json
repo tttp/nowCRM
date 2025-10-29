@@ -1,13 +1,13 @@
 {
   "kind": "collectionType",
-  "collectionName": "suvery_items",
+  "collectionName": "survey_items",
   "info": {
-    "singularName": "suvery-item",
-    "pluralName": "suvery-items",
-    "displayName": "SuveryItem"
+    "singularName": "survey-item",
+    "pluralName": "survey-items",
+    "displayName": "SurveyItem"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -16,12 +16,6 @@
     },
     "answer": {
       "type": "text"
-    },
-    "survey": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::survey.survey",
-      "inversedBy": "suvery_items"
     },
     "file": {
       "type": "media",
@@ -32,6 +26,12 @@
         "videos",
         "audios"
       ]
+    },
+    "survey": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::survey.survey",
+      "inversedBy": "survey_items"
     }
   }
 }

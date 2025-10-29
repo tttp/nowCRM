@@ -105,9 +105,9 @@
       "relation": "oneToMany",
       "target": "api::source.source"
     },
-    "industries": {
+    "industry": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::industry.industry"
     },
     "city": {

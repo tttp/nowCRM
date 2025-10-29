@@ -65,6 +65,11 @@
       "relation": "oneToMany",
       "target": "api::journey-step-connection.journey-step-connection",
       "mappedBy": "source_step"
+    },
+    "composition": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::composition.composition"
     }
   }
 }

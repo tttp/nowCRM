@@ -23,10 +23,10 @@
       "target": "api::contact.contact",
       "inversedBy": "surveys"
     },
-    "suvery_items": {
+    "survey_items": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::suvery-item.suvery-item",
+      "target": "api::survey-item.survey-item",
       "mappedBy": "survey"
     }
   }
