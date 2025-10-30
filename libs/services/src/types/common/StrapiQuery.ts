@@ -1,3 +1,5 @@
+import { DocumentId } from "./base_type";
+
 export type StandardKeys<T> = {
 	[K in keyof T]: T[K] extends object ? never : K; // Only keep keys that are not objects (primitive fields)
 }[keyof T]; // This produces a union of keys that are not objects (i.e., primitive fields)
@@ -82,9 +84,15 @@ export type StrapiQuery<T> = {
 	locale?: string;
 };
 
+
+ /**
+ * When relation is `to many` you have 3 possible ways to use them in form.
+ * `connect` will add new entities to field.
+ * `disconnect` will remove entities from field.
+ * `set` will set all new entities.
+ * 
+ */
 export type StrapiConnect =
-	| {
-			connect?: number[];
-			disconnect?: number[];
-	  }
-	| number[];
+  | { connect: DocumentId[]; disconnect?: never; set?: never }
+  | { disconnect: DocumentId[]; connect?: never; set?: never }
+  | { set: DocumentId[]; connect?: never; disconnect?: never };

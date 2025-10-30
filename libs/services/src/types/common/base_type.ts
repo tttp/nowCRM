@@ -1,4 +1,8 @@
-// all entities in strapi have this field except name(name we ommit when it not used for entity)
+
+ /**
+ * Represent Strapi id -> string used to connect and disconnect entities
+ * 
+ */
 export type DocumentId = string;
 
 export interface BaseType {
