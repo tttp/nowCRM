@@ -1,9 +1,8 @@
 import type { BaseFormType, BaseType, DocumentId } from "./common/base_type";
-import { Option } from "./common/option";
-import { Setting } from "./setting";
+import type { Option } from "./common/option";
+import type { Setting } from "./setting";
 
 export type CredentialStatuses = "active" | "invalid" | "disconnected";
-
 
 export const CredentialStatusField: Option[] = [
 	{ label: "active", value: "active" },
@@ -12,8 +11,8 @@ export const CredentialStatusField: Option[] = [
 ];
 
 export interface SettingCredential extends BaseType {
-    setting: Setting
-    credential_status: CredentialStatuses;
+	setting: Setting;
+	credential_status: CredentialStatuses;
 	access_token: string;
 	refresh_token: string;
 	client_id: string;
@@ -29,8 +28,8 @@ export interface SettingCredential extends BaseType {
 }
 
 export interface Form_SettingCredential extends BaseFormType {
-    setting: DocumentId
-    credential_status: CredentialStatuses;
+	setting: DocumentId;
+	credential_status: CredentialStatuses;
 	access_token: string;
 	refresh_token: string;
 	client_id: string;

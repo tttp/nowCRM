@@ -1,17 +1,17 @@
 import type { BaseFormType, BaseType } from "./common/base_type";
 
-export type SearchHistoryType = "contacts" | "organizations"
+export type SearchHistoryType = "contacts" | "organizations";
 
 export interface SearchHistoryTemplate extends BaseType {
-    type: SearchHistoryType;
-    filters: object;
-    query: object;
-    favorite: boolean;
+	type: SearchHistoryType;
+	filters: object;
+	query: object;
+	favorite: boolean;
 }
 
 export interface Form_SearchHistoryTemplate extends BaseFormType {
-    type: SearchHistoryType;
-    filters: object;
-    query: object;
-    favorite: boolean;
+	type: SearchHistoryType;
+	filters: object;
+	query: object;
+	favorite: boolean;
 }

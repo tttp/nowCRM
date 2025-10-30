@@ -1,10 +1,10 @@
-import { LanguageKeys } from "static/languages";
+import type { aiModelKeys } from "static/ai-models";
+import type { LanguageKeys } from "static/languages";
+import type { Campaign } from "./campaign";
 import type { BaseFormType, BaseType } from "./common/base_type";
-import { aiModelKeys } from "static/ai-models";
-import { CompositionItem } from "./composition-item";
-import { Campaign } from "./campaign";
-import { StrapiConnect } from "./common/StrapiQuery";
-import { Option } from "./common/option";
+import type { Option } from "./common/option";
+import type { StrapiConnect } from "./common/StrapiQuery";
+import type { CompositionItem } from "./composition-item";
 
 export type CompositionStatusKeys = "Finished" | "Pending" | "Errored";
 
@@ -15,29 +15,29 @@ export const compositionStatuses: Option[] = [
 ];
 
 export interface Composition extends BaseType {
-    composition_status: CompositionStatusKeys
-    category: string;
-    language: LanguageKeys;
-    persona: string;
-    reference_prompt: string;
-    reference_result: string;
-    add_unsubscribe: string;
-    model: aiModelKeys;
-    subject: string;
-    composition_items: CompositionItem[]
-    campaign: Campaign[]
+	composition_status: CompositionStatusKeys;
+	category: string;
+	language: LanguageKeys;
+	persona: string;
+	reference_prompt: string;
+	reference_result: string;
+	add_unsubscribe: string;
+	model: aiModelKeys;
+	subject: string;
+	composition_items: CompositionItem[];
+	campaign: Campaign[];
 }
 
 export interface Form_Composition extends BaseFormType {
-    composition_status: CompositionStatusKeys
-    category: string;
-    language: LanguageKeys;
-    persona: string;
-    reference_prompt: string;
-    reference_result: string;
-    add_unsubscribe: string;
-    model: aiModelKeys;
-    subject: string;
-    composition_items: StrapiConnect
-    campaign: StrapiConnect
+	composition_status: CompositionStatusKeys;
+	category: string;
+	language: LanguageKeys;
+	persona: string;
+	reference_prompt: string;
+	reference_result: string;
+	add_unsubscribe: string;
+	model: aiModelKeys;
+	subject: string;
+	composition_items: StrapiConnect;
+	campaign: StrapiConnect;
 }

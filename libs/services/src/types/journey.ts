@@ -1,23 +1,23 @@
-import { Campaign } from "./campaign";
+import type { Campaign } from "./campaign";
 import type { BaseFormType, BaseType, DocumentId } from "./common/base_type";
-import { StrapiConnect } from "./common/StrapiQuery";
-import { Contact } from "./contact";
-import { JourneyPassedStep } from "./journey-passed-step";
-import { JourneyStep } from "./journey-step";
+import type { StrapiConnect } from "./common/StrapiQuery";
+import type { Contact } from "./contact";
+import type { JourneyPassedStep } from "./journey-passed-step";
+import type { JourneyStep } from "./journey-step";
 export interface Journey extends BaseType {
-    campaign: Campaign;
-    contacts: Contact[];
-    flow: object;
-    active: boolean;
-    journey_passed_steps: JourneyPassedStep[];
-    journey_steps: JourneyStep[]
+	campaign: Campaign;
+	contacts: Contact[];
+	flow: object;
+	active: boolean;
+	journey_passed_steps: JourneyPassedStep[];
+	journey_steps: JourneyStep[];
 }
 
 export interface Form_Journey extends BaseFormType {
-    campaign: DocumentId;
-    contacts: StrapiConnect;
-    flow: object;
-    active: boolean;
-    journey_passed_steps: StrapiConnect;
-    journey_steps: StrapiConnect
+	campaign: DocumentId;
+	contacts: StrapiConnect;
+	flow: object;
+	active: boolean;
+	journey_passed_steps: StrapiConnect;
+	journey_steps: StrapiConnect;
 }
