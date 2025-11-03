@@ -1,22 +1,29 @@
 # Stage 1: Builder
-FROM node:22.8.0-slim AS builder
+FROM node:22.8.0-alpine AS builder
 WORKDIR /app
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install -g pnpm@latest
 
 COPY . .
 RUN pnpm install
-RUN pnpm build
+RUN pnpm --filter @parse-me/ai-parser build
 
-FROM node:22.8.0-slim AS final
+FROM node:22.8.0-alpine AS final
 WORKDIR /app
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install -g pnpm@latest
 
-COPY --from=builder /app/dist ./dist
+# Copy monorepo structure for production install
+COPY pnpm-lock.yaml package.json pnpm-workspace.yaml ./
+COPY apps/composer/package.json ./apps/composer/
 
-COPY package.json pnpm-lock.yaml ./
+# Copy built dist from builder
+COPY --from=builder /app/apps/composer/dist ./dist
 
-RUN pnpm install --prod
+# Install production dependencies for the monorepo
+RUN pnpm install --prod --filter @parse-me/ai-parser
 
-CMD ["pnpm", "start"]
+# Copy node_modules and dist for final runtime
+COPY --from=builder /app/node_modules ./node_modules
+
+CMD ["node", "dist/index.js"]
