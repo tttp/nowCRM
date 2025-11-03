@@ -1,19 +1,17 @@
-import {
-	type SettingCredential,
-	settingsCredentialsService,
-} from "@nowtec/shared";
-import type { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { refreshToken } from "./callback";
+import { SettingCredential } from "@nowcrm/services";
+import { settingCredentialsService } from "@nowcrm/services/server";
 
 export async function checkLinkedInHealth(
 	credential: Omit<SettingCredential, "setting">,
 ): Promise<ServiceResponse<null> | ServiceResponse<string>> {
 	if (!credential || !credential.client_id || !credential.client_secret) {
-		settingsCredentialsService.update(
-			credential.id,
+		settingCredentialsService.update(
+			credential.documentId,
 			{
-				status: "disconnected",
+				credential_status: "disconnected",
 				error_message: "Client id or client secret is empty",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -21,10 +19,10 @@ export async function checkLinkedInHealth(
 	}
 
 	if (!credential.access_token) {
-		settingsCredentialsService.update(
-			credential.id,
+		settingCredentialsService.update(
+			credential.documentId,
 			{
-				status: "disconnected",
+				credential_status: "disconnected",
 				error_message: "Acess token is empty.Please refresh access token",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -34,10 +32,10 @@ export async function checkLinkedInHealth(
 	const serviceResponse = await refreshToken(credential);
 
 	if (serviceResponse.success) {
-		settingsCredentialsService.update(
-			credential.id,
+		settingCredentialsService.update(
+			credential.documentId,
 			{
-				status: "active",
+				credential_status: "active",
 				error_message: "",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,

@@ -1,15 +1,10 @@
-import {
-	CommunicationChannel,
-	type CompositionItem,
-	composerItemsService,
-	settingsCredentialsService,
-	settingsService,
-} from "@nowtec/shared";
 import * as dotenv from "dotenv";
 import { StatusCodes } from "http-status-codes";
 import { loadEsm } from "load-esm";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
+import { CommunicationChannel, CompositionItem } from "@nowcrm/services";
+import { compositionItemsService, settingCredentialsService, settingsService } from "@nowcrm/services/server";
 
 dotenv.config();
 
@@ -17,8 +12,7 @@ export const linkedinPost = async (
 	compositionItem: CompositionItem,
 ): Promise<ServiceResponse<boolean | null>> => {
 	// 1. Fetch settings
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 		{ populate: "*" },
 	);
@@ -30,7 +24,7 @@ export const linkedinPost = async (
 		);
 	}
 
-	if (settings.data.setting_credentials.length === 0) {
+	if (settings.data[0].setting_credentials.length === 0) {
 		return ServiceResponse.failure(
 			"Strapi token badly configured for Composer service",
 			null,
@@ -39,7 +33,7 @@ export const linkedinPost = async (
 	}
 
 	// 2. Get LinkedIn credentials
-	const cred = settings.data.setting_credentials.find(
+	const cred = settings.data[0].setting_credentials.find(
 		(c) => c.name.toLowerCase() === CommunicationChannel.LINKEDIN.toLowerCase(),
 	);
 	if (!cred) {
@@ -50,10 +44,10 @@ export const linkedinPost = async (
 		);
 	}
 	if (!cred.access_token) {
-		await settingsCredentialsService.update(
-			cred.id,
+		await settingCredentialsService.update(
+			cred.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message:
 					"No linkedin access token provided, please refresh your token",
 			},
@@ -66,10 +60,10 @@ export const linkedinPost = async (
 		);
 	}
 	if (!cred.organization_urn) {
-		await settingsCredentialsService.update(
-			cred.id,
+		await settingCredentialsService.update(
+			cred.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message: "No organization URN provided for linkedin channel",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -124,10 +118,10 @@ export const linkedinPost = async (
 			);
 			if (!registerResp.ok) {
 				const msg = `${registerResp.status} ${registerResp.statusText}`;
-				await settingsCredentialsService.update(
-					cred.id,
+				await settingCredentialsService.update(
+					cred.documentId,
 					{
-						status: "invalid",
+						credential_status: "invalid",
 						error_message: msg,
 					},
 					env.COMPOSER_STRAPI_API_TOKEN,
@@ -234,10 +228,10 @@ export const linkedinPost = async (
 
 		if (!postResp.ok) {
 			const msg = `${postResp.status} ${postResp.statusText}`;
-			await settingsCredentialsService.update(
-				cred.id,
+			await settingCredentialsService.update(
+				cred.documentId,
 				{
-					status: "invalid",
+					credential_status: "invalid",
 					error_message: msg,
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
@@ -250,11 +244,11 @@ export const linkedinPost = async (
 		}
 
 		// 7. Reactivate credentials if needed
-		if (cred.status !== "active") {
-			await settingsCredentialsService.update(
-				cred.id,
+		if (cred.credential_status !== "active") {
+			await settingCredentialsService.update(
+				cred.documentId,
 				{
-					status: "active",
+					credential_status: "active",
 					error_message: "",
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
@@ -262,10 +256,10 @@ export const linkedinPost = async (
 		}
 
 		// 8. Mark composition as published
-		await composerItemsService.update(
-			compositionItem.id,
+		await compositionItemsService.update(
+			compositionItem.documentId,
 			{
-				status: "Published",
+				item_status: "Published",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
 		);

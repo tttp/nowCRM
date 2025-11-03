@@ -72,3 +72,4 @@ export * from './api-routes/api-routes-composer';
 export * from './api-routes/api-routes-strapi';
 export * from './zod-validators/non-empty-string';
 export * from './zod-validators/url-validator';
+export * from './utils/check-documentid';

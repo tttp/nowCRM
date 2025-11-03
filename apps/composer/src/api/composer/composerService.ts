@@ -18,7 +18,7 @@ import {
 } from "@nowcrm/services/server";
 import { StatusCodes } from "http-status-codes";
 import { z } from "zod";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { logger } from "@/server";
 import {

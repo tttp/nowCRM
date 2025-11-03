@@ -1,15 +1,9 @@
-import {
-	CommunicationChannel,
-	type Contact,
-	channelService,
-	contactsService,
-	type StandardResponse,
-	subscriptionsService,
-} from "@nowtec/shared";
 import { StatusCodes } from "http-status-codes";
 import { env } from "@/common/utils/envConfig";
 import { logger } from "@/server";
 import type { fieldTypes } from "./field_types";
+import { channelsService, contactsService, StandardResponse, subscriptionsService } from "@nowcrm/services/server";
+import { CommunicationChannel, Contact } from "@nowcrm/services";
 
 export async function getOrCreateContact(
 	field: fieldTypes,
@@ -80,7 +74,7 @@ export async function getOrCreateContact(
 				};
 			}
 
-			const channel = await channelService.find(env.COMPOSER_STRAPI_API_TOKEN, {
+			const channel = await channelsService.find(env.COMPOSER_STRAPI_API_TOKEN, {
 				filters: {
 					name: { $eqi: CommunicationChannel.EMAIL },
 				},
@@ -96,8 +90,8 @@ export async function getOrCreateContact(
 
 			await subscriptionsService.create(
 				{
-					channel: channel.data[0].id,
-					contact: newContact.data.id,
+					channel: channel.data[0].documentId,
+					contact: newContact.data.documentId,
 					active: true,
 					publishedAt: new Date(),
 					subscribed_at: new Date(),

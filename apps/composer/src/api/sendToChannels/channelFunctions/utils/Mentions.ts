@@ -1,9 +1,6 @@
-import {
-	type StrapiQuery,
-	type TextBlock,
-	textBlocksService,
-} from "@nowtec/shared";
 import { env } from "@/common/utils/envConfig";
+import { StrapiQuery, TextBlock } from "@nowcrm/services";
+import { textblocksService } from "@nowcrm/services/server";
 
 interface MentionCheckResult {
 	mentions: string[];
@@ -75,7 +72,7 @@ export async function findTextBlock(
 	query: StrapiQuery<TextBlock>,
 ): Promise<string> {
 	try {
-		const textBlocks = await textBlocksService.find(
+		const textBlocks = await textblocksService.find(
 			env.COMPOSER_STRAPI_API_TOKEN,
 			query,
 		);

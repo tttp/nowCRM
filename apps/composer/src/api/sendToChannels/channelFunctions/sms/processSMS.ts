@@ -1,8 +1,7 @@
-import { CommunicationChannel, type Composition } from "@nowtec/shared";
-import type { ServiceResponse } from "@/common/models/serviceResponse";
-import type { sendToChannelsData } from "@/lib/types/sendToChannel";
+import { ServiceResponse } from "@nowcrm/services";
 import { processChannel } from "../utils/channelProcessor";
 import { SMSMessage } from "./sendSms";
+import { CommunicationChannel, Composition, sendToChannelsData } from "@nowcrm/services";
 /**
  * Process SMS channel
  * @param data Channel data

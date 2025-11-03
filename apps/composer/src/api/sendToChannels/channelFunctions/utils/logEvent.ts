@@ -1,15 +1,17 @@
-import { type Contact, eventsService, type Form_Event } from "@nowtec/shared";
+
 import { env } from "@/common/utils/envConfig";
+import { Contact, DocumentId, Form_Event } from "@nowcrm/services";
+import { eventsService } from "@nowcrm/services/server";
 
 export async function logEvent(
 	contact: Contact,
-	composition_id: number,
-	channel_id: number,
+	composition_id: DocumentId,
+	channel_id: DocumentId,
 	source: string,
 	payload?: any,
 ): Promise<void> {
 	const data = {
-		contact: contact.id,
+		contact: contact.documentId,
 		composition_item: composition_id,
 		external_id: "",
 		destination: contact.email ?? contact.mobile_phone ?? contact.phone,
@@ -20,18 +22,18 @@ export async function logEvent(
 		channel: channel_id,
 		publishedAt: new Date(),
 	};
-	await eventsService.create(data as Form_Event, env.COMPOSER_STRAPI_API_TOKEN);
+	await eventsService.create(data as Partial<Form_Event>, env.COMPOSER_STRAPI_API_TOKEN);
 }
 
 export async function logUnpublishedEvent(
 	contact: Contact,
-	composition_id: number,
-	channel_id: number,
+	composition_id: DocumentId,
+	channel_id: DocumentId,
 	source: string,
 	payload?: any,
 ): Promise<void> {
 	const data = {
-		contact: contact.id,
+		contact: contact.documentId,
 		composition_item: composition_id,
 		external_id: "",
 		destination: contact.email ?? contact.mobile_phone ?? contact.phone,
@@ -42,5 +44,5 @@ export async function logUnpublishedEvent(
 		channel: channel_id,
 		publishedAt: new Date(),
 	};
-	await eventsService.create(data as Form_Event, env.COMPOSER_STRAPI_API_TOKEN);
+	await eventsService.create(data as Partial<Form_Event>, env.COMPOSER_STRAPI_API_TOKEN);
 }

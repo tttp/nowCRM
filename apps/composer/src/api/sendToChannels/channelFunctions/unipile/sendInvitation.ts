@@ -1,25 +1,18 @@
-import {
-	CommunicationChannel,
-	type CompositionItem,
-	type Contact,
-	settingsCredentialsService,
-	settingsService,
-	type UnipileIdentity,
-} from "@nowtec/shared";
 import { StatusCodes } from "http-status-codes";
 import { UnipileClient } from "unipile-node-sdk";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { logEvent } from "../utils/logEvent";
 import { checkMentions, replaceMentionsInText } from "../utils/Mentions";
+import { CommunicationChannel, CompositionItem, Contact, UnipileIdentity } from "@nowcrm/services";
+import { settingCredentialsService, settingsService } from "@nowcrm/services/server";
 
 export async function sendMessage(
 	contact: Contact,
 	composition: CompositionItem,
 	account: UnipileIdentity,
 ): Promise<ServiceResponse<string | null>> {
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 		{ populate: "*" },
 	);
@@ -31,7 +24,7 @@ export async function sendMessage(
 		);
 	}
 
-	if (settings.data.subscription === "verify") {
+	if (settings.data[0].subscription.toLowerCase() === "verify") {
 		if (contact.subscriptions.length === 0) {
 			return ServiceResponse.failure(
 				"Contact has no subscription",
@@ -64,7 +57,7 @@ export async function sendMessage(
 		}
 	}
 
-	if (settings.data.setting_credentials.length === 0) {
+	if (settings.data[0].setting_credentials.length === 0) {
 		return ServiceResponse.failure(
 			"Strapi token badly configured for Composer service",
 			null,
@@ -72,7 +65,7 @@ export async function sendMessage(
 		);
 	}
 
-	const unipile_credentials = settings.data.setting_credentials.find(
+	const unipile_credentials = settings.data[0].setting_credentials.find(
 		(item) =>
 			item.name.toLowerCase() === CommunicationChannel.UNIPILE.toLowerCase(),
 	);
@@ -124,10 +117,10 @@ export async function sendMessage(
 		});
 
 		if (response.invitation_id) {
-			await settingsCredentialsService.update(
-				unipile_credentials.id,
+			await settingCredentialsService.update(
+				unipile_credentials.documentId,
 				{
-					status: "active",
+					credential_status: "active",
 					error_message: "",
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
@@ -152,10 +145,10 @@ export async function sendMessage(
 			);
 		}
 
-		await settingsCredentialsService.update(
-			unipile_credentials.id,
+		await settingCredentialsService.update(
+			unipile_credentials.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message:
 					error.message ||
 					`Unknown error occurred when sending Linkedin Invitation message - ${error}`,
@@ -196,8 +189,8 @@ export async function LinkedInInvitation(
 	}
 	await logEvent(
 		contact,
-		composition.id as number,
-		composition.channel.id,
+		composition.documentId,
+		composition.channel.documentId,
 		"LinkedinInvitation",
 		messageId.responseObject,
 	);

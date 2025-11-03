@@ -1,6 +1,5 @@
 import { env } from "@/common/utils/envConfig";
 import { app, logger } from "@/server";
-import "@nowtec/shared";
 
 const server = app.listen(env.COMPOSER_PORT, () => {
 	const { NODE_ENV, COMPOSER_HOST, COMPOSER_PORT } = env;

@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { logEvent } from "../utils/logEvent";
 import { checkMentions, replaceMentionsInText } from "../utils/Mentions";
@@ -300,8 +300,8 @@ export async function whatsAppMessage(
 	}
 	await logEvent(
 		contact,
-		composition.id as number,
-		composition.channel.id,
+		composition.documentId,
+		composition.channel.documentId,
 		"WhatsApp",
 		messageId.responseObject,
 	);

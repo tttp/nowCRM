@@ -1,22 +1,18 @@
-import {
-	CommunicationChannel,
-	type SettingCredential,
-	settingsCredentialsService,
-	settingsService,
-} from "@nowtec/shared";
 import { StatusCodes } from "http-status-codes";
 import { TwitterApi } from "twitter-api-v2";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { CALLBACK_URL_TWITTER, env } from "@/common/utils/envConfig";
+import { CommunicationChannel, SettingCredential } from "@nowcrm/services";
+import { settingCredentialsService, settingsService } from "@nowcrm/services/server";
 
 export async function refreshToken(
 	twitter_credential: Omit<SettingCredential, "setting">,
 ) {
 	if (!twitter_credential.refresh_token) {
-		await settingsCredentialsService.update(
-			twitter_credential.id,
+		await settingCredentialsService.update(
+			twitter_credential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message: "Refresh token is empty please refresh your tokens",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -38,12 +34,12 @@ export async function refreshToken(
 		);
 
 		if (token) {
-			await settingsCredentialsService.update(
-				twitter_credential.id,
+			await settingCredentialsService.update(
+				twitter_credential.documentId,
 				{
 					access_token: token.accessToken,
 					refresh_token: token.refreshToken,
-					status: "active",
+					credential_status: "active",
 					error_message: "",
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
@@ -71,8 +67,7 @@ export async function refreshToken(
 }
 
 export async function generateRefreshUrlTwitter() {
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 		{ populate: "*" },
 	);
@@ -84,7 +79,7 @@ export async function generateRefreshUrlTwitter() {
 		);
 	}
 
-	if (settings.data.setting_credentials.length === 0) {
+	if (settings.data[0].setting_credentials.length === 0) {
 		return ServiceResponse.failure(
 			"Strapi token badly configured for Composer service",
 			null,
@@ -92,7 +87,7 @@ export async function generateRefreshUrlTwitter() {
 		);
 	}
 
-	const twitter_credential = settings.data.setting_credentials.find(
+	const twitter_credential = settings.data[0].setting_credentials.find(
 		(item) =>
 			item.name.toLowerCase() === CommunicationChannel.TWITTER.toLowerCase(),
 	);
@@ -117,10 +112,12 @@ export async function generateRefreshUrlTwitter() {
 		scope: ["tweet.read", "tweet.write", "users.read", "offline.access"],
 	});
 
-	await settingsCredentialsService.update(
-		twitter_credential.id,
+	await settingCredentialsService.update(
+		twitter_credential.documentId,
 		{
 			organization_urn: link.codeVerifier, // here we use organization urn cause its unside field here
+			credential_status: "active",
+			error_message: "",
 		},
 		env.COMPOSER_STRAPI_API_TOKEN,
 	);

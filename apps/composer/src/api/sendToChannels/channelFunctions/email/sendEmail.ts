@@ -1,17 +1,13 @@
-import {
-	CommunicationChannel,
-	type CompositionItem,
-	type Contact,
-	settingsService,
-} from "@nowtec/shared";
 import { StatusCodes } from "http-status-codes";
 import * as nodemailer from "nodemailer";
 import type * as SMTPTransport from "nodemailer/lib/smtp-transport";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { inlineLinkAndUnderlineStyles } from "../utils/formatStyle";
 import { logEvent, logUnpublishedEvent } from "../utils/logEvent";
 import { checkMentions, replaceMentionsInText } from "../utils/Mentions";
+import { CommunicationChannel, CompositionItem, Contact } from "@nowcrm/services";
+import { settingsService } from "@nowcrm/services/server";
 
 export async function sendEmail(
 	email_from: string,
@@ -21,8 +17,7 @@ export async function sendEmail(
 	ignoreSubscription: boolean,
 ): Promise<ServiceResponse<string | null>> {
 	// one is until settings migrates to each user
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 	);
 
@@ -34,12 +29,12 @@ export async function sendEmail(
 		);
 	}
 
-	if (settings.data.subscription === "verify" && ignoreSubscription === false) {
+	if (settings.data[0].subscription === "verify" && ignoreSubscription === false) {
 		if (contact.subscriptions.length === 0) {
 			await logUnpublishedEvent(
 				contact,
-				composition.id as number,
-				composition.channel.id,
+				composition.documentId,
+				composition.channel.documentId,
 				"Email",
 			);
 			return ServiceResponse.failure(
@@ -56,8 +51,8 @@ export async function sendEmail(
 		if (!emailSubscription) {
 			await logUnpublishedEvent(
 				contact,
-				composition.id as number,
-				composition.channel.id,
+				composition.documentId,
+				composition.channel.documentId,
 				"Email",
 			);
 			return ServiceResponse.failure(
@@ -69,8 +64,8 @@ export async function sendEmail(
 		if (!emailSubscription.active) {
 			await logUnpublishedEvent(
 				contact,
-				composition.id as number,
-				composition.channel.id,
+				composition.documentId,
+				composition.channel.documentId,
 				"Email",
 			);
 			return ServiceResponse.failure(
@@ -104,9 +99,9 @@ export async function sendEmail(
 		html: composition.result, // Notice this will now use our updated text
 		attachments, // add attachments here
 		headers: {
-			"X-SES-MESSAGE-TAGS": `composition_id=${composition.id},channel=${composition.channel.id}`,
-			"X-Composition-Id": composition.id.toString(),
-			"X-Composition-Channel-Id": composition.channel.id.toString(),
+			"X-SES-MESSAGE-TAGS": `composition_id=${composition.documentId},channel=${composition.channel.documentId}`,
+			"X-Composition-Id": composition.documentId.toString(),
+			"X-Composition-Channel-Id": composition.channel.documentId.toString(),
 		},
 	};
 	try {
@@ -148,8 +143,7 @@ export async function emailPost(
 	);
 
 	// Fetch settings to handle unsubscribe text.
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 	);
 	if (!settings.data || !settings.success || settings.errorMessage) {
@@ -161,7 +155,7 @@ export async function emailPost(
 	}
 
 	if (addUnsubscribe) {
-		const unsubscribeText = settings.data?.unsubscribe_text;
+		const unsubscribeText = settings.data[0].unsubscribe_text;
 		if (unsubscribeText === "" || !unsubscribeText) {
 			return ServiceResponse.failure(
 				"You have active add Unsubscribe text, but unsubscribe text in settings is empty",
@@ -207,8 +201,8 @@ export async function emailPost(
 	}
 	await logEvent(
 		contact,
-		composition.id as number,
-		composition.channel.id,
+		composition.documentId,
+		composition.channel.documentId,
 		"Email",
 		messageId.responseObject,
 	);

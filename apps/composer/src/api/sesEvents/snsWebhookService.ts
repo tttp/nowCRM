@@ -1,15 +1,10 @@
-import {
-	contactsService,
-	eventsService,
-	type Form_Contact,
-	type Form_Event,
-	subscriptionsService,
-} from "@nowtec/shared";
+
 import { StatusCodes } from "http-status-codes";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { Form_Contact, Form_Event, ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { logger } from "@/server";
 import type { EmailRecord, SESMessage, SNSMessage } from "./snsWebhookModel";
+import { contactsService, eventsService, subscriptionsService } from "@nowcrm/services/server";
 
 export class SNSWebhookServiceApi {
 	/**
@@ -333,7 +328,7 @@ export class SNSWebhookServiceApi {
 			);
 
 			// First, find the contact ID by email
-			let contactId = null;
+			let contactId = undefined;
 			try {
 				// Use contactsService to find contact by email
 				const contactResponse = await contactsService.find(
@@ -359,7 +354,7 @@ export class SNSWebhookServiceApi {
 					contactResponse.data &&
 					contactResponse.data.length > 0
 				) {
-					contactId = contactResponse.data[0].id;
+					contactId = contactResponse.data[0].documentId;
 					logger.info(
 						`Found contact ID ${contactId} for email: ${record.destination}`,
 					);
@@ -398,7 +393,7 @@ export class SNSWebhookServiceApi {
 							newContactResponse.data &&
 							newContactResponse.data.length > 0
 						) {
-							contactId = newContactResponse.data[0].id;
+							contactId = newContactResponse.data[0].documentId;
 							logger.info(
 								`Created and found contact ID ${contactId} for email: ${record.destination}`,
 							);
@@ -426,10 +421,10 @@ export class SNSWebhookServiceApi {
 				action: record.action || "",
 				payload: record.payload || "",
 				source: record.source,
-				channel: Number(record.channel),
-				composition_item: Number(record.composition_id),
+				channel: record.channel,
+				composition_item: record.composition_id,
 				external_id: record.external_id,
-				status: record.status,
+				event_status: record.status,
 				destination: record.destination,
 			};
 
@@ -455,17 +450,16 @@ export class SNSWebhookServiceApi {
 					await eventsService.create(
 						{
 							contact: contactId,
-							composition_item: Number(record.composition_id),
+							composition_item: record.composition_id,
 							external_id: "",
 							destination: record.destination,
-							status: "unsubscribed",
+							event_status: "unsubscribed",
 							action: "unsubscribe",
 							source: "Unsubscribe",
-							channel: Number(record.channel),
+							channel: record.channel,
 							publishedAt: new Date(),
 							title: "Unsubscribe event",
-							name: "unsubscribe",
-						} as Form_Event,
+						},
 						env.COMPOSER_STRAPI_API_TOKEN,
 					);
 
@@ -474,7 +468,7 @@ export class SNSWebhookServiceApi {
 							const contactResponse = await contactsService.find(
 								env.COMPOSER_STRAPI_API_TOKEN,
 								{
-									filters: { id: { $eq: contactId } },
+									filters: { documentId: { $eq: contactId } },
 									populate: ["subscriptions", "subscriptions.channel"],
 								},
 							);
@@ -513,7 +507,7 @@ export class SNSWebhookServiceApi {
 								}
 
 								await subscriptionsService.update(
-									emailSub.id,
+									emailSub.documentId,
 									{ active: false },
 									env.COMPOSER_STRAPI_API_TOKEN,
 								);
@@ -613,7 +607,7 @@ export class SNSWebhookServiceApi {
 
 			// Cast to Form_Contact when passing to the service
 			const response = await contactsService.create(
-				contactData as Form_Contact,
+				contactData,
 				env.COMPOSER_STRAPI_API_TOKEN,
 			);
 

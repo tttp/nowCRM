@@ -1,5 +1,5 @@
 
-import type { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { processChannel } from "../utils/channelProcessor";
 import { whatsAppMessage } from "./sendWhatsAppMessage";
 import { CommunicationChannel, Composition, sendToChannelsData } from "@nowcrm/services";

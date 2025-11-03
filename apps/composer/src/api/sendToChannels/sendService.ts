@@ -1,7 +1,6 @@
 
 import { StatusCodes } from "http-status-codes";
 import qs from "qs";
-import { ServiceResponse } from "@/common/models/serviceResponse";
 import { env } from "@/common/utils/envConfig";
 import { massSendQueue } from "@/lib/queues/SendQueue";
 import { logger } from "@/server";
@@ -13,7 +12,7 @@ import { twitterPost } from "./channelFunctions/twitter/createPost";
 import { processLinkedInInvitationsChannel } from "./channelFunctions/unipile/processLinkedinInvitations";
 import { processWhatsAppChannel } from "./channelFunctions/whatsapp/processWhatsapp";
 import { wordpressPost } from "./channelFunctions/wordpress/createPost";
-import { CommunicationChannel, Composition, DocumentId, sendToChannelsData } from "@nowcrm/services";
+import { CommunicationChannel, Composition, DocumentId, sendToChannelsData, ServiceResponse } from "@nowcrm/services";
 import { compositionsService, listsService, organizationsService, StandardResponse } from "@nowcrm/services/server";
 
 export class SendToChannelsService {

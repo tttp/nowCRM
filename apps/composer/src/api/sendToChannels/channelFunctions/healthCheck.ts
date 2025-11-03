@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { checkLinkedInHealth } from "./linkedIn/healthCheck";
 import { checkSMSHealth } from "./sms/healthCheck";

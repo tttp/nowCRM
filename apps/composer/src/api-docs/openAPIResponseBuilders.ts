@@ -1,7 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import type { z } from "zod";
+import { ServiceResponseSchema } from "./responce-schema";
 
-import { ServiceResponseSchema } from "@/common/models/serviceResponse";
+
 
 export function createApiResponse(
 	schema: z.ZodTypeAny,

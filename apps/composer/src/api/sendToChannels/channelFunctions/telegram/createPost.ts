@@ -1,15 +1,10 @@
-import {
-	CommunicationChannel,
-	type CompositionItem,
-	composerItemsService,
-	settingsCredentialsService,
-	settingsService,
-} from "@nowtec/shared";
 import * as dotenv from "dotenv";
 import { StatusCodes } from "http-status-codes";
 import { loadEsm } from "load-esm";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env, TELEGRAM_API_BASE } from "@/common/utils/envConfig";
+import { CommunicationChannel, CompositionItem } from "@nowcrm/services";
+import { compositionItemsService, settingCredentialsService, settingsService } from "@nowcrm/services/server";
 
 dotenv.config();
 
@@ -17,8 +12,7 @@ export const telegramPost = async (
 	compositionItem: CompositionItem,
 ): Promise<ServiceResponse<boolean | null>> => {
 	// Fetch settings
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 		{ populate: "*" },
 	);
@@ -29,7 +23,7 @@ export const telegramPost = async (
 			StatusCodes.INTERNAL_SERVER_ERROR,
 		);
 	}
-	if (settings.data.setting_credentials.length === 0) {
+	if (settings.data[0].setting_credentials.length === 0) {
 		return ServiceResponse.failure(
 			"Strapi token badly configured for Composer service",
 			null,
@@ -37,7 +31,7 @@ export const telegramPost = async (
 		);
 	}
 
-	const telegram_credential = settings.data.setting_credentials.find(
+	const telegram_credential = settings.data[0].setting_credentials.find(
 		(item) =>
 			item.name.toLowerCase() === CommunicationChannel.TELEGRAM.toLowerCase(),
 	);
@@ -49,10 +43,10 @@ export const telegramPost = async (
 		);
 	}
 	if (!telegram_credential.access_token) {
-		await settingsCredentialsService.update(
-			telegram_credential.id,
+		await settingCredentialsService.update(
+			telegram_credential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message:
 					"No telegram API token provided, please update your token",
 			},
@@ -65,10 +59,10 @@ export const telegramPost = async (
 		);
 	}
 	if (!telegram_credential.organization_urn) {
-		await settingsCredentialsService.update(
-			telegram_credential.id,
+		await settingCredentialsService.update(
+			telegram_credential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message: "No channel id provided for telegram channel",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -139,10 +133,10 @@ export const telegramPost = async (
 					body: JSON.stringify(payload),
 				});
 				if (!res.ok) {
-					await settingsCredentialsService.update(
-						telegram_credential.id,
+					await settingCredentialsService.update(
+						telegram_credential.documentId,
 						{
-							status: "invalid",
+							credential_status: "invalid",
 							error_message: `${res.status} - ${res.statusText}`,
 						},
 						env.COMPOSER_STRAPI_API_TOKEN,
@@ -167,10 +161,10 @@ export const telegramPost = async (
 				}),
 			});
 			if (!response.ok) {
-				await settingsCredentialsService.update(
-					telegram_credential.id,
+				await settingCredentialsService.update(
+					telegram_credential.documentId,
 					{
-						status: "invalid",
+						credential_status: "invalid",
 						error_message: `${response.status} - ${response.statusText}`,
 					},
 					env.COMPOSER_STRAPI_API_TOKEN,
@@ -184,11 +178,11 @@ export const telegramPost = async (
 		}
 
 		// Update credential status if needed
-		if (telegram_credential.status !== "active") {
-			await settingsCredentialsService.update(
-				telegram_credential.id,
+		if (telegram_credential.credential_status !== "active") {
+			await settingCredentialsService.update(
+				telegram_credential.documentId,
 				{
-					status: "active",
+					credential_status: "active",
 					error_message: "",
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
@@ -196,10 +190,10 @@ export const telegramPost = async (
 		}
 
 		// Mark composition item as published
-		await composerItemsService.update(
-			compositionItem.id,
+		await compositionItemsService.update(
+			compositionItem.documentId,
 			{
-				status: "Published",
+				item_status: "Published",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
 		);

@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import type { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { SettingCredential } from "@nowcrm/services";
 import { settingCredentialsService } from "@nowcrm/services/server";

@@ -1,16 +1,11 @@
-import {
-	CommunicationChannel,
-	type CompositionItem,
-	composerItemsService,
-	settingsCredentialsService,
-	settingsService,
-} from "@nowtec/shared";
 import * as dotenv from "dotenv";
 import { StatusCodes } from "http-status-codes";
 import { TwitterApi } from "twitter-api-v2";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { refreshToken } from "./callback";
+import { CommunicationChannel, CompositionItem } from "@nowcrm/services";
+import { compositionItemsService, settingCredentialsService, settingsService } from "@nowcrm/services/server";
 
 dotenv.config();
 
@@ -18,8 +13,7 @@ export const twitterPost = async (
 	compositionItem: CompositionItem,
 ): Promise<ServiceResponse<boolean | null>> => {
 	// Fetch settings
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 		{ populate: "*" },
 	);
@@ -31,14 +25,14 @@ export const twitterPost = async (
 		);
 	}
 
-	if (settings.data.setting_credentials.length === 0) {
+	if (settings.data[0].setting_credentials.length === 0) {
 		return ServiceResponse.failure(
 			"Strapi token badly configured for Composer service",
 			null,
 			StatusCodes.PARTIAL_CONTENT,
 		);
 	}
-	const twitter_credential = settings.data.setting_credentials.find(
+	const twitter_credential = settings.data[0].setting_credentials.find(
 		(item) =>
 			item.name.toLowerCase() === CommunicationChannel.TWITTER.toLowerCase(),
 	);
@@ -50,10 +44,10 @@ export const twitterPost = async (
 		);
 	}
 	if (!twitter_credential.client_id && !twitter_credential.client_secret) {
-		await settingsCredentialsService.update(
-			twitter_credential.id,
+		await settingCredentialsService.update(
+			twitter_credential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message:
 					"No Twitter access token provided, please refresh your token",
 			},
@@ -67,10 +61,10 @@ export const twitterPost = async (
 	}
 
 	if (!twitter_credential.refresh_token) {
-		await settingsCredentialsService.update(
-			twitter_credential.id,
+		await settingCredentialsService	.update(
+			twitter_credential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message: "No refresh token generated for Twitter channel",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -83,8 +77,8 @@ export const twitterPost = async (
 	}
 
 	await refreshToken(twitter_credential);
-	const updated_creds = await settingsCredentialsService.findOne(
-		twitter_credential.id,
+	const updated_creds = await settingCredentialsService.findOne(
+		twitter_credential.documentId,
 		env.COMPOSER_STRAPI_API_TOKEN,
 	);
 	if (!updated_creds.success || !updated_creds.data) {
@@ -130,10 +124,10 @@ export const twitterPost = async (
 						!twitter_credential.twitter_access_secret ||
 						!twitter_credential.twitter_access_token
 					) {
-						settingsCredentialsService.update(
-							twitter_credential.id,
+						settingCredentialsService.update(
+							twitter_credential.documentId,
 							{
-								status: "invalid",
+								credential_status: "invalid",
 								error_message:
 									"If you want to upload imagese please update credentials for uploading images",
 							},
@@ -184,10 +178,10 @@ export const twitterPost = async (
 
 		if (tweet.errors) {
 			// Update credentials on failure
-			await settingsCredentialsService.update(
-				twitter_credential.id,
+			await settingCredentialsService.update(
+				twitter_credential.documentId,
 				{
-					status: "invalid",
+					credential_status: "invalid",
 					error_message: `${tweet.errors}`,
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
@@ -201,11 +195,11 @@ export const twitterPost = async (
 		}
 
 		// Update Twitter credentials status if needed
-		if (twitter_credential.status !== "active") {
-			await settingsCredentialsService.update(
-				twitter_credential.id,
+		if (twitter_credential.credential_status !== "active") {
+			await settingCredentialsService.update(
+				twitter_credential.documentId,
 				{
-					status: "active",
+					credential_status: "active",
 					error_message: "",
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
@@ -213,10 +207,10 @@ export const twitterPost = async (
 		}
 
 		// Update composition item status
-		await composerItemsService.update(
-			compositionItem.id,
+		await compositionItemsService.update(
+			compositionItem.documentId,
 			{
-				status: "Published",
+				item_status: "Published",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
 		);

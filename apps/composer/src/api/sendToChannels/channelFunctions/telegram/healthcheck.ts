@@ -1,20 +1,19 @@
-import {
-	type SettingCredential,
-	settingsCredentialsService,
-} from "@nowtec/shared";
+
 import { StatusCodes } from "http-status-codes";
-import type { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env, TELEGRAM_API_BASE } from "@/common/utils/envConfig";
+import { SettingCredential } from "@nowcrm/services";
+import { settingCredentialsService } from "@nowcrm/services/server";
 
 export async function checkTelegramHealth(
 	credential: Omit<SettingCredential, "setting">,
 ): Promise<ServiceResponse<null>> {
 	// Validate that the critical credentials are present.
 	if (!credential || !credential.access_token) {
-		await settingsCredentialsService.update(
-			credential.id,
+			await settingCredentialsService.update(
+			credential.documentId,
 			{
-				status: "disconnected",
+				credential_status: "disconnected",
 				error_message: "Api token is empty",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -34,10 +33,10 @@ export async function checkTelegramHealth(
 			method: "GET",
 		});
 		if (resp.ok === true) {
-			await settingsCredentialsService.update(
-				credential.id,
+			await settingCredentialsService.update(
+				credential.documentId,
 				{
-					status: "active",
+					credential_status: "active",
 					error_message: "",
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
@@ -57,10 +56,10 @@ export async function checkTelegramHealth(
 			statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
 		};
 	} catch (error: any) {
-		await settingsCredentialsService.update(
-			credential.id,
+		await settingCredentialsService.update(
+			credential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message: error.message || "Unknown error",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,

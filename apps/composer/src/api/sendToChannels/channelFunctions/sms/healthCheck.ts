@@ -1,21 +1,20 @@
 import { ListTopicsCommand, SNSClient } from "@aws-sdk/client-sns";
-import {
-	type SettingCredential,
-	settingsCredentialsService,
-} from "@nowtec/shared";
+
 import { StatusCodes } from "http-status-codes";
-import type { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
+import { SettingCredential } from "@nowcrm/services";
+import { settingCredentialsService } from "@nowcrm/services/server";
 
 export async function checkSMSHealth(
 	credential: Omit<SettingCredential, "setting">,
 ): Promise<ServiceResponse<null>> {
 	// Validate that the critical credentials are present.
 	if (!credential || !credential.client_id || !credential.client_secret) {
-		await settingsCredentialsService.update(
-			credential.id,
+		await settingCredentialsService.update(
+			credential.documentId,
 			{
-				status: "disconnected",
+				credential_status: "disconnected",
 				error_message: "Client id or secret token is empty",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -40,10 +39,10 @@ export async function checkSMSHealth(
 		const command = new ListTopicsCommand({});
 		await snsClient.send(command);
 
-		await settingsCredentialsService.update(
-			credential.id,
+		await settingCredentialsService.update(
+			credential.documentId,
 			{
-				status: "active",
+				credential_status: "active",
 				error_message: "",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -56,10 +55,10 @@ export async function checkSMSHealth(
 			statusCode: StatusCodes.OK,
 		};
 	} catch (error: any) {
-		await settingsCredentialsService.update(
-			credential.id,
+		await settingCredentialsService.update(
+			credential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message: error.message || "Unknown error",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,

@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import { StatusCodes } from "http-status-codes";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { CommunicationChannel, CompositionItem } from "@nowcrm/services";
 import { compositionItemsService, settingCredentialsService, settingsService } from "@nowcrm/services/server";

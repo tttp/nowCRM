@@ -1,23 +1,17 @@
 import { PublishCommand, SNSClient } from "@aws-sdk/client-sns";
-import {
-	CommunicationChannel,
-	type CompositionItem,
-	type Contact,
-	settingsCredentialsService,
-	settingsService,
-} from "@nowtec/shared";
 import { StatusCodes } from "http-status-codes";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
 import { logEvent } from "../utils/logEvent";
 import { checkMentions, replaceMentionsInText } from "../utils/Mentions";
+import { CommunicationChannel, CompositionItem, Contact } from "@nowcrm/services";
+import { settingCredentialsService, settingsService } from "@nowcrm/services/server";
 
 export async function sendMessage(
 	contact: Contact,
 	composition: CompositionItem,
 ): Promise<ServiceResponse<string | null>> {
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 		{ populate: "*" },
 	);
@@ -29,7 +23,7 @@ export async function sendMessage(
 		);
 	}
 
-	if (settings.data.subscription === "verify") {
+	if (settings.data[0].subscription === "verify") {
 		if (contact.subscriptions.length === 0) {
 			return ServiceResponse.failure(
 				"Contact has no subscription",
@@ -61,7 +55,7 @@ export async function sendMessage(
 		}
 	}
 
-	if (settings.data.setting_credentials.length === 0) {
+	if (settings.data[0].setting_credentials.length === 0) {
 		return ServiceResponse.failure(
 			"Strapi token badly configured for Composer service",
 			null,
@@ -69,7 +63,7 @@ export async function sendMessage(
 		);
 	}
 
-	const smsCredential = settings.data.setting_credentials.find(
+	const smsCredential = settings.data[0].setting_credentials.find(
 		(item) =>
 			item.name.toLowerCase() === CommunicationChannel.SMS.toLowerCase(),
 	);
@@ -84,10 +78,10 @@ export async function sendMessage(
 
 	// Validate that the required SNS credentials exist.
 	if (!smsCredential.client_id || !smsCredential.client_secret) {
-		await settingsCredentialsService.update(
-			smsCredential.id,
+		await settingCredentialsService.update(
+			smsCredential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message: "SMS client credentials are missing",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -127,10 +121,10 @@ export async function sendMessage(
 
 		const response = await snsClient.send(publishCommand);
 
-		await settingsCredentialsService.update(
-			smsCredential.id,
+		await settingCredentialsService.update(
+			smsCredential.documentId,
 			{
-				status: "active",
+				credential_status: "active",
 				error_message: "",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -142,10 +136,10 @@ export async function sendMessage(
 			StatusCodes.OK,
 		);
 	} catch (error: any) {
-		await settingsCredentialsService.update(
-			smsCredential.id,
+		await settingCredentialsService.update(
+			smsCredential.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message:
 					error.message || "Unknown error occurred when sending SNS message",
 			},
@@ -184,8 +178,8 @@ export async function SMSMessage(
 	}
 	await logEvent(
 		contact,
-		composition.id as number,
-		composition.channel.id,
+		composition.documentId,
+		composition.channel.documentId,
 		"SMS",
 		messageId.responseObject,
 	);

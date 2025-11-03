@@ -1,19 +1,15 @@
-import {
-	CommunicationChannel,
-	settingsCredentialsService,
-	settingsService,
-} from "@nowtec/shared";
 import { StatusCodes } from "http-status-codes";
 import { type PostHostedAuthLinkInput, UnipileClient } from "unipile-node-sdk";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { CALLBACK_URL_UNIPILE, env } from "@/common/utils/envConfig";
 import { logger } from "@/logger";
+import { settingCredentialsService, settingsService } from "@nowcrm/services/server";
+import { CommunicationChannel } from "@nowcrm/services";
 export async function generateAccessURLUnipile(
 	name: string,
 	reconnect_account?: string,
 ) {
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 		{ populate: "*" },
 	);
@@ -25,7 +21,7 @@ export async function generateAccessURLUnipile(
 		);
 	}
 
-	if (settings.data.setting_credentials.length === 0) {
+	if (settings.data[0].setting_credentials.length === 0) {
 		return ServiceResponse.failure(
 			"Strapi token badly configured for Composer service",
 			null,
@@ -33,7 +29,7 @@ export async function generateAccessURLUnipile(
 		);
 	}
 
-	const uniple_credentials = settings.data.setting_credentials.find(
+	const uniple_credentials = settings.data[0].setting_credentials.find(
 		(item) =>
 			item.name.toLowerCase() ===
 			CommunicationChannel.UNIPILE.toLocaleLowerCase(),
@@ -48,10 +44,10 @@ export async function generateAccessURLUnipile(
 	}
 
 	if (!uniple_credentials.client_id || !uniple_credentials.client_secret) {
-		settingsCredentialsService.update(
-			uniple_credentials.id,
+		settingCredentialsService.update(
+			uniple_credentials.documentId,
 			{
-				status: "invalid",
+				credential_status: "invalid",
 				error_message: "Api token and DNS is not provided",
 			},
 			env.COMPOSER_STRAPI_API_TOKEN,
@@ -91,13 +87,15 @@ export async function generateAccessURLUnipile(
 				name,
 			};
 
-	logger.info("Generating Unipile access URL", {
+	logger.info(JSON.stringify({
+		message: "Generating Unipile access URL",
 		notify_url: payload.notify_url,
 		type: payload.type,
-		name: payload.name,
-		api_url: payload.api_url,
-		reconnect_account: reconnect_account,
-	});
+			name: payload.name,
+			api_url: payload.api_url,
+			reconnect_account: reconnect_account,
+		}),
+	);
 	const link = await client.account.createHostedAuthLink(payload);
 
 	return ServiceResponse.success(

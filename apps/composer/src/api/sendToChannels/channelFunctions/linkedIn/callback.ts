@@ -1,12 +1,9 @@
-import {
-	CommunicationChannel,
-	type SettingCredential,
-	settingsCredentialsService,
-	settingsService,
-} from "@nowtec/shared";
+
 import { StatusCodes } from "http-status-codes";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { CALLBACK_URL_LINKEDIN, env } from "@/common/utils/envConfig";
+import { CommunicationChannel, SettingCredential } from "@nowcrm/services";
+import { settingCredentialsService, settingsService } from "@nowcrm/services/server";
 
 export async function getLinkedInAccessToken(
 	auth_code: string,
@@ -72,11 +69,13 @@ export async function refreshToken(
 		});
 		const data = await response.json();
 		if (response.ok) {
-			await settingsCredentialsService.update(
-				linkedin_credential.id,
+			await settingCredentialsService.update(
+				linkedin_credential.documentId,
 				{
 					access_token: data.access_token,
 					refresh_token: data.refresh_token,
+					credential_status: "active",
+					error_message: "",
 				},
 				env.COMPOSER_STRAPI_API_TOKEN,
 			);
@@ -102,8 +101,7 @@ export async function refreshToken(
 	}
 }
 export async function generateRefreshUrlLinkedIn() {
-	const settings = await settingsService.findOne(
-		1,
+	const settings = await settingsService.find(
 		env.COMPOSER_STRAPI_API_TOKEN,
 		{ populate: "*" },
 	);
@@ -114,7 +112,7 @@ export async function generateRefreshUrlLinkedIn() {
 			StatusCodes.INTERNAL_SERVER_ERROR,
 		);
 	}
-	if (settings.data.setting_credentials.length === 0) {
+	if (settings.data[0].setting_credentials.length === 0) {
 		return ServiceResponse.failure(
 			"Strapi token badly configured for Composer service",
 			null,
@@ -122,7 +120,7 @@ export async function generateRefreshUrlLinkedIn() {
 		);
 	}
 
-	const linkedin_credential = settings.data.setting_credentials.find(
+	const linkedin_credential = settings.data[0].setting_credentials.find(
 		(item) =>
 			item.name.toLowerCase() === CommunicationChannel.LINKEDIN.toLowerCase(),
 	);

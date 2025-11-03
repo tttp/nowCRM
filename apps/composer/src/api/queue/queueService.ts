@@ -1,8 +1,8 @@
 // queueService.ts
 import fetchCookie from "fetch-cookie";
 import { CookieJar } from "tough-cookie";
-import { ServiceResponse } from "@/common/models/serviceResponse";
 import { env } from "@/common/utils/envConfig";
+import { ServiceResponse } from "@nowcrm/services";
 
 interface GetQueueDataParams {
 	activeQueue: string;

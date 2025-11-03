@@ -1,16 +1,12 @@
-import {
-	type Composition,
-	type CompositionItem,
-	type Contact,
-	contactsService,
-} from "@nowtec/shared";
+
 import { StatusCodes } from "http-status-codes";
-import { ServiceResponse } from "@/common/models/serviceResponse";
+import { ServiceResponse } from "@nowcrm/services";
 import { env } from "@/common/utils/envConfig";
-import type { sendToChannelsData } from "@/lib/types/sendToChannel";
 import { logger } from "@/server";
 import type { fieldTypes } from "./field_types";
 import { getOrCreateContact } from "./getOrCreateContact";
+import { checkDocumentId, Composition, CompositionItem, Contact, DocumentId, sendToChannelsData } from "@nowcrm/services";
+import { contactsService } from "@nowcrm/services/server";
 
 /**
  * Type for message sending function
@@ -110,31 +106,17 @@ export async function processChannel<_T = boolean>(
  * @returns ServiceResponse with success or failure
  */
 async function processContactRecipient(
-	to: string | number | string[] | number[],
+	to: string | DocumentId | string[] | DocumentId[],
 	composition_item: CompositionItem,
 	messageSender: MessageSender,
 	contactField: fieldTypes,
 	additionalArgs: any[] = [],
 ): Promise<ServiceResponse<boolean | null>> {
 	// Determine contact type (email or phone) based on the composition channel
-	if (typeof to === "string") {
-		const contactResponse = await getOrCreateContact(contactField, to);
-		if (!contactResponse.success || !contactResponse.data) {
-			return ServiceResponse.failure(
-				contactResponse.errorMessage || "Failed to get or create contact",
-				null,
-				contactResponse.status,
-			);
-		}
-		return messageSender(
-			composition_item,
-			contactResponse.data,
-			...additionalArgs,
-		);
-	} else if (typeof to === "number") {
+	if (checkDocumentId(to)) {
 		// Handle contact ID
 		const contactResult = await contactsService.findOne(
-			to,
+			to as DocumentId,
 			env.COMPOSER_STRAPI_API_TOKEN,
 			{
 				populate: {
@@ -156,6 +138,21 @@ async function processContactRecipient(
 		return messageSender(
 			composition_item,
 			contactResult.data,
+			...additionalArgs,
+		);
+	}
+	else if (typeof to === "string") {
+		const contactResponse = await getOrCreateContact(contactField, to);
+		if (!contactResponse.success || !contactResponse.data) {
+			return ServiceResponse.failure(
+				contactResponse.errorMessage || "Failed to get or create contact",
+				null,
+				contactResponse.status,
+			);
+		}
+		return messageSender(
+			composition_item,
+			contactResponse.data,
 			...additionalArgs,
 		);
 	} else if (Array.isArray(to)) {
@@ -336,7 +333,7 @@ async function processOrganization(
  * @returns ServiceResponse with success or failure
  */
 async function processMultipleContacts(
-	contacts: string[] | number[],
+	contacts: string[] | DocumentId[],
 	composition_item: CompositionItem,
 	messageSender: MessageSender,
 	additionalArgs: any[],
@@ -347,15 +344,9 @@ async function processMultipleContacts(
 		const contactObjects: Contact[] = [];
 
 		for (const contact of contacts) {
-			if (typeof contact === "string") {
-				// Email or phone address
-				const contactResult = await getOrCreateContact(contactType, contact);
-				if (contactResult.success && contactResult.data) {
-					contactObjects.push(contactResult.data);
-				}
-			} else {
+			if (checkDocumentId(contact)) {
 				const contactResult = await contactsService.findOne(
-					contact,
+					contact as DocumentId,
 					env.COMPOSER_STRAPI_API_TOKEN,
 					{
 						populate: {
@@ -367,6 +358,11 @@ async function processMultipleContacts(
 						},
 					},
 				);
+				if (contactResult.success && contactResult.data) {
+					contactObjects.push(contactResult.data);
+				}
+			} else {
+				const contactResult = await getOrCreateContact(contactType, contact);
 				if (contactResult.success && contactResult.data) {
 					contactObjects.push(contactResult.data);
 				}
