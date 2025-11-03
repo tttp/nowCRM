@@ -1,0 +1,75 @@
+import { ListTopicsCommand, SNSClient } from "@aws-sdk/client-sns";
+import {
+	type SettingCredential,
+	settingsCredentialsService,
+} from "@nowtec/shared";
+import { StatusCodes } from "http-status-codes";
+import type { ServiceResponse } from "@/common/models/serviceResponse";
+import { env } from "@/common/utils/envConfig";
+
+export async function checkSMSHealth(
+	credential: Omit<SettingCredential, "setting">,
+): Promise<ServiceResponse<null>> {
+	// Validate that the critical credentials are present.
+	if (!credential || !credential.client_id || !credential.client_secret) {
+		await settingsCredentialsService.update(
+			credential.id,
+			{
+				status: "disconnected",
+				error_message: "Client id or secret token is empty",
+			},
+			env.COMPOSER_STRAPI_API_TOKEN,
+		);
+		return {
+			success: false,
+			responseObject: null,
+			message: "disconnected",
+			statusCode: StatusCodes.BAD_REQUEST,
+		};
+	}
+
+	try {
+		const snsClient = new SNSClient({
+			region: credential.organization_urn,
+			credentials: {
+				accessKeyId: credential.client_id,
+				secretAccessKey: credential.client_secret,
+			},
+		});
+
+		const command = new ListTopicsCommand({});
+		await snsClient.send(command);
+
+		await settingsCredentialsService.update(
+			credential.id,
+			{
+				status: "active",
+				error_message: "",
+			},
+			env.COMPOSER_STRAPI_API_TOKEN,
+		);
+
+		return {
+			success: true,
+			responseObject: null,
+			message: "active",
+			statusCode: StatusCodes.OK,
+		};
+	} catch (error: any) {
+		await settingsCredentialsService.update(
+			credential.id,
+			{
+				status: "invalid",
+				error_message: error.message || "Unknown error",
+			},
+			env.COMPOSER_STRAPI_API_TOKEN,
+		);
+
+		return {
+			success: false,
+			responseObject: null,
+			message: "failed",
+			statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+		};
+	}
+}

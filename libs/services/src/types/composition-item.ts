@@ -29,8 +29,8 @@ export interface CompositionItem extends Omit<BaseType, "name"> {
 export interface Form_CompositionItem extends Omit<BaseFormType, "name"> {
 	additional_prompt: string;
 	result: string;
-	attached_files: Asset[];
+	attached_files?: Asset[];
 	item_status: CompositionItemsStatusKeys;
-	composition: DocumentId;
-	channel: DocumentId;
+	composition?: DocumentId;
+	channel?: DocumentId;
 }

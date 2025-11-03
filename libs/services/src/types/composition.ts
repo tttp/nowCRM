@@ -21,7 +21,7 @@ export interface Composition extends BaseType {
 	persona: string;
 	reference_prompt: string;
 	reference_result: string;
-	add_unsubscribe: string;
+	add_unsubscribe: boolean;
 	model: aiModelKeys;
 	subject: string;
 	composition_items: CompositionItem[];
@@ -35,9 +35,9 @@ export interface Form_Composition extends BaseFormType {
 	persona: string;
 	reference_prompt: string;
 	reference_result: string;
-	add_unsubscribe: string;
+	add_unsubscribe: boolean;
 	model: aiModelKeys;
 	subject: string;
-	composition_items: StrapiConnect;
-	campaign: StrapiConnect;
+	composition_items?: StrapiConnect;
+	campaign?: StrapiConnect;
 }

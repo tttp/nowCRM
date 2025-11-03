@@ -12,3 +12,6 @@ ignoredBuiltDependencies:
   - core-js
   - sharp
   - unrs-resolver
+
+onlyBuiltDependencies:
+  - '@scarf/scarf'
