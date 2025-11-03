@@ -34,6 +34,8 @@ const API_ROUTES_STRAPI = {
 	CONTACT_TITLES: "contact-titles",
 	CONTACT_TYPES: "contact-types",
 
+	TASKS: "tasks",
+
 	//Sibscriptions
 	SUBSCRIPTIONS: "subscriptions",
 	SUBSCRIPTION_TYPES: "subscription-types",
