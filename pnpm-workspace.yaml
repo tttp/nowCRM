@@ -1,6 +1,7 @@
 packages:
   - apps/*
   - libs/*
+  - scripts/generate-app/templates/*
 
 ignoredBuiltDependencies:
   - '@parcel/watcher'
