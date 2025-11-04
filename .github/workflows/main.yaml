@@ -70,6 +70,7 @@ jobs:
           context: .
           file: ./apps/composer/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}/composer:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}/composer:${{ needs.create_release.outputs.tag_name }}
@@ -150,6 +151,7 @@ jobs:
           context: .
           file: ./apps/nowcrm-strapi/Dockerfile.prod
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}/strapi:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}/strapi:${{ needs.create_release.outputs.tag_name }}

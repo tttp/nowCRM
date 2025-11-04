@@ -1,21 +1,27 @@
 name: "nowcrm"
 
 services:
-  dbdt:
-    container_name: strapidb
-    image: postgres:15.4
-    restart: always
-    command: -c 'max_connections=500'
-    expose:
-      - "5432"
+  postgres:
+    image: postgres:16-alpine
+    container_name: nowcrm-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: ${STRAPI_DATABASE_NAME}
-      POSTGRES_PASSWORD: ${STRAPI_DATABASE_PASSWORD}
       POSTGRES_USER: ${STRAPI_DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${STRAPI_DATABASE_PASSWORD}
+      POSTGRES_DB: ${STRAPI_DATABASE_NAME}
     volumes:
-      - /var/docker_volumes/strapi:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - my_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${STRAPI_DATABASE_USERNAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   redis:
     container_name: redis
@@ -39,12 +45,12 @@ services:
 
   strapi:
     container_name: strapi
-    image: nowtecstrapi
+    image: ghcr.io/nowtec/nowcrm/strapi:latest
     restart: unless-stopped
     ports:
       - "1337:1337"
     environment:
-      DATABASE_HOST: dbdt
+      DATABASE_HOST: postgres
       STRAPI_ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
       STRAPI_API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT}
       STRAPI_APP_KEYS: ${STRAPI_APP_KEYS}
@@ -83,14 +89,14 @@ services:
     volumes:
       - strapi-data:/opt/app/public
     depends_on:
-      - dbdt
+      postgres:
+        condition: service_healthy
     networks:
       - my_net
 
   nowcrm:
     container_name: nowcrm
-    image: nowcrm
-    build: ./contactsapp/
+    image: ghcr.io/nowtec/nowcrm/nowcrm:latest
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -110,8 +116,7 @@ services:
 
   journeys:
     container_name: journeys
-    image: journeys
-    build: ./journeys/
+    image: ghcr.io/nowtec/nowcrm/journeys:latest
     restart: unless-stopped
     expose:
       - "3010"
@@ -147,11 +152,10 @@ services:
 
   composer:
     container_name: composer
-    image: composer
-    build: ./composer/
+    image: ghcr.io/nowtec/nowcrm/composer:latest
     restart: unless-stopped
-    expose:
-      - "3020"
+    ports:
+      - "3020:3000"
     environment:
       COMPOSER_ANTHROPIC_KEY: ${COMPOSER_ANTHROPIC_KEY}
       COMPOSER_BASIC_AUTH_PASSWORD: ${COMPOSER_BASIC_AUTH_PASSWORD}
@@ -187,7 +191,7 @@ services:
 
   dal:
     container_name: dal
-    build: ./dal
+    image: ghcr.io/nowtec/nowcrm/dal:latest
     restart: unless-stopped
     expose:
       - "6001"
@@ -261,6 +265,7 @@ services:
       - my_net
 
 volumes:
+  postgres_data:
   rabbitmq_data:
   strapi-data:
   redis_data:
