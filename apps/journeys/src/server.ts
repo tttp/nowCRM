@@ -1,42 +1,55 @@
 import express, { type Express } from "express";
 import helmet from "helmet";
-import { pino } from "pino";
-import { healthCheckRouter } from "@/api/healthCheck/healthCheckRouter";
-import errorHandler from "@/common/middleware/error-handler";
-import rateLimiter from "@/common/middleware/rate-limiter";
-import requestLogger from "@/common/middleware/request-logger";
-import { openAPIRouter } from "@/api-docs/openAPIRouter";
-const logger = pino({ name: "server start" });
-import path from "node:path";
 
-const __dirname = path.resolve();
+import { healthCheckRouter, webhooksRouter } from "@/api";
+import {
+	delayedConsumer,
+	jobConsumer,
+	journeyConsumer,
+	ruleConsumer,
+	triggerConsumer,
+} from "@/consumers";
+import { startJourneyScheduler } from "@/cron";
+import { setupRabbitMQ } from "@/rabbitmq";
+import errorHandler from "./common/middleware/error-handler";
+import rateLimiter from "./common/middleware/rate-limiter";
+import requestLogger from "./common/middleware/request-logger";
+import { logger } from "./logger";
 
-console.log(__dirname);
 const app: Express = express();
-app.use(express.static(path.join(`${__dirname}/src`, "public")));
-
-// Set the application to trust the reverse proxy
 app.set("trust proxy", true);
 
-// Middlewares
-app.use(
-	express.json({
-		type: ["application/json", "text/plain"],
-	}),
-);
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use(helmet());
 app.use(rateLimiter);
 
-// Request logging
 app.use(requestLogger);
 
 app.use("/health-check", healthCheckRouter);
-// Swagger UI
+app.use("/webhooks", webhooksRouter);
 
-app.use(openAPIRouter);
-
-// Error handlers
 app.use(errorHandler());
+
+// —— Initialize RabbitMQ, consumers & cron ——
+async function initJobs() {
+	await setupRabbitMQ();
+	journeyConsumer();
+	jobConsumer();
+	ruleConsumer();
+	delayedConsumer();
+	triggerConsumer();
+	startJourneyScheduler();
+	logger.info("Job processing (RabbitMQ + cron) initialized");
+}
+
+initJobs().catch((err) => {
+	logger.error(
+		"Failed to init job processors: RabbitMQ connection could not be initialied",
+		err,
+	);
+	process.exit(1);
+});
 
 export { app, logger };
