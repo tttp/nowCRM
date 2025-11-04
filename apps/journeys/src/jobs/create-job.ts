@@ -1,4 +1,4 @@
-import type { journeyTiming } from "@nowtec/shared";
+import { DocumentId, JourneyTiming } from "@nowcrm/services";
 import { getJourney } from "../lib/functions/helpers/getJourney";
 import { getJourneyStep } from "../lib/functions/helpers/getJourneyStep";
 import { passContactToNextStep } from "../lib/functions/passContactToNextStep";
@@ -7,13 +7,13 @@ import { logger } from "../logger";
 import { publishToJourneyQueue } from "../rabbitmq";
 
 export async function createJob(jobData: {
-	contact: number;
-	journey: number;
+	contact: DocumentId;
+	journey: DocumentId;
 	type: string;
-	journey_step: number;
-	composition?: number;
-	channel?: number;
-	timing?: journeyTiming;
+	journey_step: DocumentId;
+	composition?: DocumentId;
+	channel?: DocumentId;
+	timing?: JourneyTiming;
 	ignoreSubscription?: boolean;
 }) {
 	const jobKey = `job-contact:${jobData.contact}-journey:${jobData.journey}-step:${jobData.journey_step}`;
@@ -62,7 +62,7 @@ export async function closeJob(jobId: string) {
 	logger.info(`Job closed: ${jobId}`);
 }
 
-export async function createNextJob(jobData: any, targetStep: number | null) {
+export async function createNextJob(jobData: any, targetStep: DocumentId | null) {
 	const { contactId, journeyId, stepId } = jobData;
 	const journeyRes = await getJourney(journeyId);
 	if (!journeyRes.success || !journeyRes.responseObject) return;
@@ -76,10 +76,10 @@ export async function createNextJob(jobData: any, targetStep: number | null) {
 		await createJob({
 			contact: contactId,
 			journey: journeyId,
-			journey_step: next.id,
+			journey_step: next.documentId,
 			type: next.type,
-			composition: next.composition?.id || undefined,
-			channel: next.channel?.id || undefined,
+			composition: next.composition?.documentId || undefined,
+			channel: next.channel?.documentId || undefined,
 			timing: next.timing,
 		});
 	} else {
