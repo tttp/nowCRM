@@ -1,6 +1,6 @@
 import API_ROUTES_STRAPI from "../api-routes/api-routes-strapi";
-import { DocumentId } from "../types/common/base_type";
-import { Form_JourneyStep, JourneyStep } from "../types/journey-step";
+import type { DocumentId } from "../types/common/base_type";
+import type { Form_JourneyStep, JourneyStep } from "../types/journey-step";
 import { actionsService } from "./action.service";
 import BaseService from "./common/base.service";
 import { handleError, type StandardResponse } from "./common/response.service";
@@ -47,7 +47,9 @@ class JourneyStepsService extends BaseService<JourneyStep, Form_JourneyStep> {
 		token: string,
 		stepId: DocumentId,
 		contactId: DocumentId,
-	): Promise<StandardResponse<{ find: boolean; target_step: DocumentId | null }>> {
+	): Promise<
+		StandardResponse<{ find: boolean; target_step: DocumentId | null }>
+	> {
 		try {
 			const data = await actionsService.find(token, {
 				filters: {

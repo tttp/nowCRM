@@ -14,11 +14,10 @@ export type JourneyStepTypes =
 	| "channel"
 	| "wait";
 
-
 export type timingJourneyStepKeys = "delay" | "publish" | "none";
 export interface JourneyTiming {
-    type: timingJourneyStepKeys;
-    value: number | Date;
+	type: timingJourneyStepKeys;
+	value: number | Date;
 }
 
 export interface JourneyStep extends BaseType {
