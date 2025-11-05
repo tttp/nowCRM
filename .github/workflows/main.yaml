@@ -247,12 +247,12 @@ jobs:
           context: .
           file: ./apps/wiki-payload/Dockerfile.runtime
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}/wiki:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_REPO }}/wiki:${{ needs.create_release.outputs.tag_name }}
           build-args: |
-            DATABASE_URI=postgresql://postgres:postgres@localhost:5432/wikidb
+            DATABASE_URI=postgresql://postgres:postgres@postgres:5432/wikidb
             PAYLOAD_SECRET=build-time-secret
           cache-from: type=gha
           cache-to: type=gha,mode=max

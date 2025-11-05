@@ -8,8 +8,7 @@ COPY . .
 
 RUN corepack enable pnpm && pnpm i --frozen-lockfile
 
-# Database connection and Payload secret are provided at build time by CI/CD
-# Payload CMS content is always dynamic, managed through the admin interface
+# Build arguments provided by CI/CD at build time
 ARG DATABASE_URI
 ARG PAYLOAD_SECRET
 
