@@ -254,8 +254,6 @@ jobs:
           build-args: |
             DATABASE_URI=postgresql://postgres:postgres@localhost:5432/wikidb
             PAYLOAD_SECRET=build-time-secret
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
 
   notify_success:
