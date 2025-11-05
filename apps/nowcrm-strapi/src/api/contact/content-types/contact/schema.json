@@ -237,6 +237,9 @@
     },
     "connection_degree": {
       "type": "text"
+    },
+    "email": {
+      "type": "email"
     }
   }
 }
