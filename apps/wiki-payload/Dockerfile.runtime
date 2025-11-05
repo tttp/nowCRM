@@ -47,4 +47,4 @@ EXPOSE 3000
 ENV NODE_ENV=production
 ENV PORT=3000
 
-CMD ["pnpm", "--filter", "wiki", "start"]
+CMD ["sh", "-c", "pnpm --filter wiki payload migrate && pnpm --filter wiki start"]
