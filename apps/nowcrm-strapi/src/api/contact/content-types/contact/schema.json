@@ -226,9 +226,8 @@
     },
     "job_title": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::job-title.job-title",
-      "inversedBy": "contacts"
+      "relation": "oneToOne",
+      "target": "api::contact-job-title.contact-job-title"
     },
     "job_description": {
       "type": "text"
