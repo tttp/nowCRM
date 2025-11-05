@@ -1,4 +1,4 @@
-import { DocumentId, JourneyTiming } from "@nowcrm/services";
+import type { DocumentId, JourneyTiming } from "@nowcrm/services";
 import { getJourney } from "../lib/functions/helpers/getJourney";
 import { getJourneyStep } from "../lib/functions/helpers/getJourneyStep";
 import { passContactToNextStep } from "../lib/functions/passContactToNextStep";
@@ -62,7 +62,10 @@ export async function closeJob(jobId: string) {
 	logger.info(`Job closed: ${jobId}`);
 }
 
-export async function createNextJob(jobData: any, targetStep: DocumentId | null) {
+export async function createNextJob(
+	jobData: any,
+	targetStep: DocumentId | null,
+) {
 	const { contactId, journeyId, stepId } = jobData;
 	const journeyRes = await getJourney(journeyId);
 	if (!journeyRes.success || !journeyRes.responseObject) return;
