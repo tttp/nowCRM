@@ -1,29 +1,41 @@
-# Stage 1: Builder
-FROM node:22.8.0-alpine AS builder
-WORKDIR /app
+FROM node:22-slim AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-RUN npm install -g pnpm@latest
+# ----------------------
+# Build stage
+# ----------------------
+FROM base AS build
+WORKDIR /usr/src/app
 
-COPY . .
-RUN pnpm install
-RUN pnpm --filter @parse-me/ai-parser build
+# Copy only dependency manifests first (for caching)
+COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
+COPY package.json ./
+COPY tsconfig.base.json ./
+COPY tsconfig.json ./
 
-FROM node:22.8.0-alpine AS final
-WORKDIR /app
+# Copy only required packages and apps
+COPY libs ./libs
+COPY apps/journeys ./apps/journeys
 
-RUN npm install -g pnpm@latest
+# Install dependencies with cache mount
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
-# Copy monorepo structure for production install
-COPY pnpm-lock.yaml package.json pnpm-workspace.yaml ./
-COPY apps/composer/package.json ./apps/composer/
+# Build the selected app
+RUN pnpm run -r build
 
-# Copy built dist from builder
-COPY --from=builder /app/apps/composer/dist ./dist
+# Deploy only journeys app
+RUN pnpm deploy --filter=journeys --prod /prod/journeys
 
-# Install production dependencies for the monorepo
-RUN pnpm install --prod --filter @parse-me/ai-parser
+# ----------------------
+# Runtime stage
+# ----------------------
+FROM base AS runner
+COPY --from=build /prod/journeys /prod/journeys
 
-# Copy node_modules and dist for final runtime
-COPY --from=builder /app/node_modules ./node_modules
+WORKDIR /prod/journeys
 
-CMD ["node", "dist/index.js"]
+EXPOSE 3010
+CMD ["pnpm", "start"]

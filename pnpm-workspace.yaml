@@ -3,6 +3,8 @@ packages:
   - libs/*
   - scripts/generate-app/templates/*
 
+injectWorkspacePackages: true
+
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
