@@ -1,4 +1,4 @@
-import API_ROUTES_STRAPI from "../api-routes/api-routes-strapi";
+import {API_ROUTES_STRAPI} from "../api-routes/api-routes-strapi";
 import { envServices } from "../envConfig";
 import type { Form_Journey, Journey } from "../types/journey";
 import BaseService from "./common/base.service";

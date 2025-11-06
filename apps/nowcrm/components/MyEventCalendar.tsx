@@ -34,10 +34,10 @@
  */
 "use client";
 
-import { createScheduledCompositions } from "@/lib/actions/scheduled_composition/createScheduledComposition";
-import { deleteScheduledCompositions } from "@/lib/actions/scheduled_composition/deleteScheduledComposition";
-import { fetchScheduledCompositions } from "@/lib/actions/scheduled_composition/fetchScheduledCompositions";
-import { updateScheduledCompositions } from "@/lib/actions/scheduled_composition/updateScheduledComposition";
+import { createScheduledCompositions } from "@/lib/actions/scheduled_composition/create-scheduled-composition";
+import { deleteScheduledCompositions } from "@/lib/actions/scheduled_composition/delete-scheduled-composition";
+import { fetchScheduledCompositions } from "@/lib/actions/scheduled_composition/get-scheduled-composition";
+import { updateScheduledCompositions } from "@/lib/actions/scheduled_composition/update-scheduled-composition";
 import { fromCalendarEventToForm, mapToCalendarEvents } from "@/lib/utils";
 import EventCalendar from "./event-calendar/EventCalendar";
 import {

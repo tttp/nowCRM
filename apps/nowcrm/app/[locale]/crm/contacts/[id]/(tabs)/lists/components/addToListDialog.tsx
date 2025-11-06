@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { createList } from "@/lib/actions/lists/createList";
+import { createList } from "@/lib/actions/lists/create-list";
 
 const createListSchema = z.object({
 	name: z
@@ -65,7 +65,7 @@ export default function AddToListDialog() {
 	async function handleSubmit() {
 		const { default: toast } = await import("react-hot-toast");
 		const { addContactToList } = await import(
-			"@/lib/actions/lists/addContactToList"
+			"@/lib/actions/lists/add-contact-to-list"
 		);
 
 		const res = await addContactToList(

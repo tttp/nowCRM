@@ -18,7 +18,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { updateList } from "@/lib/actions/lists/updateList";
+import { updateList } from "@/lib/actions/lists/update-list";
 
 interface EditableTitleProps {
 	title: string;

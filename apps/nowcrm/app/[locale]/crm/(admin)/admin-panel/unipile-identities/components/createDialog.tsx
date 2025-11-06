@@ -30,7 +30,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { AddNewIdentityUnipile } from "@/lib/actions/healthCheck/refereshUnipile";
+import { AddNewIdentityUnipile } from "@/lib/actions/healthCheck/refresh-unipile";
 
 const formSchema = z.object({
 	identity: z.string().min(1, "Name for identity required"),

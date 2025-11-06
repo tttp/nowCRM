@@ -45,7 +45,7 @@ export default function CreateMediaTypeDialog() {
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		const { default: toast } = await import("react-hot-toast");
 		const { createMediaType } = await import(
-			"@/lib/actions/media_types/createMediaType"
+			"@/lib/actions/media_types/create-media-type"
 		);
 		const res = await createMediaType(values.name);
 		if (!res.success) {

@@ -26,8 +26,8 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createList } from "@/lib/actions/lists/createList";
-import { updateList } from "@/lib/actions/lists/updateList";
+import { createList } from "@/lib/actions/lists/create-list";
+import { updateList } from "@/lib/actions/lists/update-list";
 import type { List } from "@/lib/types/new_type/list";
 
 const formSchema = z.object({

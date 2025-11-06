@@ -1,5 +1,6 @@
-import API_ROUTES_STRAPI from "../api-routes/api-routes-strapi";
+import {API_ROUTES_STRAPI} from "../api-routes/api-routes-strapi";
 import { envServices } from "../envConfig";
+import { DocumentId } from "../types/common/base_type";
 import type { Form_Organization, Organization } from "../types/organization";
 import BaseService from "./common/base.service";
 import {
@@ -17,7 +18,7 @@ class OrganizationsService extends BaseService<
 	}
 
 	async duplicate(
-		organizationId: number,
+		organizationId: DocumentId,
 		token: string,
 	): Promise<StandardResponse<null>> {
 		try {

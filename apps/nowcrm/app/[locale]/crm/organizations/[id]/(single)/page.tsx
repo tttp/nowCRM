@@ -3,7 +3,7 @@ import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
 import { TypographyH3 } from "@/components/Typography";
-import { transformFilters } from "@/lib/actions/filters/filtersSearch";
+import { transformFilters } from "@/lib/actions/filters/filters-search";
 import contactsService from "@/lib/services/new_type/contacts.service";
 import organizationService from "@/lib/services/new_type/organizations.service";
 import type { PaginationParams } from "@/lib/types/common/paginationParams";

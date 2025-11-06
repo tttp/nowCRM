@@ -47,7 +47,7 @@ const ViewActions: React.FC<{ organization: Organization }> = ({
 					<DropdownMenuItem
 						onClick={async () => {
 							const { duplicateOrganizationAction } = await import(
-								"@/lib/actions/organizations/duplicateOrganization"
+								"@/lib/actions/organizations/duplicate-organization"
 							);
 							const res = await duplicateOrganizationAction(organization.id);
 							if (!res.success) {

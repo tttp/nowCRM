@@ -16,7 +16,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
-import { updateForm } from "@/lib/actions/forms/updateForm";
+import { updateForm } from "@/lib/actions/forms/update-form";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
 import { formatDateTimeStrapi } from "@/lib/strapiDate";
 import type { FormEntity } from "@/lib/types/new_type/form";
@@ -46,7 +46,7 @@ const ViewActions: React.FC<{ form: FormEntity }> = ({ form }) => {
 					<DropdownMenuItem
 						onClick={async () => {
 							const { duplicateFormAction } = await import(
-								"@/lib/actions/forms/duplicateForm"
+								"@/lib/actions/forms/duplicate-form"
 							);
 							const res = await duplicateFormAction(form.id);
 							if (!res.success) {

@@ -1,4 +1,4 @@
-import API_ROUTES_STRAPI from "../api-routes/api-routes-strapi";
+import { API_ROUTES_STRAPI } from "../api-routes/api-routes-strapi";
 import type { ContactRank, Form_ContactRank } from "../types/contact-rank";
 import BaseService from "./common/base.service";
 

@@ -6,7 +6,7 @@ import ErrorMessage from "@/components/ErrorMessage";
 import {
 	parseQueryToFilterValues,
 	transformFilters,
-} from "@/lib/actions/filters/filtersSearch";
+} from "@/lib/actions/filters/filters-search";
 import organizationService from "@/lib/services/new_type/organizations.service";
 import AdvancedFilters from "./components/advancedFilters/advancedFilters";
 import { columns } from "./components/columns/organizationColumns";

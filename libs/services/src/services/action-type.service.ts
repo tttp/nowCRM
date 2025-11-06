@@ -1,6 +1,6 @@
 // src/services/contact.service.ts
 
-import APIRoutes from "../api-routes/api-routes-strapi";
+import { API_ROUTES_STRAPI } from "../api-routes/api-routes-strapi";
 import type { ActionType, Form_ActionType } from "../types/action-type";
 import BaseService from "./common/base.service";
 
@@ -10,7 +10,7 @@ import BaseService from "./common/base.service";
  */
 class ActionTypeService extends BaseService<ActionType, Form_ActionType> {
 	public constructor() {
-		super(APIRoutes.ACTION_TYPES);
+		super(API_ROUTES_STRAPI.ACTION_TYPES);
 	}
 }
 export const actionTypeService = new ActionTypeService();

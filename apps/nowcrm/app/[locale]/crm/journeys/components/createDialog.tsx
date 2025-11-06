@@ -26,7 +26,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createJourney } from "@/lib/actions/journeys/createJourney";
+import { createJourney } from "@/lib/actions/journeys/create-journey";
 
 const formSchema = z.object({
 	name: z.string().min(2, {

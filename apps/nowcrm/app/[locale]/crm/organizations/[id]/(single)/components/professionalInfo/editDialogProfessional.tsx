@@ -24,7 +24,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { updateOrganization } from "@/lib/actions/organizations/updateOrganization";
+import { updateOrganization } from "@/lib/actions/organizations/update-organization";
 import type { Organization } from "@/lib/types/new_type/organization";
 
 const formSchema = z.object({

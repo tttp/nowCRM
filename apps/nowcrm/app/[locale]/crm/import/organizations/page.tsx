@@ -40,7 +40,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { uploadCSV } from "@/lib/actions/import/uploadCSV";
+import { uploadCSV } from "@/lib/actions/import/upload-csv";
 import { cn } from "@/lib/utils";
 import { CSVMappingModal } from "./components/csvMappingModal";
 import PreviousImportsModal from "./components/PreviousImportsModal";

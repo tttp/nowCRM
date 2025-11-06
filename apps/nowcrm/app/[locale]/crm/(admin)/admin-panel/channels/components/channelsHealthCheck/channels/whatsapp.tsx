@@ -42,7 +42,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { updateSettingCredentials } from "@/lib/actions/settings/credentials/updateSettingsCredentials";
+import { updateSettingCredentials } from "@/lib/actions/settings/credentials/update-setting-credential";
 import {
 	getStatusColor,
 	getStatusIcon,

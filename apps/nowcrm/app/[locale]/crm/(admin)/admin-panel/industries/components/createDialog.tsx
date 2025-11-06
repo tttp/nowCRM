@@ -27,7 +27,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createIndustry } from "@/lib/actions/industries/createIndustry";
+import { createIndustry } from "@/lib/actions/industries/create-industry";
 
 export default function CreateIndustryDialog() {
 	const t = useMessages();

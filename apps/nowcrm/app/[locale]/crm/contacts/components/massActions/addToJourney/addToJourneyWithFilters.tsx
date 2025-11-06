@@ -82,7 +82,7 @@ export default function AddToJourneyWithFiltersDialog({
 
 		try {
 			const { getContactsPreview } = await import(
-				"@/lib/actions/filters/getContactsPreview"
+				"@/lib/actions/filters/get-contact-preview"
 			);
 			const response = await getContactsPreview(filterData);
 			if (response) {

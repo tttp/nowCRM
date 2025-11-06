@@ -51,12 +51,12 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 // Import types and utilities from the base component
-import { transformFilters } from "@/lib/actions/filters/filtersSearch";
-import { createSearch } from "@/lib/actions/search_history/createSearch";
-import { deleteSearch } from "@/lib/actions/search_history/deleteSearch";
-import { getSearchHistory } from "@/lib/actions/search_history/getSearchHistory";
-import { makeFavorite } from "@/lib/actions/search_history/makeFavorite";
-import { updateSearchTemplate } from "@/lib/actions/search_history/updateSearchTemplate";
+import { transformFilters } from "@/lib/actions/filters/filters-search";
+import { createSearch } from "@/lib/actions/search_history/create-search";
+import { deleteSearch } from "@/lib/actions/search_history/delete-search";
+import { getSearchHistory } from "@/lib/actions/search_history/get-search-history";
+import { makeFavorite } from "@/lib/actions/search_history/make-favorite-search";
+import { updateSearchTemplate } from "@/lib/actions/search_history/update-search-history-template";
 import type { SearchHistoryType } from "@/lib/types/new_type/searchHistory";
 import type { SearchHistoryTemplate } from "@/lib/types/new_type/searchHistoryTemplate";
 import FilterGroupComponent from "./FilterGroupComponents";

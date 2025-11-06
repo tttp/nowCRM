@@ -27,7 +27,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { updateJobTitle } from "@/lib/actions/job-titles/updateJobTitle";
+import { updateJobTitle } from "@/lib/actions/job-titles/update-job-title";
 import type { JobTitle } from "@/lib/types/new_type/job_title";
 
 interface EditJobTitleDialogProps {

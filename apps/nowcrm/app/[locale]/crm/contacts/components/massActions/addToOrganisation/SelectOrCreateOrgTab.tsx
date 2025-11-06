@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { createOrganization } from "@/lib/actions/organizations/createOrganization";
+import { createOrganization } from "@/lib/actions/organizations/create-organization";
 
 const formSchema = z.object({
 	name: z.string().min(2, {

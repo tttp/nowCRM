@@ -1,4 +1,4 @@
-import API_ROUTES_STRAPI from "../api-routes/api-routes-strapi";
+import {API_ROUTES_STRAPI} from "../api-routes/api-routes-strapi";
 import type { ContactTitle, Form_ContactTitle } from "../types/contact-title";
 import BaseService from "./common/base.service";
 

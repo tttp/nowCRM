@@ -20,7 +20,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
-import { addContactToList } from "@/lib/actions/lists/addContactToList";
+import { addContactToList } from "@/lib/actions/lists/add-contact-to-list";
 
 const formSchema = z.object({
 	contact: z.object(

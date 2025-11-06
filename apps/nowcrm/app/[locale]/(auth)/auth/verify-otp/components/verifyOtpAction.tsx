@@ -3,8 +3,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { verifyTotpToken } from "@/lib/actions/profile/editProfile";
-import { decryptTotpSecret } from "@/lib/actions/profile/encryptionHelpers";
+import { verifyTotpToken } from "@/lib/actions/profile/edit-profile";
+import { decryptTotpSecret } from "@/lib/actions/profile/encryption-helpers";
 
 import { completeLoginAfter2FA } from "@/lib/actions/user/signInAction";
 import { RouteConfig } from "@/lib/config/RoutesConfig";

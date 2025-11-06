@@ -34,7 +34,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { updateOrganization } from "@/lib/actions/organizations/updateOrganization";
+import { updateOrganization } from "@/lib/actions/organizations/update-organization";
 import cantons from "@/lib/static/cantons.json";
 import countries from "@/lib/static/countries.json";
 import type { Organization } from "@/lib/types/new_type/organization";

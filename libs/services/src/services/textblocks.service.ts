@@ -1,4 +1,4 @@
-import API_ROUTES_STRAPI from "../api-routes/api-routes-strapi";
+import { API_ROUTES_STRAPI } from "../api-routes/api-routes-strapi";
 import type { Form_TextBlock, TextBlock } from "../types/text-block";
 import BaseService from "./common/base.service";
 

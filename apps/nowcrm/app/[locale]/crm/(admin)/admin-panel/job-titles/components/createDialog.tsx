@@ -27,7 +27,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createJobTitle } from "@/lib/actions/job-titles/createJobTitle";
+import { createJobTitle } from "@/lib/actions/job-titles/create-job-title";
 
 export default function CreateJobTitleDialog() {
 	const t = useMessages();

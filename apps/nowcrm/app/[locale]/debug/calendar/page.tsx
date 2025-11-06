@@ -1,6 +1,6 @@
 import type { CalendarEventType } from "@/components/event-calendar/types";
 import MyEventCalendar from "@/components/MyEventCalendar";
-import { fetchScheduledCompositions } from "@/lib/actions/scheduled_composition/fetchScheduledCompositions";
+import { fetchScheduledCompositions } from "@/lib/actions/scheduled_composition/get-scheduled-composition";
 import { mapToCalendarEvents } from "@/lib/utils";
 
 export default async function Home() {

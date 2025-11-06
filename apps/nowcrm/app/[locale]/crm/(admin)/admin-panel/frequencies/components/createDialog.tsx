@@ -45,7 +45,7 @@ export default function CreateFrequencyDialog() {
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		const { default: toast } = await import("react-hot-toast");
 		const { createFrequency } = await import(
-			"@/lib/actions/frequencies/createFrequency"
+			"@/lib/actions/frequencies/create-frequency"
 		);
 		const res = await createFrequency(values.name);
 		if (!res.success) {

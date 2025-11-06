@@ -14,7 +14,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import { createList } from "@/lib/actions/lists/createList";
+import { createList } from "@/lib/actions/lists/create-list";
 import AdvancedFilters from "../../advancedFilters/advancedFilters";
 import SelectOrCreateListTabs from "./SelectOrCreateListTabs";
 
@@ -122,7 +122,7 @@ export default function AssignToListWithFiltersDialog({
 
 		try {
 			const { getContactsPreview } = await import(
-				"@/lib/actions/filters/getContactsPreview"
+				"@/lib/actions/filters/get-contact-preview"
 			);
 			const response = await getContactsPreview(filterData);
 			if (response) {

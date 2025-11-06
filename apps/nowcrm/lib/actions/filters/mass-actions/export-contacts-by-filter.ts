@@ -1,10 +1,8 @@
 // actions/deleteContactAction.ts
 "use server";
 import { auth } from "@/auth";
-import { env } from "@/lib/config/envConfig";
-import { API_ROUTES_DAL,} from "@nowcrm/services";
-import { handleError, StandardResponse } from "@nowcrm/services/server";
-export async function deleteContactsByFilters(payload: {
+import { dalService, handleError, StandardResponse } from "@nowcrm/services/server";
+export async function exportContactsByFilters(payload: {
     entity: string;
     searchMask: any;
     mass_action: string;
@@ -23,38 +21,9 @@ export async function deleteContactsByFilters(payload: {
 
     const userEmail = session.user?.email ?? "unknown@unknown.com";
 	try {
-        const transformedFilters = payload.searchMask;
+        const res = await dalService.exportContactsByFilters(payload, userEmail);
 
-        const updatedPayload = {
-            ...payload,
-            searchMask: transformedFilters,
-            userEmail,
-        };
-        console.log(`[Export] Requested by user: ${userEmail}`);
-        console.log("[API] Export contacts with payload:", updatedPayload);
-
-        const res = await fetch(
-            `${env.CRM_DAL_API_URL}${API_ROUTES_DAL.MASS_EXPORT}`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updatedPayload),
-            },
-        );
-
-        if (!res.ok) {
-            const errorText = await res.text();
-            console.error("Export failed:", errorText);
-            throw new Error("Failed to export contacts");
-        }
-
-        return {
-            data: await res.json(),
-            status: res.status,
-            success: true,
-        };
+        return res;
 	} catch (error) {
 		return handleError(error);
 	}

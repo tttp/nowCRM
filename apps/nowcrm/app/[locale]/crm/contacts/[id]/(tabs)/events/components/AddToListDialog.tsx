@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { createList } from "@/lib/actions/lists/createList";
+import { createList } from "@/lib/actions/lists/create-list";
 import type { StandardResponse } from "@/lib/services/common/response.service";
 import { getContactIdByEventId } from "./massActions/getContactIdByEvent";
 import { currentEvents } from "./massActions/massActions";

@@ -9,7 +9,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import { createList } from "@/lib/actions/lists/createList";
+import { createList } from "@/lib/actions/lists/create-list";
 import SelectOrCreateListTabs from "./SelectOrCreateListTabs";
 
 const formSchema = z.object({

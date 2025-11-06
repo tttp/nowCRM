@@ -23,7 +23,7 @@ import { getCompositionJobs } from "@/lib/actions/composer/get-composition-jobs"
 import {
 	getImportProgressMap,
 	getPreviousImports,
-} from "@/lib/actions/import/fetchImports";
+} from "@/lib/actions/import/fetch-import";
 import type { JobCompositionRecord } from "@/lib/types/new_type/composition";
 import type { ImportRecord } from "@/lib/types/new_type/import";
 

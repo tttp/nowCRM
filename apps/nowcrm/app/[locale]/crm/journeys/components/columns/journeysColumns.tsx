@@ -93,7 +93,7 @@ const ViewActions: React.FC<{ journey: Journey }> = ({ journey }) => {
 					<DropdownMenuItem
 						onClick={async () => {
 							const { duplicateJourneyAction } = await import(
-								"@/lib/actions/journeys/duplicateJourney"
+								"@/lib/actions/journeys/duplicate-journey"
 							);
 							const res = await duplicateJourneyAction(journey.id);
 							if (!res.success) {

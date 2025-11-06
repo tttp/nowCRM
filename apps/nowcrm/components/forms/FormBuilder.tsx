@@ -54,12 +54,12 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 // --- Actions & Types ---
-import { getFormBySlugOrId } from "@/lib/actions/forms/getForm";
+import { getFormBySlugOrId } from "@/lib/actions/forms/get-form";
 import {
 	eraseCoverOrLogo,
 	updateForm,
 	uploadCoverOrLogo,
-} from "@/lib/actions/forms/updateForm";
+} from "@/lib/actions/forms/update-form";
 import type {
 	CustomForm_FormItemEntity,
 	Form_FormEntity,

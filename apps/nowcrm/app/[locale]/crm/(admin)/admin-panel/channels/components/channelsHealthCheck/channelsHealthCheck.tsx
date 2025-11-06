@@ -19,7 +19,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { createSettingCredential } from "@/lib/actions/settings/credentials/createSettingsCredentials";
+import { createSettingCredential } from "@/lib/actions/settings/credentials/create-settings-credentials";
 import { CommunicationChannel } from "@/lib/static/channel-icons";
 import type { Settings } from "@/lib/types/new_type/settings";
 import { EmailHealthCheck } from "./channels/email";
@@ -44,7 +44,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 
 	const handleRunHealthCheck = async () => {
 		const { runHealthCheck } = await import(
-			"@/lib/actions/healthCheck/runHealthCheck"
+			"@/lib/actions/healthCheck/run-health-check"
 		);
 		const { default: toast } = await import("react-hot-toast");
 		await runHealthCheck();

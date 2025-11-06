@@ -44,8 +44,8 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { refreshAccessLinkedin } from "@/lib/actions/healthCheck/refreshAccessLinkedin";
-import { updateSettingCredentials } from "@/lib/actions/settings/credentials/updateSettingsCredentials";
+import { refreshAccessLinkedin } from "@/lib/actions/healthCheck/refresh-access-linkedin";
+import { updateSettingCredentials } from "@/lib/actions/settings/credentials/update-setting-credential";
 import {
 	getStatusColor,
 	getStatusIcon,

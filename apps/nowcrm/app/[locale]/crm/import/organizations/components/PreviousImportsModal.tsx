@@ -15,11 +15,11 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { downloadCsv } from "@/lib/actions/import/downloadCsv";
+import { downloadCsv } from "@/lib/actions/import/download-csv";
 import {
 	getImportProgressMap,
 	getPreviousImports,
-} from "@/lib/actions/import/fetchImports";
+} from "@/lib/actions/import/fetch-import";
 import type { ImportRecord } from "@/lib/types/new_type/import";
 
 interface PreviousImportsModalProps {

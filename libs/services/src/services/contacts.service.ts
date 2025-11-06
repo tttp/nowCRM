@@ -1,4 +1,4 @@
-import API_ROUTES_STRAPI from "../api-routes/api-routes-strapi";
+import {API_ROUTES_STRAPI} from "../api-routes/api-routes-strapi";
 import { envServices } from "../envConfig";
 import type { CommunicationChannelKeys } from "../static/communication-channel";
 import { DocumentId } from "../types/common/base_type";

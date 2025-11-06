@@ -14,7 +14,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AddNewIdentityUnipile } from "@/lib/actions/healthCheck/refereshUnipile";
+import { AddNewIdentityUnipile } from "@/lib/actions/healthCheck/refresh-unipile";
 import type { UnipileIdentity } from "@/lib/types/new_type/unipile_identity";
 import { deleteUnipileIdentityAction } from "./deleteIdentity";
 

@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { transformFilters } from "@/lib/actions/filters/filtersSearch";
+import { transformFilters } from "@/lib/actions/filters/filters-search";
 import contactsService from "@/lib/services/new_type/contacts.service";
 
 type FetchContactsParams = {

@@ -7,6 +7,7 @@ const processEnv = {
 	NODE_ENV: process.env.NODE_ENV || "",
 	STRAPI_URL: process.env.STRAPI_URL || "",
 	COMPOSER_URL: process.env.COMPOSER_URL || "",
+	DAL_URL: process.env.DAL_URL || "",
 };
 
 export const envServices = cleanEnv(processEnv, {
@@ -16,4 +17,5 @@ export const envServices = cleanEnv(processEnv, {
 	}),
 	STRAPI_URL: URLValidator({ devDefault: testOnly("http://localhost:1337") }),
 	COMPOSER_URL: URLValidator({ devDefault: testOnly("http://localhost:3020") }),
+	DAL_URL: URLValidator({ devDefault: testOnly("http://localhost:6001") }),
 });

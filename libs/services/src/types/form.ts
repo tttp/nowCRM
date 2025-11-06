@@ -1,7 +1,8 @@
 import type Asset from "./common/asset";
 import type { BaseFormType, BaseType } from "./common/base_type";
 import type { StrapiConnect } from "./common/StrapiQuery";
-import type { FormEntityItem } from "./form-item";
+import type { FormEntityItem, FormEntityItemType } from "./form-item";
+
 export interface FormEntity extends BaseType {
 	description: string;
 	submit_confirm_text: string;
@@ -38,4 +39,17 @@ export interface Form_FormEntity extends BaseFormType {
 	excel_url: string;
 	override_contact: boolean;
 	form_view: boolean;
+}
+
+
+export interface CustomForm_FormItemEntity
+	extends Omit<BaseType, "publishedAt"> {
+	type: FormEntityItemType;
+	label: string;
+	rank?: number;
+	hidden?: boolean;
+	required?: boolean;
+	options: string[];
+	form?: number;
+	publishedAt?: Date;
 }

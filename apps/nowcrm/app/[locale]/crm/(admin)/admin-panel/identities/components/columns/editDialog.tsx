@@ -85,7 +85,7 @@ export default function EditIdentityDialog({
 		setIsLoading(true);
 		const { default: toast } = await import("react-hot-toast");
 		const { updateIdentity } = await import(
-			"@/lib/actions/identities/updateIdentity"
+			"@/lib/actions/identities/update-identity"
 		);
 
 		const result = await updateIdentity(identity.id, values);

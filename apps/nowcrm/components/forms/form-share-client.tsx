@@ -58,7 +58,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { getFormBySlugOrId, submitFormData } from "@/lib/actions/forms/getForm";
+import { getFormBySlugOrId, submitFormData } from "@/lib/actions/forms/get-form";
 import type { FormEntity, FormItemEntity } from "@/lib/types/new_type/form";
 import { cn } from "@/lib/utils";
 import CustomProgress from "../CustomProgress";

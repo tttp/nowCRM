@@ -30,6 +30,7 @@ export * from './types/contact-salutation';
 export * from './types/contact-title';
 export * from './types/contact-type';
 export * from './types/contact';
+export * from './types/dal/import-record';
 export * from './types/department';
 export * from './types/donation-subscription';
 export * from './types/donation-transaction';

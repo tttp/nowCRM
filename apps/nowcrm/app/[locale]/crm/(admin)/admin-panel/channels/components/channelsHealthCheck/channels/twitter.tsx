@@ -51,8 +51,8 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { refreshAccessTwitter } from "@/lib/actions/healthCheck/refreshAcessTwitter";
-import { updateSettingCredentials } from "@/lib/actions/settings/credentials/updateSettingsCredentials";
+import { refreshAccessTwitter } from "@/lib/actions/healthCheck/refresh-access-twitter";
+import { updateSettingCredentials } from "@/lib/actions/settings/credentials/update-setting-credential";
 import {
 	getStatusColor,
 	getStatusIcon,

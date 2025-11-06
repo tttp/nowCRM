@@ -31,7 +31,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { createIdentity } from "@/lib/actions/identities/createIdentity";
+import { createIdentity } from "@/lib/actions/identities/create-identity";
 
 export default function CreateIdentityDialog() {
 	const t = useMessages();

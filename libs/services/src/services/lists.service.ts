@@ -1,5 +1,6 @@
-import API_ROUTES_STRAPI from "../api-routes/api-routes-strapi";
+import {API_ROUTES_STRAPI} from "../api-routes/api-routes-strapi";
 import { envServices } from "../envConfig";
+import { DocumentId } from "../types/common/base_type";
 import type { Form_List, List } from "../types/list";
 import BaseService from "./common/base.service";
 import {
@@ -14,7 +15,7 @@ class ListsService extends BaseService<List, Form_List> {
 	}
 
 	async countContacts(
-		id: number,
+		id: DocumentId,
 		token: string,
 	): Promise<StandardResponse<number>> {
 		const url = `${envServices.STRAPI_URL}${this.endpoint}/${id}/${API_ROUTES_STRAPI.LISTS_COUNT_CONTACTS}`;
@@ -30,7 +31,7 @@ class ListsService extends BaseService<List, Form_List> {
 	}
 
 	async duplicate(
-		listId: number,
+		listId: DocumentId,
 		token: string,
 	): Promise<StandardResponse<null>> {
 		try {

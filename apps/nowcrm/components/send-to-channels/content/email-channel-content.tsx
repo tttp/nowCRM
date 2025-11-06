@@ -31,7 +31,7 @@ import {
 	getChannelThrottle,
 } from "@/lib/actions/channels/get-channel-throttle";
 import { getComposition } from "@/lib/actions/composer/get-composition";
-import { getUserIdentity } from "@/lib/actions/identities/getUserIdentity";
+import { getUserIdentity } from "@/lib/actions/identities/get-user-identity";
 import { CommunicationChannel } from "@/lib/static/channel-icons";
 import type { CompositionItem } from "@/lib/types/new_type/composition";
 import type { sendToChannelsData } from "../sendToChannelType";

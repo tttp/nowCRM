@@ -25,7 +25,7 @@ import {
 	generateTotpSecret,
 	updateUser,
 	uploadImage,
-} from "@/lib/actions/profile/editProfile";
+} from "@/lib/actions/profile/edit-profile";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
 
 interface SessionUser {

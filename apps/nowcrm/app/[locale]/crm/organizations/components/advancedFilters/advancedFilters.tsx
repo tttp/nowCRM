@@ -38,7 +38,7 @@ import {
 import {
 	parseFormIntoUrlFilters,
 	parseQueryToFilterValues,
-} from "@/lib/actions/filters/filtersSearch";
+} from "@/lib/actions/filters/filters-search";
 
 import {
 	NUMBER_OPERATORS,
