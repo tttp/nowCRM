@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { updateList } from "@/lib/actions/lists/update-list";
+import { DocumentId } from "@nowcrm/services";
 
 interface EditableTitleProps {
 	title: string;
@@ -32,7 +33,7 @@ export default function EditableTitle({ title }: EditableTitleProps) {
 	const [isEditing, setIsEditing] = useState(false);
 	const router = useRouter();
 	const inputRef = useRef<HTMLInputElement>(null);
-	const params = useParams<{ locale: string; id: string }>();
+	const params = useParams<{ locale: string; id: DocumentId }>();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -51,7 +52,7 @@ export default function EditableTitle({ title }: EditableTitleProps) {
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			const res = await updateList(Number.parseInt(params.id), {
+			const res = await updateList(params.id, {
 				name: values.title,
 			});
 			console.log(res);

@@ -17,10 +17,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
 import { formatDateTimeStrapi } from "@/lib/strapiDate";
-import type { Organization } from "@/lib/types/new_type/organization";
+import type { Organization } from "@nowcrm/services";
 import { TagsCell } from "../../../contacts/components/columns/tags/TagCell";
 import { TagFilterHeader } from "../../../contacts/components/columns/tags/TagFilterHeader";
-import { deleteOrganizationAction } from "./OrganizationDelete";
+
 
 const ViewActions: React.FC<{ organization: Organization }> = ({
 	organization,
@@ -39,7 +39,7 @@ const ViewActions: React.FC<{ organization: Organization }> = ({
 				<DropdownMenuContent align="end">
 					<DropdownMenuLabel>Actions</DropdownMenuLabel>
 					<Link
-						href={`${RouteConfig.organizations.single.base(organization.id)}`}
+						href={`${RouteConfig.organizations.single.base(organization.documentId)}`}
 					>
 						<DropdownMenuItem>View organization</DropdownMenuItem>
 					</Link>
@@ -49,7 +49,7 @@ const ViewActions: React.FC<{ organization: Organization }> = ({
 							const { duplicateOrganizationAction } = await import(
 								"@/lib/actions/organizations/duplicate-organization"
 							);
-							const res = await duplicateOrganizationAction(organization.id);
+							const res = await duplicateOrganizationAction(organization.documentId);
 							if (!res.success) {
 								toast.error(
 									res.errorMessage ?? "Failed to duplicate organization",
@@ -64,7 +64,14 @@ const ViewActions: React.FC<{ organization: Organization }> = ({
 					</DropdownMenuItem>
 					<DropdownMenuItem
 						onClick={async () => {
-							await deleteOrganizationAction(organization.id);
+							const { deleteOrganizationAction } = await import(
+								"@/lib/actions/organizations/delete-organization"
+							);
+							const res = await deleteOrganizationAction(organization.documentId);
+							if (!res.success) {
+								toast.error(res.errorMessage ?? "Failed to delete organization");
+								return;
+							}
 							toast.success("Organization deleted");
 							router.refresh();
 						}}
@@ -133,7 +140,7 @@ export const columns: ColumnDef<Organization>[] = [
 			const organization = row.original;
 			return (
 				<Link
-					href={`${RouteConfig.organizations.single.base(organization.id)}`}
+					href={`${RouteConfig.organizations.single.base(organization.documentId)}`}
 					className="whitespace-nowrap font-medium hover:underline"
 				>
 					{cell.renderValue() as any}
@@ -160,8 +167,8 @@ export const columns: ColumnDef<Organization>[] = [
 			const tags = row.original.tags || [];
 			return (
 				<TagsCell
-					serviceName="organizationService"
-					entityId={row.original.id}
+					serviceName="organizationsService"
+					entityId={row.original.documentId}
 					initialTags={tags}
 				/>
 			);

@@ -41,10 +41,15 @@ async function collectExports(dir: string, rootDir: string): Promise<string[]> {
 /**
  * Generate a file (index.ts, server.ts, client.ts) that exports from specific subfolders.
  */
+type TargetConfig = {
+  targetFile: string;
+  includeDirs: string[];
+  extraExports?: string[];
+};
+
 async function generateCustomIndex(
   rootDir: string,
-  targetFile: string,
-  includeDirs: string[]
+  { targetFile, includeDirs, extraExports = [] }: TargetConfig
 ): Promise<void> {
   const allExports: string[] = [];
 
@@ -62,12 +67,14 @@ async function generateCustomIndex(
     }
   }
 
-  if (allExports.length === 0) {
+  const contentLines = [...allExports, ...extraExports];
+
+  if (contentLines.length === 0) {
     console.log(`No exports found for ${targetFile}`);
     return;
   }
 
-  const content = allExports.join("\n") + "\n";
+  const content = contentLines.join("\n") + "\n";
   await fs.writeFile(path.join(rootDir, targetFile), content);
   console.log(`Generated ${targetFile}`);
 }
@@ -75,9 +82,38 @@ async function generateCustomIndex(
 async function main(): Promise<void> {
   const rootDir = path.resolve(__dirname, "../src");
 
-  await generateCustomIndex(rootDir, "index.ts", ["types", "static", "api-routes","zod-validators","utils"]);
-  await generateCustomIndex(rootDir, "server.ts", ["services"]);
-  // await generateCustomIndex(rootDir, "client.ts", ["hooks"]);
+  const targets: TargetConfig[] = [
+    {
+      targetFile: "index.ts",
+      includeDirs: ["types", "static", "api-routes", "zod-validators", "utils"],
+      extraExports: [
+        "export type {",
+        "  BaseServiceName,",
+        "  CustomServiceName,",
+        "  ServiceName,",
+        "} from './services/common/factory';",
+      ],
+    },
+    {
+      targetFile: "client.ts",
+      includeDirs: ["types", "static", "api-routes", "zod-validators", "utils"],
+      extraExports: [
+        "export type {",
+        "  BaseServiceName,",
+        "  CustomServiceName,",
+        "  ServiceName,",
+        "} from './services/common/factory';",
+      ],
+    },
+    {
+      targetFile: "server.ts",
+      includeDirs: ["services"],
+    },
+  ];
+
+  for (const target of targets) {
+    await generateCustomIndex(rootDir, target);
+  }
 }
 
 main().catch((err) => {

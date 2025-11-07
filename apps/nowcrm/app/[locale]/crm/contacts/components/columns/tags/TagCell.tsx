@@ -6,14 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { addTag } from "@/lib/actions/tags/add-tag";
 import { removeTag } from "@/lib/actions/tags/remove-tag";
-import type { ServiceName } from "@/lib/services/common/serviceFactory";
 import { AddTagDialog } from "./AddTagDialog";
-
-type Tag = { id: number; name: string; color: string };
+import { DocumentId, Tag } from "@nowcrm/services";
+import { BaseServiceName } from "@nowcrm/services/server";
 
 interface TagsCellProps {
-	serviceName: ServiceName;
-	entityId: number;
+	serviceName: BaseServiceName;
+	entityId: DocumentId;
 	initialTags: Tag[];
 }
 
@@ -24,7 +23,7 @@ export function TagsCell({
 }: TagsCellProps) {
 	const [tags, setTags] = useState<Tag[]>(initialTags || []);
 	const [adding, setAdding] = useState(false);
-	const [removingTagId, setRemovingTagId] = useState<number | null>(null);
+	const [removingTagId, setRemovingTagId] = useState<DocumentId | null>(null);
 
 	const handleTagAdded = async (newTag: Tag) => {
 		setAdding(true);
@@ -38,7 +37,7 @@ export function TagsCell({
 		}
 	};
 
-	const handleTagRemoved = async (tagId: number) => {
+	const handleTagRemoved = async (tagId: DocumentId) => {
 		setRemovingTagId(tagId);
 		try {
 			const res = await removeTag(serviceName, entityId, tagId);

@@ -2,11 +2,12 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import organizationService from "@/lib/services/new_type/organizations.service";
+import { DocumentId } from "@nowcrm/services";
+
+import { handleError, organizationsService, StandardResponse } from "@nowcrm/services/server";
 
 export async function MassDeleteOrganizations(
-	contacts: number[],
+	organizations: DocumentId[],
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -17,8 +18,8 @@ export async function MassDeleteOrganizations(
 		};
 	}
 	try {
-		const unpublishPromises = contacts.map((id) =>
-			organizationService.unPublish(id),
+		const unpublishPromises = organizations.map((id) =>
+			organizationsService.delete(id, session.jwt),
 		);
 		await Promise.all(unpublishPromises);
 		return {
@@ -27,11 +28,6 @@ export async function MassDeleteOrganizations(
 			success: true,
 		};
 	} catch (error) {
-		console.error("Error deleting Contacts:", error);
-		return {
-			data: null,
-			status: 500,
-			success: false,
-		};
+		return handleError(error);
 	}
 }

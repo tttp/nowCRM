@@ -2,13 +2,13 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import organizationService from "@/lib/services/new_type/organizations.service";
-import type { List } from "@/lib/types/new_type/list";
+import { DocumentId, List } from "@nowcrm/services";
+import { organizationsService, StandardResponse } from "@nowcrm/services/server";
+import { handleError } from "@nowcrm/services/server";
 
 export async function removeContactFromListAction(
-	organizationId: number,
-	contactId: number,
+	organizationId: DocumentId,
+	contactId: DocumentId,
 ): Promise<StandardResponse<List>> {
 	const session = await auth();
 	if (!session) {
@@ -19,12 +19,11 @@ export async function removeContactFromListAction(
 		};
 	}
 	try {
-		const response = await organizationService.update(organizationId, {
+		const response = await organizationsService.update(organizationId, {
 			contacts: { disconnect: [contactId] },
-		});
+		}, session.jwt,);
 		return response;
 	} catch (error) {
-		console.log(error);
-		throw new Error("Failed to delete Contact");
+		return handleError(error);
 	}
 }

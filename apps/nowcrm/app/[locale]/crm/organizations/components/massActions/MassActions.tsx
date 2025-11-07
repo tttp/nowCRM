@@ -8,6 +8,7 @@ import {
 import AssignToListDialog from "./dialogs/addToList";
 import { MassDeleteOrganizations } from "./MassDeleteOrganizations";
 import { MassAddToList } from "./massAddToList";
+import { DocumentId } from "@nowcrm/services";
 
 // Define the actions configuration for contacts
 const actionsConfig: ActionsConfig = {
@@ -21,7 +22,7 @@ const actionsConfig: ActionsConfig = {
 			/>
 		),
 		dialogSubmitLabel: "Add to list",
-		onAction: async (selectedRows: number[], selectedOption: any) => {
+		onAction: async (selectedRows: DocumentId[], selectedOption: any) => {
 			return await MassAddToList(selectedRows, selectedOption.value);
 		},
 		successMessage: "Organizations added to list",
@@ -29,7 +30,7 @@ const actionsConfig: ActionsConfig = {
 	},
 	deleteContacts: {
 		label: "Delete", // e.g., "Delete"
-		onAction: async (selectedRows: number[]) => {
+		onAction: async (selectedRows: DocumentId[]) => {
 			return await MassDeleteOrganizations(selectedRows);
 		},
 		successMessage: "Organizations deleted",

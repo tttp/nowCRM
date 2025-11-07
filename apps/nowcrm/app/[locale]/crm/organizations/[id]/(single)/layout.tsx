@@ -6,11 +6,12 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { TypographyH4 } from "@/components/Typography";
 import { Separator } from "@/components/ui/separator";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
-import organizationService from "@/lib/services/new_type/organizations.service";
-
+import { DocumentId } from "@nowcrm/services";
+import { auth } from "@/auth";
+import { organizationsService } from "@nowcrm/services/server";
 interface LayoutProps {
 	children: React.ReactNode;
-	params: Promise<{ id: string }>;
+	params: Promise<{ id: DocumentId }>;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,8 +25,10 @@ export default async function Layout(props: LayoutProps) {
 	const params = await props.params;
 
 	const { children } = props;
-	const organizationId = Number.parseInt(params.id);
-	const organization = await organizationService.findOne(organizationId);
+	const organizationId = params.id;
+	const session = await auth();
+
+	const organization = await organizationsService.findOne(organizationId, session?.jwt );
 	if (!organization.data) {
 		return <ErrorMessage response={organization} />;
 	}
@@ -44,7 +47,7 @@ export default async function Layout(props: LayoutProps) {
 					label="delete"
 					successMessage="Organization deleted"
 					redirectURL={RouteConfig.organizations.base}
-					serviceName="organizationService"
+					serviceName="organizationsService"
 					id={organizationId}
 				/>
 			</header>

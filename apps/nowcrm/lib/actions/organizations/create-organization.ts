@@ -5,7 +5,7 @@ import { Form_Organization, Organization } from "@nowcrm/services";
 import { handleError, organizationsService, StandardResponse } from "@nowcrm/services/server";
 
 export async function createOrganization(
-	values: Form_Organization,
+	values: Partial<Form_Organization>,
 ): Promise<StandardResponse<Organization>> {
 	const session = await auth();
 	if (!session) {

@@ -7,16 +7,17 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { ServiceName } from "@/lib/services/common/serviceFactory";
 import { Button } from "../ui/button";
 import { DeleteData } from "./deleteData";
+import { BaseServiceName } from "@nowcrm/services/client";
+import { DocumentId } from "@nowcrm/services";
 
 interface deleteButtonProps {
 	label: string;
 	successMessage: string;
 	redirectURL: string;
-	serviceName: ServiceName;
-	id: number;
+	serviceName: BaseServiceName;
+	id: DocumentId;
 }
 
 export default function DeleteButton({

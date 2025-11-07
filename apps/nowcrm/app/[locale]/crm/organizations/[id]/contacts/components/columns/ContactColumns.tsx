@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
 import { formatDateTimeStrapi } from "@/lib/strapiDate";
-import type { Contact } from "@/lib/types/new_type/contact";
+import { Contact, DocumentId } from "@nowcrm/services";
 import { removeContactFromListAction } from "./removeContactFromListAction";
 
 const DeleteAction: React.FC<{ contact: Contact }> = ({ contact }) => {
@@ -33,8 +33,8 @@ const DeleteAction: React.FC<{ contact: Contact }> = ({ contact }) => {
 				<DropdownMenuItem
 					onClick={async () => {
 						await removeContactFromListAction(
-							Number.parseInt(path.split("/").pop() as string),
-							contact.id,
+							(path.split("/").pop() as DocumentId),
+							contact.documentId,
 						);
 						toast.success("Contact removed from list");
 						router.refresh();
@@ -59,7 +59,7 @@ const ViewActions: React.FC<{ contact: Contact }> = ({ contact }) => {
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
-				<Link href={`${RouteConfig.contacts.single.base(contact.id)}`}>
+				<Link href={`${RouteConfig.contacts.single.base(contact.documentId)}`}>
 					<DropdownMenuItem>View contact</DropdownMenuItem>
 				</Link>
 				<DropdownMenuSeparator />
@@ -75,7 +75,7 @@ const ViewContact: React.FC<{ contact: Contact; cell: any }> = ({
 	return (
 		<div className="flex cursor-pointer space-x-2">
 			<Link
-				href={`${RouteConfig.contacts.single.base(contact.id)}`}
+				href={`${RouteConfig.contacts.single.base(contact.documentId)}`}
 				className="max-w-[150px] truncate font-medium"
 			>
 				{cell.renderValue() as any}

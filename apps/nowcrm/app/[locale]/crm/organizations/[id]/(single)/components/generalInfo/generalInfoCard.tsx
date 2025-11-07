@@ -9,7 +9,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import type { Organization } from "@/lib/types/new_type/organization";
+import { Organization } from "@nowcrm/services";
 import { EditDialogOrganizationGeneral } from "./editDialogGeneral";
 
 interface OrganizationGeneralInfoCardProps {

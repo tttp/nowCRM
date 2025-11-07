@@ -34,7 +34,7 @@ export interface Organization extends BaseType {
 	description: string;
 	canton: string;
 	language: LanguageKeys;
-	sources: Source;
+	sources: Source[];
 	industry: Industry;
 	city: string;
 	company_size: string;
@@ -66,7 +66,7 @@ export interface Form_Organization extends BaseFormType {
 	description: string;
 	canton: string;
 	language: LanguageKeys;
-	sources: DocumentId;
+	sources: StrapiConnect;
 	industry: DocumentId;
 	city: string;
 	company_size: string;

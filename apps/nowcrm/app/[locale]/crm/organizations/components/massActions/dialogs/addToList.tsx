@@ -53,7 +53,7 @@ export default function AssignToListDialog({
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		const res = await createList(values.name);
-		setSelectedOption({ value: res.data?.id, label: res.data?.name });
+		setSelectedOption({ value: res.data?.documentId, label: res.data?.name });
 		setListCreated(true);
 	}
 

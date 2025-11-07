@@ -12,7 +12,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { ensureValidUrl } from "@/lib/ensureValidUrl";
-import type { Organization } from "@/lib/types/new_type/organization";
+import { Organization } from "@nowcrm/services";
 import { EditDialogOrganizationProfessional } from "./editDialogProfessional";
 
 interface OrganizationProfessionalInfoCardProps {

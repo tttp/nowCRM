@@ -7,11 +7,11 @@ import {
 	parseQueryToFilterValues,
 	transformFilters,
 } from "@/lib/actions/filters/filters-search";
-import organizationService from "@/lib/services/new_type/organizations.service";
 import AdvancedFilters from "./components/advancedFilters/advancedFilters";
 import { columns } from "./components/columns/organizationColumns";
 import createOrganizationDialog from "./components/createDialog";
 import MassActionsContacts from "./components/massActions/MassActions";
+import { organizationsService } from "@nowcrm/services/server";
 export const metadata: Metadata = {
 	title: "Organizations",
 };
@@ -32,7 +32,7 @@ export default async function Page(props: { searchParams: Promise<any> }) {
 	const transformedFilters = transformFilters(flatFilters);
 	// Fetch data from the contactService
 	const session = await auth();
-	const response = await organizationService.find({
+	const response = await organizationsService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {

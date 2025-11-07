@@ -1,9 +1,8 @@
 "use server";
 import { auth } from "@/auth";
-import ServiceFactory, {
-	type ServiceName,
-} from "@/lib/services/common/serviceFactory";
-export async function DeleteData(serviceName: ServiceName, id: number) {
+import { DocumentId } from "@nowcrm/services";
+import { BaseServiceName, handleError, ServiceFactory } from "@nowcrm/services/server";
+export async function DeleteData(serviceName: BaseServiceName, id: DocumentId) {
 	const session = await auth();
 	if (!session) {
 		return {
@@ -14,10 +13,9 @@ export async function DeleteData(serviceName: ServiceName, id: number) {
 	}
 	try {
 		const service = ServiceFactory.getService(serviceName);
-		const response = await service.unPublish(id);
+		const response = await service.delete(id, session.jwt);
 		return response;
 	} catch (error) {
-		console.log(error);
-		throw new Error("Failed to fetch item");
+		return handleError(error);
 	}
 }

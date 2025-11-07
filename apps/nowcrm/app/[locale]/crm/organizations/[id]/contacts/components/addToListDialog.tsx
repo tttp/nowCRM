@@ -21,11 +21,12 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { addContactToOrganization } from "@/lib/actions/organizations/add-contact-to-organization";
+import { DocumentId } from "@nowcrm/services";
 
 const formSchema = z.object({
 	contact: z.object(
 		{
-			value: z.number(),
+			value: z.string(),
 			label: z.string(),
 		},
 		{ required_error: "Select contact" },
@@ -36,7 +37,7 @@ export default function AddToListDialog() {
 	const t = (useMessages() as any).Contacts.MassActions;
 	const router = useRouter();
 
-	const params = useParams<{ locale: string; id: string }>();
+	const params = useParams<{ locale: string; id: DocumentId }>();
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -44,10 +45,9 @@ export default function AddToListDialog() {
 		},
 	});
 	async function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values);
 		const res = await addContactToOrganization(
-			Number.parseInt(params.id),
-			+values.contact.value,
+			params.id,
+			values.contact.value,
 		);
 		if (!res.success) {
 			toast.error(`Error during adding contact to list: ${res.errorMessage}`);
@@ -77,7 +77,7 @@ export default function AddToListDialog() {
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
 						<AsyncSelectField
 							form={form}
-							serviceName="contactService"
+							serviceName="contactsService"
 							name="contact"
 							label="Contact"
 							filterKey="first_name"

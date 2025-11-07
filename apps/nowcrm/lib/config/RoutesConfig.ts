@@ -1,5 +1,7 @@
 // contactsapp/lib/config/RoutesConfig.ts
 
+import { DocumentId } from "@nowcrm/services";
+
 const BASE_URL = "/crm";
 
 export const RouteConfig = {
@@ -22,35 +24,35 @@ export const RouteConfig = {
 	contacts: {
 		base: `${BASE_URL}/contacts`,
 		single: {
-			base: (id: number) => `${BASE_URL}/contacts/${id}/details`,
-			subscriptions: (id: number) => `${BASE_URL}/contacts/${id}/subscriptions`,
-			lists: (id: number) => `${BASE_URL}/contacts/${id}/lists`,
-			transactions: (id: number) => `${BASE_URL}/contacts/${id}/transactions`,
-			transaction_subscriptions: (id: number) =>
+			base: (id: DocumentId) => `${BASE_URL}/contacts/${id}/details`,
+			subscriptions: (id: DocumentId) => `${BASE_URL}/contacts/${id}/subscriptions`,
+			lists: (id: DocumentId) => `${BASE_URL}/contacts/${id}/lists`,
+			transactions: (id: DocumentId) => `${BASE_URL}/contacts/${id}/transactions`,
+			transaction_subscriptions: (id: DocumentId) =>
 				`${BASE_URL}/contacts/${id}/transaction-subscriptions`,
-			surveys: (id: number) => `${BASE_URL}/contacts/${id}/surveys`,
-			events: (id: number) => `${BASE_URL}/contacts/${id}/events`,
-			tasks: (id: number) => `${BASE_URL}/contacts/${id}/tasks`,
-			actions: (id: number) => `${BASE_URL}/contacts/${id}/actions`,
-			activity_logs: (id: number) => `${BASE_URL}/contacts/${id}/activity_logs`,
-			documents: (id: number) => `${BASE_URL}/contacts/${id}/documents`,
+			surveys: (id: DocumentId) => `${BASE_URL}/contacts/${id}/surveys`,
+			events: (id: DocumentId) => `${BASE_URL}/contacts/${id}/events`,
+			tasks: (id: DocumentId) => `${BASE_URL}/contacts/${id}/tasks`,
+			actions: (id: DocumentId) => `${BASE_URL}/contacts/${id}/actions`,
+			activity_logs: (id: DocumentId) => `${BASE_URL}/contacts/${id}/activity_logs`,
+			documents: (id: DocumentId) => `${BASE_URL}/contacts/${id}/documents`,
 		},
 	},
 	lists: {
 		base: `${BASE_URL}/lists`,
-		single: (id: number) => `${BASE_URL}/lists/${id}`,
+		single: (id: DocumentId) => `${BASE_URL}/lists/${id}`,
 	},
 	organizations: {
 		base: `${BASE_URL}/organizations`,
 		single: {
-			base: (id: number) => `${BASE_URL}/organizations/${id}`,
-			contacts: (id: number) => `${BASE_URL}/organizations/${id}/contacts`,
+			base: (id: DocumentId) => `${BASE_URL}/organizations/${id}`,
+			contacts: (id: DocumentId) => `${BASE_URL}/organizations/${id}/contacts`,
 		},
 	},
 	forms: {
 		base: `${BASE_URL}/forms`,
-		single: (id: number) => `${BASE_URL}/forms/${id}`,
-		results: (id: number) => `${BASE_URL}/forms/results/${id}`,
+		single: (id: DocumentId) => `${BASE_URL}/forms/${id}`,
+		results: (id: DocumentId) => `${BASE_URL}/forms/results/${id}`,
 	},
 	import: {
 		base: `${BASE_URL}/import`,
@@ -80,16 +82,16 @@ export const RouteConfig = {
 	composer: {
 		base: `${BASE_URL}/composer`,
 		calendar: `${BASE_URL}/composer/calendar`,
-		single: (id: number) => `${BASE_URL}/composer/${id}`,
+		single: (id: DocumentId) => `${BASE_URL}/composer/${id}`,
 	},
 	journeys: {
 		base: `${BASE_URL}/journeys`,
-		single: (id: number) => `${BASE_URL}/journeys/${id}`,
+		single: (id: DocumentId) => `${BASE_URL}/journeys/${id}`,
 	},
 	terms: "/terms",
 	policy: {
 		base: "/policy",
-		single: (id: number) => `/policy/${id}`,
+		single: (id: DocumentId) => `/policy/${id}`,
 	},
 	signup: "/subscribe",
 	userguide: "/userguide",

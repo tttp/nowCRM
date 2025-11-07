@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { updateOrganization } from "@/lib/actions/organizations/update-organization";
-import type { Organization } from "@/lib/types/new_type/organization";
+import { Organization } from "@nowcrm/services";
 
 const formSchema = z.object({
 	name: z.string().min(1, "Name is required"),
@@ -58,7 +58,7 @@ export function EditDialogOrganizationGeneral({
 	});
 
 	async function handleSubmit(values: FormValues) {
-		const res = await updateOrganization(organization.id, values);
+		const res = await updateOrganization(organization.documentId, values);
 		if (!res.success) {
 			toast.error(`Error updating organization: ${res.errorMessage}`);
 		} else {

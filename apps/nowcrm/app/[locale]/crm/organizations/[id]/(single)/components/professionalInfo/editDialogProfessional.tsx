@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { updateOrganization } from "@/lib/actions/organizations/update-organization";
-import type { Organization } from "@/lib/types/new_type/organization";
+import { Organization } from "@nowcrm/services";
 
 const formSchema = z.object({
 	organization_type: z
@@ -107,7 +107,7 @@ export function EditDialogOrganizationProfessional({
 	});
 
 	async function handleSubmit(values: FormValues) {
-		const res = await updateOrganization(organization.id, values as any);
+		const res = await updateOrganization(organization.documentId, values as any);
 		if (!res.success) {
 			toast.error(`Error updating organization: ${res.errorMessage}`);
 		} else {
@@ -136,21 +136,21 @@ export function EditDialogOrganizationProfessional({
 							label="Organization type"
 							form={form}
 							useFormClear={true}
-							serviceName="organizationTypeService"
+							serviceName="organizationTypesService"
 						/>
 						<AsyncSelectField
 							name="frequency"
 							label="frequency"
 							form={form}
 							useFormClear={true}
-							serviceName="frequencyService"
+							serviceName="frequenciesService"
 						/>
 						<AsyncSelectField
 							name="media_type"
 							label="Media type"
 							form={form}
 							useFormClear={true}
-							serviceName="mediaTypeService"
+							serviceName="mediaTypesService"
 						/>
 						<FormField
 							control={form.control}

@@ -6,14 +6,14 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import type { ServiceName } from "@/lib/services/common/serviceFactory";
 import { AsyncSelect } from "./AsyncSelect";
 import type { Option } from "./autoComplete";
+import { BaseServiceName } from "@nowcrm/services";
 
 type Props = {
 	name: string;
 	label?: string;
-	serviceName: ServiceName;
+	serviceName: BaseServiceName;
 	form: UseFormReturn<any>;
 	useFormClear: boolean;
 	filterKey?: string | string[];
