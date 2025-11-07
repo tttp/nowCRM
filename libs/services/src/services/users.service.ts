@@ -194,6 +194,26 @@ class UsersService extends BaseService<User, Form_User> {
 			return null;
 		}
 	}
+
+	async register(
+		userData: Partial<Form_User>,
+		token: string,
+	): Promise<StandardResponse<null>> {
+		const url = `${envServices.STRAPI_URL}${API_ROUTES_STRAPI.REGISTER}`;
+		console.log(userData);
+		try {
+			const response = await fetch(url, {
+				method: "POST",
+				headers: this.getHeaders(true, token),
+				body: JSON.stringify(userData),
+			});
+
+			return await handleResponse<null>(response);
+		} catch (error: any) {
+			console.error("Error registering user:", error);
+			return handleError<null>(error);
+		}
+	}
 }
 
 export const usersService = new UsersService();
