@@ -11,7 +11,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { unsubscribeUser } from "@/lib/actions/unsubscribeUser";
+import { unsubscribeUser } from "@/lib/actions/unsubscribe-user";
 
 export default function UnsubscribeComponent({
 	email,
