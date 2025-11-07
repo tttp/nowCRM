@@ -86,7 +86,7 @@ export interface Contact extends Omit<BaseType, "name"> {
 	surveys: Survey[];
 	donation_transactions: DonationTransaction[];
 	donation_subscriptions: DonationSubscription[];
-	tags: Tag;
+	tags: Tag[];
 	title: ContactTitle;
 	salutation: ContactSalutation;
 	job_title: ContactJobTitle;
@@ -144,7 +144,7 @@ export interface Form_Contact extends Omit<BaseFormType, "name"> {
 	surveys: StrapiConnect;
 	donation_transactions: StrapiConnect;
 	donation_subscriptions: StrapiConnect;
-	tags: DocumentId;
+	tags: StrapiConnect;
 	title: DocumentId;
 	salutation: DocumentId;
 	job_title: DocumentId;

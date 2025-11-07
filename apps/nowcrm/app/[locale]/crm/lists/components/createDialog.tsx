@@ -28,8 +28,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { createList } from "@/lib/actions/lists/create-list";
 import { updateList } from "@/lib/actions/lists/update-list";
-import type { List } from "@/lib/types/new_type/list";
-
+import { List } from "@nowcrm/services";
 const formSchema = z.object({
 	name: z.string().min(2, {
 		message: "List name must be at least 2 characters.",
@@ -68,7 +67,7 @@ export default function CreateListDialog({
 				setOpenDialog(false);
 			}
 		} else if (mode === "rename" && list) {
-			const res = await updateList(list.id, { name: values.name });
+			const res = await updateList(list.documentId, { name: values.name });
 			if (!res.success) {
 				toast.error(`Error renaming list: ${res.errorMessage}`);
 			} else {

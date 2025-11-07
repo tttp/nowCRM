@@ -2,18 +2,17 @@ import type { Metadata } from "next";
 import type { Session } from "next-auth";
 import { auth } from "@/auth";
 import ErrorMessage from "@/components/ErrorMessage";
-import contactsService from "@/lib/services/new_type/contacts.service";
-import listsService from "@/lib/services/new_type/lists.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
 import ContactsTableClient from "./ContactsTableClient";
 import EditableTitle from "./components/editTitle";
+import { DocumentId, PaginationParams } from "@nowcrm/services";
+import { contactsService, listsService } from "@nowcrm/services/server";
 
 export const metadata: Metadata = {
 	title: "Contacts",
 };
 
 export default async function Page(props: {
-	params: Promise<{ id: number }>;
+	params: Promise<{ id: DocumentId }>;
 	searchParams: Promise<PaginationParams>;
 }) {
 	const searchParams = await props.searchParams;
@@ -27,14 +26,14 @@ export default async function Page(props: {
 
 	// Fetch data from the contactService
 	const session = await auth();
-	const list = await listsService.findOne(params.id);
+	const list = await listsService.findOne(params.id, session?.jwt);
 	if (!list.success || !list.data || !list.meta) {
 		return <ErrorMessage response={list} />;
 	}
-	const listFilter = { lists: { id: { $eq: params.id } } };
-	const response = await contactsService.find({
+	const listFilter = { lists: { documentId: { $eq: params.id } } };
+	const response = await contactsService.find(session?.jwt, {
 		fields: [
-			"id",
+			"documentId",
 			"first_name",
 			"last_name",
 			"email",

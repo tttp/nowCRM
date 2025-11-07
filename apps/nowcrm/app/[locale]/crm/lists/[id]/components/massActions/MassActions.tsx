@@ -8,6 +8,7 @@ import {
 import AssignToListDialog from "./dialogs/addToList";
 import { MassDisconnectContacts } from "./MassDisconnectContacts";
 import { MassAddToList } from "./massAddToList";
+import { DocumentId } from "@nowcrm/services";
 
 // Get your translations/messages
 
@@ -23,7 +24,7 @@ const actionsConfig: ActionsConfig = {
 			/>
 		),
 		dialogSubmitLabel: "Add to list",
-		onAction: async (selectedRows: number[], selectedOption: any) => {
+		onAction: async (selectedRows: DocumentId[], selectedOption: any) => {
 			return await MassAddToList(selectedRows, selectedOption.value);
 		},
 		successMessage: "Contact added to list",
@@ -31,9 +32,9 @@ const actionsConfig: ActionsConfig = {
 	},
 	deleteContacts: {
 		label: "Remove", // e.g., "Delete"
-		onAction: async (selectedRows: number[], listId: string) => {
+		onAction: async (selectedRows: DocumentId[], listId: DocumentId) => {
 			return await MassDisconnectContacts(
-				Number.parseInt(listId),
+				listId,
 				selectedRows,
 			);
 		},

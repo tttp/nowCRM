@@ -21,11 +21,11 @@ import {
 import { getListCount } from "@/lib/actions/lists/get-list-count";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
 import { formatDateTimeStrapi } from "@/lib/strapiDate";
-import type { List } from "@/lib/types/new_type/list";
+import { List } from "@nowcrm/services";
 import { TagsCell } from "../../../contacts/components/columns/tags/TagCell";
 import { TagFilterHeader } from "../../../contacts/components/columns/tags/TagFilterHeader";
 import CreateListDialog from "../createDialog";
-import { deleteListAction } from "./deleteList";
+
 
 const ViewActions: React.FC<{ list: List }> = ({ list }) => {
 	const router = useRouter();
@@ -41,7 +41,7 @@ const ViewActions: React.FC<{ list: List }> = ({ list }) => {
 				<DropdownMenuContent align="end">
 					<DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-					<Link href={`${RouteConfig.lists.single(list.id)}`}>
+					<Link href={`${RouteConfig.lists.single(list.documentId)}`}>
 						<DropdownMenuItem>View List</DropdownMenuItem>
 					</Link>
 
@@ -51,7 +51,7 @@ const ViewActions: React.FC<{ list: List }> = ({ list }) => {
 							const { duplicateListAction } = await import(
 								"@/lib/actions/lists/duplicate-list"
 							);
-							const res = await duplicateListAction(list.id);
+							const res = await duplicateListAction(list.documentId);
 							if (!res.success) {
 								toast.error(res.errorMessage ?? "Failed to duplicate list");
 								return;
@@ -77,7 +77,14 @@ const ViewActions: React.FC<{ list: List }> = ({ list }) => {
 					<DropdownMenuSeparator />
 					<DropdownMenuItem
 						onClick={async () => {
-							await deleteListAction(list.id);
+							const { deleteListAction } = await import(
+								"@/lib/actions/lists/delete-list"
+							);
+							const res = await deleteListAction(list.documentId);
+							if (!res.success) {
+								toast.error(res.errorMessage ?? "Failed to delete list");
+								return;
+							}
 							toast.success("List deleted");
 							router.refresh();
 						}}
@@ -98,7 +105,7 @@ const ListCount: React.FC<{ list: List }> = ({ list }) => {
 	useEffect(() => {
 		const fetchCount = async () => {
 			try {
-				const response = await getListCount(list.id);
+				const response = await getListCount(list.documentId);
 				setCount(response.data);
 				setIsLoading(false);
 			} catch (_err) {
@@ -161,7 +168,7 @@ export const columns: ColumnDef<List>[] = [
 			const list = row.original;
 			return (
 				<Link
-					href={`${RouteConfig.lists.single(list.id)}`}
+					href={`${RouteConfig.lists.single(list.documentId)}`}
 					className="whitespace-nowrap font-medium hover:underline"
 				>
 					{cell.renderValue() as any}
@@ -197,8 +204,8 @@ export const columns: ColumnDef<List>[] = [
 			const tags = row.original.tags || [];
 			return (
 				<TagsCell
-					serviceName="listService"
-					entityId={row.original.id}
+					serviceName="listsService"
+					entityId={row.original.documentId}
 					initialTags={tags}
 				/>
 			);

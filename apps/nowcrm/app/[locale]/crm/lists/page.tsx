@@ -3,11 +3,12 @@ import type { Session } from "next-auth";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import listsService from "@/lib/services/new_type/lists.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+
 import { columns } from "./components/columns/listsColumns";
 import createListDialog from "./components/createDialog";
 import MassActionsLists from "./components/massActions/massActions";
+import { PaginationParams } from "@nowcrm/services";
+import { listsService } from "@nowcrm/services/server";
 export const metadata: Metadata = {
 	title: "Lists",
 };
@@ -22,12 +23,13 @@ export default async function Page(props: {
 		search = "",
 		sortBy = "id",
 		sortOrder = "desc",
-	} = searchParams;
+	} = searchParams
+
 
 	// Fetch data from the contactService
 	const session = await auth();
-	const response = await listsService.find({
-		fields: ["id", "name", "createdAt", "updatedAt"],
+	const response = await listsService.find(session?.jwt, {
+		fields: ["documentId", "name", "createdAt", "updatedAt"],
 		populate: {
 			tags: {
 				populate: ["name"],

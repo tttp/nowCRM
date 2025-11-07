@@ -2,11 +2,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import listsService from "@/lib/services/new_type/lists.service";
+import { DocumentId } from "@nowcrm/services";
+import { handleError, listsService, StandardResponse } from "@nowcrm/services/server";
 
 export async function MassDeleteLists(
-	lists: number[],
+	lists: DocumentId[],
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -17,7 +17,7 @@ export async function MassDeleteLists(
 		};
 	}
 	try {
-		const unpublishPromises = lists.map((id) => listsService.unPublish(id));
+		const unpublishPromises = lists.map((id) => listsService.delete(id, session.jwt));
 		await Promise.all(unpublishPromises);
 		return {
 			data: null,
@@ -25,11 +25,6 @@ export async function MassDeleteLists(
 			success: true,
 		};
 	} catch (error) {
-		console.error("Error deleting Lists:", error);
-		return {
-			data: null,
-			status: 500,
-			success: false,
-		};
+		return handleError(error);
 	}
 }
