@@ -1,9 +1,12 @@
 "use server";
-import composerItemService from "@/lib/services/new_type/composerItems.service";
 
+import { compositionItemsService } from "@nowcrm/services/server";
+import { auth } from "@/auth";
 export async function processFormFileOperations(
 	formData: FormData,
 ): Promise<void> {
+	const session = await auth();
+
 	const compositionItemsJson = formData.get("composition_items");
 	if (!compositionItemsJson || typeof compositionItemsJson !== "string") {
 		throw new Error("Missing composition items data");
@@ -36,7 +39,7 @@ export async function processFormFileOperations(
 				await Promise.all([
 					itemFiles.length > 0
 						? (async () => {
-								await composerItemService.uploadFile(itemFiles, item.id);
+								await compositionItemsService.uploadFile(itemFiles, item.documentId, session?.jwt);
 							})()
 						: Promise.resolve(),
 
@@ -49,9 +52,9 @@ export async function processFormFileOperations(
 									)
 									.map((file: any) => file.id);
 								console.log(filesUpdated);
-								await composerItemService.update(item.id, {
+								await compositionItemsService.update(item.documentId, {
 									attached_files: filesUpdated,
-								});
+								}, session?.jwt);
 							})()
 						: Promise.resolve(),
 				]);

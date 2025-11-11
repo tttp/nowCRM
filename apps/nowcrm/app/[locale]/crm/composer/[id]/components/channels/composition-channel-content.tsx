@@ -51,14 +51,14 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type Asset from "@/lib/services/new_type/assets/asset";
-import type { createAdditionalComposition } from "@/lib/types/new_type/composition";
 import SendToChannelButton from "../../../../../../../components/send-to-channels/sendToChannel";
 import { FileUploadHandler } from "../../../../../../../components/uploaders/file-uploader-handler";
 import { AnalyticsSection } from "../analytics/EmailAnalyticsSection";
 import { channelAnalyticsConfigs } from "../analytics/metrics";
 import { ResultPreview } from "../result-preview";
-
+import { DocumentId } from "@nowcrm/services";
+import { createAdditionalComposition } from "@nowcrm/services";
+import { Asset } from "@nowcrm/services";
 interface ChannelTab {
 	id: string;
 	label: string;
@@ -69,14 +69,14 @@ interface ChannelTab {
 }
 
 interface CompositionChannelContentProps {
-	composition_id: number;
+	composition_id: DocumentId;
 	tab: ChannelTab;
 	form: UseFormReturn<any>;
 	isEditing: boolean;
 	formItemIndex: number;
-	itemId: number;
+	itemId: DocumentId;
 	onRegenerate: (
-		itemId: number,
+		itemId: DocumentId,
 		formItemIndex: number,
 		data: createAdditionalComposition,
 	) => any;
@@ -199,7 +199,7 @@ export function CompositionChannelContent({
 					max_content_length: tab.maximum_content_lenght,
 				};
 				const newResult = await onRegenerate(
-					Number.parseInt(itemId),
+					itemId,
 					formItemIndex,
 					data,
 				);

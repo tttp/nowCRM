@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getChannelIcon } from "@/lib/static/channel-icons";
 import { AddChannelButton } from "./add-channel-button";
+import { CommunicationChannelKeys } from "@nowcrm/services";
 
 interface ChannelTab {
 	id: string;
@@ -20,7 +21,7 @@ interface CompositionSidebarProps {
 	activeTab: string;
 	setActiveTab: (tab: string) => void;
 	channelTabs: ChannelTab[];
-	onAddChannel?: (channel: string) => void;
+	onAddChannel?: (channel: CommunicationChannelKeys) => void;
 	isAddingChannel?: boolean;
 }
 

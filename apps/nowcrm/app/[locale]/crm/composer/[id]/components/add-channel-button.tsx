@@ -15,10 +15,11 @@ import {
 	CommunicationChannel,
 	getChannelIcon,
 } from "@/lib/static/channel-icons";
+import { CommunicationChannelKeys } from "@nowcrm/services";
 
 interface AddChannelButtonProps {
 	existingChannels: string[];
-	onAddChannel: (channel: string) => void;
+	onAddChannel: (channel: CommunicationChannelKeys) => void;
 	isLoading?: boolean;
 }
 
@@ -33,11 +34,11 @@ export function AddChannelButton({
 	// Get all available channels that aren't already added
 	const availableChannels = Object.values(CommunicationChannel).filter(
 		(channel) =>
-			!existingChannels.includes(channel as string) &&
+			!existingChannels.includes(channel as CommunicationChannelKeys) &&
 			channel !== CommunicationChannel.UNIPILE,
 	);
 
-	const handleAddChannel = (channel: string) => {
+	const handleAddChannel = (channel: CommunicationChannelKeys) => {
 		onAddChannel(channel);
 		setOpen(false);
 	};
@@ -71,7 +72,7 @@ export function AddChannelButton({
 									key={channel}
 									variant="outline"
 									className="w-full justify-start"
-									onClick={() => handleAddChannel(channel)}
+									onClick={() => handleAddChannel(channel as CommunicationChannelKeys)}
 								>
 									<Icon className="mr-2 h-4 w-4" />
 									{channel}

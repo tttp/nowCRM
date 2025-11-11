@@ -2,11 +2,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import composerService from "@/lib/services/new_type/composer.service";
-
+import { DocumentId } from "@nowcrm/services";
+import { handleError, StandardResponse } from "@nowcrm/services/server";
+import { compositionsService } from "@nowcrm/services/server";
 export async function deleteCompositionAction(
-	compositionId: number,
+	compositionId: DocumentId,
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -17,10 +17,9 @@ export async function deleteCompositionAction(
 		};
 	}
 	try {
-		const response = await composerService.unPublish(compositionId);
+		const response = await compositionsService.delete(compositionId, session.jwt);
 		return response;
 	} catch (error) {
-		console.log(error);
-		throw new Error("Failed to delete composition");
+		return handleError(error);
 	}
 }

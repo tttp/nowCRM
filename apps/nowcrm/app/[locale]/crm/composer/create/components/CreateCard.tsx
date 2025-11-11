@@ -6,15 +6,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Card } from "@/components/ui/card";
 import { createComposition } from "@/lib/actions/composer/create-composition";
-import { createCompositionFull } from "@/lib/actions/composer/createCompositionFull";
+import { createCompositionFull } from "@/lib/actions/composer/create-composition-complete";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
-import type { CompositionModelKeys } from "@/lib/static/compoisitonModels";
-import type { LanguageKeys } from "@/lib/static/languages";
-import type { ReferenceComposition } from "@/lib/types/new_type/composition";
 import ChannelAdditions from "./steps/channel-additions";
 import InitialForm from "./steps/initial-form";
 import ProcessingScreen from "./steps/processing-screen";
 import TextEditor from "./steps/text-editor";
+import { aiModelKeys, DocumentId, LanguageKeys, ReferenceComposition } from "@nowcrm/services";
 
 export type ChannelCustomization = {
 	channel: string;
@@ -134,14 +132,14 @@ export default function CreateCompositionCard({ channels }: Props) {
 				subject: compositionData?.subject as string,
 				category: compositionData?.category as string,
 				language: compositionData?.language as LanguageKeys,
-				mainChannel: compositionData?.mainChannel as number,
+				mainChannel: compositionData?.mainChannel as DocumentId,
 				persona: compositionData?.persona as string,
-				model: compositionData?.model as CompositionModelKeys,
+				model: compositionData?.model as aiModelKeys,
 				add_unsubscribe: includeUnsubscribe,
 				reference_prompt: compositionData?.prompt as string,
 				reference_result: generatedHtml as string,
 				composition_items: channelCustomizations.map((item) => ({
-					channel: Number.parseInt(item.channel),
+					channel: item.channel as DocumentId,
 					additional_prompt: item.additional_prompt,
 				})),
 			};
@@ -164,13 +162,13 @@ export default function CreateCompositionCard({ channels }: Props) {
 			const res = await createComposition({
 				name: t.scratch.name,
 				subject: t.scratch.name,
-				status: "Finished",
+				composition_status: "Finished",
 				publishedAt: new Date(),
 			});
 			if (!res.data || !res.success) {
 				toast.error(res.errorMessage as string);
 			} else {
-				router.push(RouteConfig.composer.single(res.data.id));
+				router.push(RouteConfig.composer.single(res.data.documentId));
 			}
 		} catch (error) {
 			console.error("Error creating from scratch:", error);

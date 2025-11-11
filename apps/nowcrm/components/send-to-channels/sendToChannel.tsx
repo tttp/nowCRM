@@ -19,10 +19,11 @@ import { TelegramChannelContent } from "./content/telegram-channel-content";
 import { TwitterChannelContent } from "./content/twitter-channel-content";
 import { WhatsAppChannelContent } from "./content/whatsapp-channel-content";
 import { WordpressChannelContent } from "./content/wordpress-channel-content";
+import { DocumentId } from "@nowcrm/services";
 
 interface SendToChannelsProps {
 	channelName: string;
-	composition_id: number;
+	composition_id: DocumentId;
 }
 
 export default function SendToChannelButton({

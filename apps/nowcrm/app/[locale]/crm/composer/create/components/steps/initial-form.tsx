@@ -31,9 +31,8 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { getEmailChannel } from "@/lib/actions/channels/get-email-channel";
-import { compositionModels } from "@/lib/static/compoisitonModels";
-import { getLanguageLabel, getLanguageValue } from "@/lib/static/languages";
-import type { ReferenceComposition } from "@/lib/types/new_type/composition";
+import { aiModels, getLanguageLabel, getLanguageValue, ReferenceComposition } from "@nowcrm/services";
+
 
 interface InitialFormProps {
 	onSubmit: (data: ReferenceComposition) => void;
@@ -110,7 +109,7 @@ const formSchema = z.object({
 	category: z.string(),
 	promptBase: z.string(),
 	language: z.enum(["en", "it", "fr", "de"]).default("en"),
-	mainChannel: z.coerce.number(),
+	mainChannel: z.string(),
 	persona: z.string().optional(),
 });
 
@@ -216,8 +215,7 @@ The output should reflect the tone, vocabulary, and perspective typical for the 
 
 		// Set mainChannel to 1
 		const id = await getEmailChannel();
-		if (id.data) form.setValue("mainChannel", id.data[0].id);
-		else form.setValue("mainChannel", 1);
+		if (id.data) form.setValue("mainChannel", id.data[0].documentId);
 
 		// Generate and set the base prompt text
 		const basePrompt = generateBasePrompt(
@@ -435,7 +433,7 @@ The output should reflect the tone, vocabulary, and perspective typical for the 
 												</SelectTrigger>
 											</FormControl>
 											<SelectContent>
-												{compositionModels.map((model) => (
+												{aiModels.map((model) => (
 													<SelectItem
 														value={model.value}
 														key={`${model.label} - ${model.value}`}

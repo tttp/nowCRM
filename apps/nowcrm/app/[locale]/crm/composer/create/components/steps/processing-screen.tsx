@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
+import { DocumentId } from "@nowcrm/services";
 
 interface ProcessingScreenProps {
 	onSubmit: () => Promise<string | null>;
@@ -22,7 +23,7 @@ export default function ProcessingScreen({
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isComplete, setIsComplete] = useState(false);
-	const [compositionId, setCompositionId] = useState<string | null>(null);
+	const [compositionId, setCompositionId] = useState<DocumentId | null>(null);
 	const handleSubmit = async () => {
 		setIsSubmitting(true);
 		try {
@@ -102,7 +103,7 @@ export default function ProcessingScreen({
 						</div>
 						<Button
 							onClick={() =>
-								router.push(RouteConfig.composer.single(Number(compositionId)))
+								router.push(RouteConfig.composer.single(compositionId as string))
 							}
 						>
 							{t.Composer.channelContent.viewComposition}

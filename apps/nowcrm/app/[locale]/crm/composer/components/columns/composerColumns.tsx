@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { RouteConfig } from "@/lib/config/RoutesConfig";
 import { formatDateTimeStrapi } from "@/lib/strapiDate";
-import type { Composition } from "@/lib/types/new_type/composition";
+import { Composition } from "@nowcrm/services";
 import { cn } from "@/lib/utils";
 import { deleteCompositionAction } from "./deleteComposition";
 
@@ -38,7 +38,7 @@ const ViewActions: React.FC<{ composition: Composition }> = ({
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
 				<DropdownMenuLabel>{t.common.actions.actions}</DropdownMenuLabel>
-				<Link href={`${RouteConfig.composer.single(composition.id)}`}>
+				<Link href={`${RouteConfig.composer.single(composition.documentId)}`}>
 					<DropdownMenuItem>
 						{t.Composer.channelContent.viewComposition}
 					</DropdownMenuItem>
@@ -49,7 +49,7 @@ const ViewActions: React.FC<{ composition: Composition }> = ({
 						const { duplicateCompositionAction } = await import(
 							"@/lib/actions/composer/duplicate-composition"
 						);
-						const res = await duplicateCompositionAction(composition.id);
+						const res = await duplicateCompositionAction(composition.documentId);
 						if (!res.success) {
 							toast.error(
 								res.errorMessage ?? "Failed to duplicate composition",
@@ -64,7 +64,11 @@ const ViewActions: React.FC<{ composition: Composition }> = ({
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					onClick={async () => {
-						await deleteCompositionAction(composition.id);
+						const res = await deleteCompositionAction(composition.documentId);
+						if (!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete composition");
+							return;
+						}
 						toast.success("Composition deleted");
 						router.refresh();
 					}}
@@ -131,7 +135,7 @@ export const columns: ColumnDef<Composition>[] = [
 			const list = row.original;
 			return (
 				<Link
-					href={`${RouteConfig.composer.single(list.id)}`}
+					href={`${RouteConfig.composer.single(list.documentId)}`}
 					className="whitespace-nowrap font-medium hover:underline"
 				>
 					{cell.renderValue() as any}
@@ -152,10 +156,10 @@ export const columns: ColumnDef<Composition>[] = [
 		header: ({ column }) => <SortableHeader column={column} label="Persona" />,
 	},
 	{
-		accessorKey: "status",
+		accessorKey: "composition_status",
 		header: "Status",
 		cell: ({ row }) => {
-			const status = row.original.status.toLowerCase();
+			const status = row.original.composition_status.toLowerCase();
 
 			return (
 				<div
@@ -168,7 +172,7 @@ export const columns: ColumnDef<Composition>[] = [
 							status === "finished",
 					})}
 				>
-					{row.original.status}
+					{row.original.composition_status}
 				</div>
 			);
 		},

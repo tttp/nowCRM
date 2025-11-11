@@ -2,8 +2,8 @@ import type { Session } from "next-auth";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import composerService from "@/lib/services/new_type/composer.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
+import { compositionsService } from "@nowcrm/services/server";
 import { columns } from "./columns/composerColumns";
 import MassActionsLists from "./massActions/massActions";
 
@@ -22,7 +22,7 @@ export default async function ComposerTable({
 
 	// Fetch data from the contactService
 	const session = await auth();
-	const response = await composerService.find({
+	const response = await compositionsService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {

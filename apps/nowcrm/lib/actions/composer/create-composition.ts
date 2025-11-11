@@ -5,7 +5,7 @@ import { Composition, Form_Composition } from "@nowcrm/services";
 import { compositionsService, handleError, StandardResponse } from "@nowcrm/services/server";
 
 export async function createComposition(
-	values: Form_Composition,
+	values: Partial<Form_Composition>,
 ): Promise<StandardResponse<Composition>> {
 	const session = await auth();
 	if (!session) {

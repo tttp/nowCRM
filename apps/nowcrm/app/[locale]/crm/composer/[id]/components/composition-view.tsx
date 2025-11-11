@@ -21,12 +21,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { updateComposition } from "@/lib/actions/composer/update-composition";
 import { delay } from "@/lib/delay";
-import { CommunicationChannel } from "@/lib/static/channel-icons";
-import { getFileUploadMimeType } from "@/lib/types/new_type/channel";
-import type {
-	Composition,
-	createAdditionalComposition,
-} from "@/lib/types/new_type/composition";
+import { CommunicationChannelKeys, Composition, createAdditionalComposition, DocumentId } from "@nowcrm/services";
+import { CommunicationChannel } from "@nowcrm/services";
+import { getFileUploadMimeType } from "@nowcrm/services";
 import { CompositionChannelContent } from "./channels/composition-channel-content";
 import { CompositionForm } from "./composition-form";
 import { processFormFileOperations } from "./composition-form-submit";
@@ -42,7 +39,7 @@ const formSchema = z.object({
 	category: z.string().optional(),
 	language: z.enum(["en", "it", "fr", "de"]),
 	persona: z.string().optional(),
-	status: z.enum(["Finished", "Pending", "Errored"]),
+	composition_status: z.enum(["Finished", "Pending", "Errored"]),
 	model: z.string().optional(),
 	reference_prompt: z.string().optional(),
 	reference_result: z.string().optional(),
@@ -72,7 +69,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 			category: composition.category || "",
 			language: composition.language || "",
 			persona: composition.persona || "",
-			status: composition.status || "Finished",
+			composition_status: composition.composition_status || "Finished",
 			model: composition.model || undefined,
 			add_unsubscribe: composition.add_unsubscribe || false,
 			reference_prompt: composition.reference_prompt || "",
@@ -108,7 +105,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 	// Create channel tabs based on available channels
 	const channelTabs = Object.values(CommunicationChannel)
 		.filter((channel) =>
-			availableChannels.includes(channel as CommunicationChannel),
+			availableChannels.includes(channel as CommunicationChannelKeys),
 		)
 		.map((channel) => {
 			const item = findCompositionItem(channel as string);
@@ -120,7 +117,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 					channel.toUpperCase(),
 				)
 					? "None"
-					: item?.status || "None",
+					: item?.item_status || "None",
 				file_type: item?.channel.file_upload_type || "all",
 				text_type: item?.channel.editor_text_type || "text",
 				maximum_content_lenght: item?.channel.max_content_lenght || 50000,
@@ -180,7 +177,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 		try {
 			const success = await handleCompositionSubmit(
 				data,
-				composition.id,
+				composition.documentId,
 				router,
 				form,
 				t.Composer.channelContent.overview.toasts,
@@ -201,7 +198,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 	};
 
 	const handleRegenerate = async (
-		itemId: number,
+		itemId: DocumentId,
 		formItemIndex: number,
 		data: createAdditionalComposition,
 	) => {
@@ -248,13 +245,13 @@ export function CompositionView({ composition }: { composition: Composition }) {
 	};
 
 	// Add this function to handle adding a new channel
-	const handleAddChannel = async (channelName: string) => {
+	const handleAddChannel = async (channelName: CommunicationChannelKeys) => {
 		try {
 			setIsAddingChannel(true);
 			const { createCompositionItem } = await import(
 				"@/lib/actions/composer/composerItems/create-composition-item"
 			);
-			await createCompositionItem(composition.id, channelName);
+			await createCompositionItem(composition.documentId, channelName);
 			toast.success(
 				`${channelName} ${t.Composer.channelContent.overview.toasts.channelAddedSuccess}`,
 			);
@@ -263,7 +260,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 			const { getComposition } = await import(
 				"@/lib/actions/composer/get-composition"
 			);
-			const updatedComposition = (await getComposition(composition.id)).data;
+			const updatedComposition = (await getComposition(composition.documentId)).data;
 
 			if (updatedComposition) {
 				// Update the form with the new composition data
@@ -272,7 +269,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 					category: updatedComposition.category || "",
 					language: updatedComposition.language || "",
 					persona: updatedComposition.persona || "",
-					status: updatedComposition.status || "Finished",
+					composition_status: updatedComposition.composition_status || "Finished",
 					model: updatedComposition.model || undefined,
 					add_unsubscribe: updatedComposition.add_unsubscribe || false,
 					reference_prompt: updatedComposition.reference_prompt || "",
@@ -312,7 +309,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 			category: composition.category || "",
 			language: composition.language || "",
 			persona: composition.persona || "",
-			status: composition.status || "Finished",
+			composition_status: composition.composition_status || "Finished",
 			model: composition.model || undefined,
 			add_unsubscribe: composition.add_unsubscribe || false,
 			reference_prompt: composition.reference_prompt || "",
@@ -362,8 +359,8 @@ export function CompositionView({ composition }: { composition: Composition }) {
 							)}
 						/>
 						<div className="ml-2 flex items-center">
-							<Badge className={getStatusColor(composition.status)}>
-								{composition.status}
+							<Badge className={getStatusColor(composition.composition_status)}>
+								{composition.composition_status}
 							</Badge>
 						</div>
 					</div>
@@ -411,7 +408,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 								if (!compositionItem) return null;
 
 								const formItemIndex = findFormItemIndex(tab.channelName);
-								const itemId = compositionItem.id || 0;
+								const itemId = compositionItem.documentId;
 								const files = compositionItem.attached_files;
 
 								return (
@@ -423,7 +420,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 											tab={tab}
 											form={form}
 											isEditing={isEditing}
-											composition_id={composition.id}
+											composition_id={composition.documentId}
 											formItemIndex={formItemIndex}
 											itemId={itemId}
 											onRegenerate={handleRegenerate}
@@ -444,7 +441,7 @@ export function CompositionView({ composition }: { composition: Composition }) {
 
 export async function handleCompositionSubmit(
 	data: any,
-	compositionId: number,
+	compositionId: DocumentId,
 	router: any,
 	_form: any,
 	translation: any,

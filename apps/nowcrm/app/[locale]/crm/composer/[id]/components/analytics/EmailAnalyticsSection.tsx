@@ -20,12 +20,13 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useChannelAnalytics } from "@/lib/hooks/useChannelAnalytics";
-import type { DateRange, MetricConfig } from "@/lib/types/new_type/composition";
+import { DateRange, MetricConfig } from "@nowcrm/services";
 import { makeCounter } from "./makeUniqueCounter";
 import { getMetricDescription, renderMetricThresholds } from "./metrics";
+import { DocumentId } from "@nowcrm/services";
 
 interface AnalyticsSectionProps {
-	compositionItemId: number;
+	compositionItemId: DocumentId;
 	channelName: string;
 	title: string;
 	metrics: MetricConfig[];

@@ -10,7 +10,7 @@ export interface createComposition {
 	language: LanguageKeys;
 	mainChannel: DocumentId;
 	persona: string;
-	status: CompositionStatusKeys;
+	composition_status: CompositionStatusKeys;
 	model: aiModelKeys;
 	reference_prompt: string;
 	reference_result: string;

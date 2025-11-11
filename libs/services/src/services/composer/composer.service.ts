@@ -1,11 +1,12 @@
 import { API_ROUTES_COMPOSER } from "../../api-routes/api-routes-composer";
+import { createComposition } from "../../client";
 import { envServices } from "../../envConfig";
 import { DocumentId } from "../../types/common/base_type";
 import { composerSendType } from "../../types/composer/composer-send-types";
 import { Contact } from "../../types/contact";
 import { JourneyStep } from "../../types/journey-step";
 import { ServiceResponse } from "../../types/microservices/service-response";
-import {  StandardResponse } from "../common/response.service";
+import {  handleError, StandardResponse } from "../common/response.service";
 import { journeyStepsService } from "../journey-steps.service";
 
 class ComposerService {
@@ -149,6 +150,35 @@ class ComposerService {
 			status: 200,
 			success: true,
 		};
+	}
+
+
+	async createComposition(
+		data: Partial<createComposition>,
+	): Promise<StandardResponse<DocumentId>> {
+
+
+		try {
+			const base = envServices.COMPOSER_URL;
+			const url = new URL(API_ROUTES_COMPOSER.SEND_TO_CHANNELS, base);
+
+			const response = await fetch(url, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				cache: "no-store",
+				body: JSON.stringify(data),
+			});
+			const res_data = await response.json() as ServiceResponse<{ documentId: string }>;
+			return {
+				data: res_data.responseObject.documentId,
+				status: 200,
+				success: true,
+			};
+		} catch (_error: any) {
+			return handleError(_error);
+		}
 	}
 }
 

@@ -30,10 +30,11 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getEventsByCompositionId } from "@/lib/actions/events/get-event";
-import type { Event } from "@/lib/types/new_type/event";
+import { Event } from "@nowcrm/services";
+import { DocumentId } from "@nowcrm/services";
 
 interface EventTableProps {
-	compositionItemId: number;
+	compositionItemId: DocumentId;
 	channelName?: string;
 }
 

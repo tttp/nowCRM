@@ -13,7 +13,7 @@ export interface Channel extends BaseType {
 	editor_text_type: EditorTextTypes;
 	removeHtml: boolean;
 	max_content_lenght: number;
-	file_upload_types: FileUploadTypes;
+	file_upload_type: FileUploadTypes;
 	throttle: number;
 	max_sending_quota: number;
 	max_sending_rate: number;
@@ -24,7 +24,7 @@ export interface Form_Channel extends BaseFormType {
 	editor_text_type: EditorTextTypes;
 	removeHtml: boolean;
 	max_content_lenght: number;
-	file_upload_types: FileUploadTypes;
+	file_upload_type: FileUploadTypes;
 	throttle: number;
 	max_sending_quota: number;
 	max_sending_rate: number;

@@ -12,7 +12,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { ReferenceComposition } from "@/lib/types/new_type/composition";
+import { ReferenceComposition } from "@nowcrm/services";
 
 interface TextEditorProps {
 	html: string;

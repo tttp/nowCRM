@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/tooltip";
 import { getChannelIcon } from "@/lib/static/channel-icons";
 import { cn } from "@/lib/utils";
+import { DocumentId } from "@nowcrm/services";
 export interface ChannelCustomization {
 	channel: string;
 	additional_prompt: string;
@@ -25,7 +26,7 @@ interface ChannelAdditionsProps {
 	onBack: () => void;
 	channels: { value: string; label: string }[];
 	initialChannelCustomizations?: ChannelCustomization[];
-	mainChannel?: number;
+	mainChannel?: DocumentId;
 }
 
 export default function ChannelAdditions({

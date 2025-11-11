@@ -81,3 +81,17 @@ export type DateRange =
 	| "last7days"
 	| "custom"
 	| "total";
+
+
+export interface MetricConfig {
+	label: string;
+	actionTypes: string | string[];
+	mode: "count" | "percentage" | "fraction";
+	denominatorActionTypes?: string | string[];
+	threshold?: number;
+	invert?: boolean;
+	Icon: any;
+	bgColor: string;
+	fgColor: string;
+	textColor: string;
+}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ErrorMessage from "@/components/ErrorMessage";
-import channelService from "@/lib/services/new_type/channel.service";
+import { channelsService } from "@nowcrm/services/server";
+import { auth } from "@/auth";
 import CreateCompositionCard from "./components/CreateCard";
 
 export const metadata: Metadata = {
@@ -8,12 +9,13 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
+	const session = await auth();
 	// here we get active channels for select
 	// we dont use async select for better error handling + now alowing user to select in additional info
 	// same channel 2 times
 	// also hardocded limit so we always get all channels
-	const response = await channelService.find({
-		sort: ["id:asc"],
+	const response = await channelsService.find(session?.jwt, {
+		sort: ["documentId:asc"],
 		pagination: { limit: 100 },
 	});
 

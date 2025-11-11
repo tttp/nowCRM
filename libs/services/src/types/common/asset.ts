@@ -10,7 +10,7 @@ export type StrapiImageFormat = {
 	size: number;
 };
 
-type Asset = {
+export type Asset = {
 	id: number;
 	name: string;
 	alternativeText: string | null;
@@ -35,4 +35,3 @@ type Asset = {
 	updatedAt: Date;
 };
 
-export default Asset;
