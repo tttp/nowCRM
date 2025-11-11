@@ -3,12 +3,12 @@ import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import actionTypeService from "@/lib/services/new_type/action_type.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+
 import { columns } from "./components/columns/organizationTypesColumns";
 import CreateOrganizationTypeDialog from "./components/createDialog";
 import OrganizationTypeMassActions from "./components/massActions/massActions";
-
+import { PaginationParams } from "@nowcrm/services";
+import { actionTypeService } from "@nowcrm/services/server";
 export default async function Page(props: {
 	searchParams: Promise<PaginationParams>;
 }) {
@@ -23,7 +23,7 @@ export default async function Page(props: {
 		sortOrder = "desc",
 	} = searchParams;
 	const session = await auth();
-	const response = await actionTypeService.find({
+	const response = await actionTypeService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {

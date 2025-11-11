@@ -36,10 +36,10 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { SubscriptionStatuses } from "@/lib/types/new_type/settings";
+import { settingSubscriptionCheck } from "@nowcrm/services";
 
 interface ChannelSettingsFormProps {
-	initialSubscription: SubscriptionStatuses;
+	initialSubscription: settingSubscriptionCheck;
 	initialUnsubscribeText: string;
 	baseLink: string;
 }
@@ -80,7 +80,8 @@ export function ChannelSettingsForm({
 				"@/lib/actions/settings/update-settings"
 			);
 			setIsSaving(true);
-			await updateSettings(1, data);
+			//TODO: get settings id from database
+			await updateSettings("", data);
 			toast.success(t.Admin.Channels.toast.updateSettings);
 			setIsEditing(false);
 		} catch (error) {

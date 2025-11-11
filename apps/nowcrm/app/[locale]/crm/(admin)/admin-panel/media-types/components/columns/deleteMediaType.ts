@@ -2,11 +2,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import mediaTypeService from "@/lib/services/new_type/media_type.service";
 
+import { DocumentId } from "@nowcrm/services";
+import { handleError, mediaTypesService, StandardResponse } from "@nowcrm/services/server";
 export async function deleteMediaTypeAction(
-	mediaTypeId: number,
+	mediaTypeId: DocumentId,
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -18,10 +18,9 @@ export async function deleteMediaTypeAction(
 	}
 
 	try {
-		const response = await mediaTypeService.unPublish(mediaTypeId);
+		const response = await mediaTypesService.delete(mediaTypeId, session?.jwt);
 		return response;
 	} catch (error) {
-		console.log(error);
-		throw new Error("Failed to delete media type");
+		return handleError(error);
 	}
 }

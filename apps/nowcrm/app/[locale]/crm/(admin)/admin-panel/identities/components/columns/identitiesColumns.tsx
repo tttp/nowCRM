@@ -11,7 +11,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Identity } from "@/lib/types/new_type/identity";
+import { Identity } from "@nowcrm/services";
 import EditIdentityDialog from "./editDialog";
 
 const DeleteAction: React.FC<{ identity: Identity }> = ({ identity }) => {
@@ -28,7 +28,11 @@ const DeleteAction: React.FC<{ identity: Identity }> = ({ identity }) => {
 					onClick={async () => {
 						const { default: toast } = await import("react-hot-toast");
 						const { deleteIdentityAction } = await import("./deleteIdentity");
-						await deleteIdentityAction(identity.id);
+						const res = await deleteIdentityAction(identity.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete identity");
+							return;
+						}
 						toast.success(t.Admin.Industry.toast.delete);
 						router.refresh();
 					}}

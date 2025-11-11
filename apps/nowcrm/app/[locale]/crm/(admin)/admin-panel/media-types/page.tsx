@@ -3,8 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import mediaTypeService from "@/lib/services/new_type/media_type.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
+import { mediaTypesService } from "@nowcrm/services/server";
 import { columns } from "./components/columns/mediaTypesColumns";
 import CreateMediaTypeDialog from "./components/createDialog";
 import MediaTypeMassActions from "./components/massActions/massActions";
@@ -23,7 +23,7 @@ export default async function Page(props: {
 		sortOrder = "desc",
 	} = searchParams;
 	const session = await auth();
-	const response = await mediaTypeService.find({
+	const response = await mediaTypesService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {

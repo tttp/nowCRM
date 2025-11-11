@@ -5,11 +5,12 @@ import {
 	massActionsGenerator,
 } from "@/components/generativeComponents/MassActionsGenerator";
 import { MassDeleteOrganizationTypes } from "./massDeleteOrganizationType";
+import { DocumentId } from "@nowcrm/services";
 
 const actionsConfig: ActionsConfig = {
 	deleteContacts: {
 		label: "Delete", // e.g., "Delete"
-		onAction: async (selectedRows: number[]) => {
+		onAction: async (selectedRows: DocumentId[]) => {
 			return await MassDeleteOrganizationTypes(selectedRows);
 		},
 		successMessage: "Organization Type deleted",

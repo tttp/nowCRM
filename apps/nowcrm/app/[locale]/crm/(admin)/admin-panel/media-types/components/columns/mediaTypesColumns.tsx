@@ -12,7 +12,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { MediaType } from "@/lib/types/new_type/media_type";
+import { MediaType } from "@nowcrm/services";
 
 const DeleteAction: React.FC<{ mediaType: MediaType }> = ({ mediaType }) => {
 	const t = useMessages();
@@ -28,7 +28,11 @@ const DeleteAction: React.FC<{ mediaType: MediaType }> = ({ mediaType }) => {
 					onClick={async () => {
 						const { default: toast } = await import("react-hot-toast");
 						const { deleteMediaTypeAction } = await import("./deleteMediaType");
-						await deleteMediaTypeAction(mediaType.id);
+						const res = await deleteMediaTypeAction(mediaType.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete media type");
+							return;
+						}
 						toast.success(t.Admin.MediaType.toast.delete);
 						router.refresh();
 					}}

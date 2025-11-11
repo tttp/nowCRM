@@ -3,11 +3,11 @@ import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import campaignService from "@/lib/services/new_type/campaign.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
 import { columns } from "./components/columns/campaignsColumns";
 import createCampaignDialog from "./components/createDialog";
 import MassActionsCampaigns from "./components/massActions/massActions";
+import { campaignsService } from "@nowcrm/services/server";
 
 export default async function Page(props: {
 	searchParams: Promise<PaginationParams>;
@@ -23,7 +23,7 @@ export default async function Page(props: {
 		sortOrder = "desc",
 	} = searchParams;
 	const session = await auth();
-	const response = await campaignService.find({
+	const response = await campaignsService.find(session?.jwt, {
 		populate: {
 			campaign_category: {
 				fields: ["id", "name"],

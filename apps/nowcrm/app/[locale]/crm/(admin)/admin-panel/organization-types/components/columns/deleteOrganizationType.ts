@@ -2,11 +2,12 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import organizationTypeService from "@/lib/services/new_type/ogranization_type.service";
+
+import { DocumentId } from "@nowcrm/services";
+import { handleError, organizationTypesService, StandardResponse } from "@nowcrm/services/server";
 
 export async function deleteOrganizationTypeAction(
-	organizationTypeId: number,
+	organizationTypeId: DocumentId,
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -19,10 +20,9 @@ export async function deleteOrganizationTypeAction(
 
 	try {
 		const response =
-			await organizationTypeService.unPublish(organizationTypeId);
+			await organizationTypesService.delete(organizationTypeId, session?.jwt);
 		return response;
 	} catch (error) {
-		console.log(error);
-		throw new Error("Failed to delete organization type");
+		return handleError(error);
 	}
 }

@@ -2,11 +2,13 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import unipleIdentityService from "@/lib/services/new_type/unipile_identity.service";
+
+import { DocumentId } from "@nowcrm/services";
+import { StandardResponse, unipileIdentitiesService } from "@nowcrm/services/server";
+import { handleError } from "@nowcrm/services/server";
 
 export async function deleteUnipileIdentityAction(
-	identityId: number,
+	identityId: DocumentId,
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -17,10 +19,9 @@ export async function deleteUnipileIdentityAction(
 		};
 	}
 	try {
-		const response = await unipleIdentityService.unPublish(identityId);
+		const response = await unipileIdentitiesService.delete(identityId, session?.jwt);
 		return response;
 	} catch (error) {
-		console.log(error);
-		throw new Error("Failed to delete identity");
+		return handleError(error);
 	}
 }

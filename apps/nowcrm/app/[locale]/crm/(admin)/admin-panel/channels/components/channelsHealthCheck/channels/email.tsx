@@ -23,7 +23,7 @@ import {
 	getStatusColor,
 	getStatusIcon,
 } from "@/lib/static/healthCheckStatuses";
-import type { SettingCredential } from "@/lib/types/new_type/settings";
+import { SettingCredential } from "@nowcrm/services";
 
 interface EmailHealthCheckProps {
 	email_credential: Omit<SettingCredential, "setting">;
@@ -61,11 +61,11 @@ export function EmailHealthCheck({ email_credential }: EmailHealthCheckProps) {
 							</div>
 							<div className="flex items-center gap-2">
 								<span
-									className={`rounded-full px-2 py-1 text-xs ${getStatusColor(email_credential.status)}`}
+									className={`rounded-full px-2 py-1 text-xs ${getStatusColor(email_credential.credential_status)}`}
 								>
-									{email_credential.status}
+									{email_credential.credential_status}
 								</span>
-								{getStatusIcon(email_credential.status)}
+								{getStatusIcon(email_credential.credential_status)}
 								<div>
 									<TooltipProvider>
 										<Tooltip>
@@ -119,13 +119,13 @@ export function EmailHealthCheck({ email_credential }: EmailHealthCheckProps) {
 						<div className="flex items-center justify-between">
 							<h4 className="font-medium">{t.common.status}</h4>
 							<span
-								className={`rounded-full px-2 py-1 text-xs ${getStatusColor(email_credential.status)}`}
+								className={`rounded-full px-2 py-1 text-xs ${getStatusColor(email_credential.credential_status)}`}
 							>
-								{email_credential.status}
+								{email_credential.credential_status}
 							</span>
 						</div>
 
-						{email_credential.status === "invalid" &&
+						{email_credential.credential_status === "invalid" &&
 							email_credential.error_message && (
 								<div className="mt-2 rounded-md border border-red-200 bg-red-50 p-3">
 									<div className="flex items-start">

@@ -29,7 +29,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { updateCampaignCategory } from "@/lib/actions/campaign-categories/update-campaign-category";
-import type { CampaignCategory } from "@/lib/types/new_type/campaignCategory";
+import { CampaignCategory } from "@nowcrm/services";
 
 interface EditCampaignCategoryDialogProps {
 	campaignCategory: CampaignCategory;
@@ -61,7 +61,7 @@ export default function EditCampaignCategoryDialog({
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		const { default: toast } = await import("react-hot-toast");
 		const res = await updateCampaignCategory(
-			campaignCategory.id,
+			campaignCategory.documentId,
 			values.name,
 			values.description,
 		);

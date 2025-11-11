@@ -3,8 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import contactTitlesService from "@/lib/services/new_type/contact_title";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
+import { contactTitlesService } from "@nowcrm/services/server";
 import { columns } from "./components/columns/contactTitlesColumns";
 import createContactTitleDialog from "./components/createDialog";
 import MassActionsContactTitles from "./components/massActions/massActions";
@@ -23,7 +23,7 @@ export default async function Page(props: {
 		sortOrder = "desc",
 	} = searchParams;
 	const session = await auth();
-	const response = await contactTitlesService.find({
+	const response = await contactTitlesService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {

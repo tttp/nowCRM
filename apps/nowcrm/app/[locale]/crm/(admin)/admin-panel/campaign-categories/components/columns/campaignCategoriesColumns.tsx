@@ -11,9 +11,9 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { CampaignCategory } from "@/lib/types/new_type/campaignCategory";
-import EditCampaignCategoryDialog from "./editDialog";
 
+import EditCampaignCategoryDialog from "./editDialog";
+import { CampaignCategory } from "@nowcrm/services";
 const DeleteAction: React.FC<{ campaignCategory: CampaignCategory }> = ({
 	campaignCategory,
 }) => {
@@ -33,7 +33,11 @@ const DeleteAction: React.FC<{ campaignCategory: CampaignCategory }> = ({
 						const { deleteCampaignCategoryAction } = await import(
 							"./deleteCampaignCategory"
 						);
-						await deleteCampaignCategoryAction(campaignCategory.id);
+						const res = await deleteCampaignCategoryAction(campaignCategory.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete campaign category");
+							return;
+						}
 						toast.success(t.common.actions.delete);
 						router.refresh();
 					}}

@@ -2,11 +2,12 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import textBlockService from "@/lib/services/new_type/text_blocks.service";
+
+import { DocumentId } from "@nowcrm/services";
+import { handleError, textblocksService, StandardResponse } from "@nowcrm/services/server";
 
 export async function MassDeleteTextBlocks(
-	textBlocks: number[],
+	textBlocks: DocumentId[],
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -18,7 +19,7 @@ export async function MassDeleteTextBlocks(
 	}
 	try {
 		const unpublishPromises = textBlocks.map((id) =>
-			textBlockService.unPublish(id),
+			textblocksService.delete(id, session?.jwt),
 		);
 		await Promise.all(unpublishPromises);
 		return {
@@ -27,11 +28,6 @@ export async function MassDeleteTextBlocks(
 			success: true,
 		};
 	} catch (error) {
-		console.error("Error deleting text blocks:", error);
-		return {
-			data: null,
-			status: 500,
-			success: false,
-		};
+		return handleError(error);
 	}
 }

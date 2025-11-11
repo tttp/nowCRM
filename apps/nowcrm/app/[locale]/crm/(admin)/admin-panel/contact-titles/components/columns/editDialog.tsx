@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { updateContactTitle } from "@/lib/actions/contact-titles/update-contact-title";
-import type { ContactTitle } from "@/lib/types/new_type/contact_title";
+import { ContactTitle } from "@nowcrm/services";
 
 interface EditContactTitleDialogProps {
 	contactTitle: ContactTitle;
@@ -57,7 +57,7 @@ export default function EditContactTitleDialog({
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		const { default: toast } = await import("react-hot-toast");
-		const res = await updateContactTitle(contactTitle.id, values.name);
+		const res = await updateContactTitle(contactTitle.documentId, values.name);
 		if (!res.success) {
 			toast.error(
 				`${t.Admin.ContactTitle.toast.createError}: ${res.errorMessage}`,

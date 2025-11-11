@@ -1,9 +1,10 @@
 "use server";
 
 import { deleteContactSalutationAction } from "@/lib/actions/contact-salutations/delete-contact-salutation";
+import { DocumentId } from "@nowcrm/services";
 
 export async function MassDeleteContactSalutations(
-	contactSalutationIds: number[],
+	contactSalutationIds: DocumentId[],
 ) {
 	try {
 		const deletePromises = contactSalutationIds.map((id) =>

@@ -2,11 +2,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import actionTypeService from "@/lib/services/new_type/action_type.service";
-
+import { actionTypeService, StandardResponse } from "@nowcrm/services/server";
+import { DocumentId } from "@nowcrm/services";
+import { handleError } from "@nowcrm/services/server";
 export async function MassDeleteActionTypes(
-	actionTypes: number[],
+	actionTypes: DocumentId[],
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -18,7 +18,7 @@ export async function MassDeleteActionTypes(
 	}
 	try {
 		const unpublishPromises = actionTypes.map((id) =>
-			actionTypeService.unPublish(id),
+			actionTypeService.delete(session?.jwt, id.toString()),
 		);
 		await Promise.all(unpublishPromises);
 		return {
@@ -27,11 +27,6 @@ export async function MassDeleteActionTypes(
 			success: true,
 		};
 	} catch (error) {
-		console.error("Error deleting action types:", error);
-		return {
-			data: null,
-			status: 500,
-			success: false,
-		};
+		return handleError(error);
 	}
 }

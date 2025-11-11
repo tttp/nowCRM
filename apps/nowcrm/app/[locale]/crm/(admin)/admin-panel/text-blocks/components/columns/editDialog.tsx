@@ -33,8 +33,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { LanguageKeys } from "@/lib/static/languages";
-import type { TextBlock } from "@/lib/types/new_type/text_blocks";
+import { LanguageKeys, TextBlock } from "@nowcrm/services";
 
 interface EditTextBlockDialogProps {
 	textBlockName: string;
@@ -147,7 +146,7 @@ export default function EditTextBlockDialog({
 			locales.map(async (locale) => {
 				// Find the textblock with the matching locale to get its ID
 				const textblock = textblocks.find((block) => block.locale === locale);
-				const id = textblock?.data.id;
+				const id = textblock?.data.documentId;
 
 				if (!id) {
 					return {

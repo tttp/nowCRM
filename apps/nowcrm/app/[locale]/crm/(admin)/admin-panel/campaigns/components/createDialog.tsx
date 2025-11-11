@@ -10,7 +10,7 @@ import { GrAddCircle } from "react-icons/gr";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
-	Dialog,
+	Dialog,	
 	DialogContent,
 	DialogDescription,
 	DialogHeader,
@@ -35,22 +35,27 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { getCampaignCategories } from "@/lib/actions/campaign-categories/get-campaign-category";
+
 import { createCampaign } from "@/lib/actions/campaigns/create-campaign";
-import type { CampaignCategory } from "@/lib/types/new_type/campaignCategory";
+import { CampaignCategory } from "@nowcrm/services";
+import { campaignCategoriesService } from "@nowcrm/services/server";
+
 
 export default function CreateCampaignDialog() {
 	const t = useMessages();
 
 	const router = useRouter();
 	const [dialogOpen, setDialogOpen] = React.useState(false);
-	const [categories, setCategories] = React.useState<CampaignCategory[]>([]);
+	const [campaigns, setCampaigns] = React.useState<CampaignCategory[]>([]);
 
 	React.useEffect(() => {
 		const fetchCategories = async () => {
-			const response = await getCampaignCategories();
+			//todo CHANGE CATEGORIES TO ASYNC SELCT
+			const response = await campaignCategoriesService.find("", {
+				fields: ["id", "name"],
+			});
 			if (response.success && response.data) {
-				setCategories(response.data);
+				setCampaigns(response.data);
 			}
 		};
 		fetchCategories();
@@ -61,7 +66,7 @@ export default function CreateCampaignDialog() {
 			message: t.Admin.Campaign.form.nameSchema,
 		}),
 		description: z.string().optional(),
-		campaignCategoryId: z.string().optional(),
+		campaignId: z.string().optional(),
 	});
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -69,7 +74,7 @@ export default function CreateCampaignDialog() {
 		defaultValues: {
 			name: "",
 			description: "",
-			campaignCategoryId: "",
+			campaignId: "",
 		},
 	});
 
@@ -78,8 +83,8 @@ export default function CreateCampaignDialog() {
 		const res = await createCampaign(
 			values.name,
 			values.description,
-			values.campaignCategoryId
-				? Number.parseInt(values.campaignCategoryId)
+			values.campaignId
+				? (values.campaignId)
 				: undefined,
 		);
 		if (!res.success) {
@@ -153,7 +158,7 @@ export default function CreateCampaignDialog() {
 						/>
 						<FormField
 							control={form.control}
-							name="campaignCategoryId"
+							name="campaignId"
 							render={({ field }) => (
 								<FormItem>
 									<FormLabel>{t.Admin.Campaign.form.categoryLabel}</FormLabel>
@@ -171,12 +176,12 @@ export default function CreateCampaignDialog() {
 											</SelectTrigger>
 										</FormControl>
 										<SelectContent>
-											{categories.map((category) => (
+											{campaigns.map((campaign) => (
 												<SelectItem
-													key={category.id}
-													value={category.id.toString()}
+													key={campaign.id}
+													value={campaign.id.toString()}
 												>
-													{category.name}
+													{campaign.name}
 												</SelectItem>
 											))}
 										</SelectContent>

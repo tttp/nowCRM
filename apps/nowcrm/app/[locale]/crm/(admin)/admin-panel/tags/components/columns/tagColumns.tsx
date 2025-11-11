@@ -12,7 +12,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Tag } from "@/lib/types/new_type/tag";
+import { Tag } from "@nowcrm/services";
 
 const DeleteAction: React.FC<{ tag: Tag }> = ({ tag }) => {
 	const t = useMessages();
@@ -28,7 +28,11 @@ const DeleteAction: React.FC<{ tag: Tag }> = ({ tag }) => {
 					onClick={async () => {
 						const { default: toast } = await import("react-hot-toast");
 						const { deleteTag } = await import("./deleteTag");
-						await deleteTag(tag.id);
+						const res = await deleteTag(tag.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete tag");
+							return;
+						}
 						toast.success(t.Admin.MediaType.toast.delete);
 						router.refresh();
 					}}

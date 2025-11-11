@@ -3,8 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import identityService from "@/lib/services/new_type/identity.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
+import { identitiesService } from "@nowcrm/services/server";
 import { columns } from "./components/columns/identitiesColumns";
 import CreateIdentityDialog from "./components/createDialog";
 import IdentitityMassActions from "./components/massActions/massActions";
@@ -23,7 +23,7 @@ export default async function Page(props: {
 		sortOrder = "desc",
 	} = searchParams;
 	const session = await auth();
-	const response = await identityService.find({
+	const response = await identitiesService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {

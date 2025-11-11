@@ -11,10 +11,10 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { JobTitle } from "@/lib/types/new_type/job_title";
+import { ContactJobTitle } from "@nowcrm/services";
 import EditJobTitleDialog from "./editDialog";
 
-const DeleteAction: React.FC<{ jobTitle: JobTitle }> = ({ jobTitle }) => {
+const DeleteAction: React.FC<{ jobTitle: ContactJobTitle }> = ({ jobTitle }) => {
 	const t = useMessages();
 
 	const router = useRouter();
@@ -29,7 +29,11 @@ const DeleteAction: React.FC<{ jobTitle: JobTitle }> = ({ jobTitle }) => {
 					onClick={async () => {
 						const { default: toast } = await import("react-hot-toast");
 						const { deleteJobTitleAction } = await import("./deleteJobTitle");
-						await deleteJobTitleAction(jobTitle.id);
+						const res = await deleteJobTitleAction(jobTitle.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete job title");
+							return;
+						}
 						toast.success(t.common.actions.delete);
 						router.refresh();
 					}}
@@ -44,7 +48,7 @@ const DeleteAction: React.FC<{ jobTitle: JobTitle }> = ({ jobTitle }) => {
 	);
 };
 
-export const columns: ColumnDef<JobTitle>[] = [
+export const columns: ColumnDef<ContactJobTitle>[] = [
 	{
 		id: "select",
 		header: ({ table }) => (

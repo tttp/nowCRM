@@ -3,11 +3,11 @@ import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import jobTitleService from "@/lib/services/new_type/job_title.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
 import { columns } from "./components/columns/jobTitlesColumns";
-import createJobTitleDialog from "./components/createDialog";
-import MassActionsJobTitles from "./components/massActions/massActions";
+import CreateJobTitleDialog from "./components/createDialog";
+import JobTitleMassActions from "./components/massActions/massActions";
+import { contactJobTitlesService } from "@nowcrm/services/server";
 
 export default async function Page(props: {
 	searchParams: Promise<PaginationParams>;
@@ -23,7 +23,7 @@ export default async function Page(props: {
 		sortOrder = "desc",
 	} = searchParams;
 	const session = await auth();
-	const response = await jobTitleService.find({
+	const response = await contactJobTitlesService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {
@@ -47,8 +47,8 @@ export default async function Page(props: {
 			columns={columns}
 			table_name="job_titles"
 			table_title={t("table_title")}
-			mass_actions={MassActionsJobTitles}
-			createDialog={createJobTitleDialog}
+			mass_actions={JobTitleMassActions}
+			createDialog={CreateJobTitleDialog}
 			pagination={meta.pagination}
 			session={session as Session}
 			sorting={{ sortBy, sortOrder }}

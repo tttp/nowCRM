@@ -11,7 +11,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { ContactSalutation } from "@/lib/types/new_type/contact_salutation";
+import { ContactSalutation } from "@nowcrm/services";
 import EditContactSalutationDialog from "./editDialog";
 
 const DeleteAction: React.FC<{ contactSalutation: ContactSalutation }> = ({
@@ -33,7 +33,11 @@ const DeleteAction: React.FC<{ contactSalutation: ContactSalutation }> = ({
 						const { deleteContactSalutationAction } = await import(
 							"./deleteContactSalutation"
 						);
-						await deleteContactSalutationAction(contactSalutation.id);
+						const res = await deleteContactSalutationAction(contactSalutation.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete contact salutation");
+							return;
+						}
 						toast.success(t.common.actions.delete);
 						router.refresh();
 					}}

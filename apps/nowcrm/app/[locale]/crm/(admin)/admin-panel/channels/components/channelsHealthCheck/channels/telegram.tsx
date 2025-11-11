@@ -48,7 +48,7 @@ import {
 	getStatusColor,
 	getStatusIcon,
 } from "@/lib/static/healthCheckStatuses";
-import type { SettingCredential } from "@/lib/types/new_type/settings";
+import { SettingCredential } from "@nowcrm/services";
 
 interface TelegramHealthCheckProps {
 	telegram_credential: Omit<SettingCredential, "setting">;
@@ -87,9 +87,9 @@ export function TelegramHealthCheck({
 		const { default: toast } = await import("react-hot-toast");
 		setIsSubmitting(true);
 		try {
-			const res = await updateSettingCredentials(telegram_credential.id, {
+			const res = await updateSettingCredentials(telegram_credential.documentId, {
 				...values,
-				status: "disconnected",
+				credential_status: "disconnected",
 				error_message: "Please at first refresh your access token",
 			});
 			if (res.success) {
@@ -123,11 +123,11 @@ export function TelegramHealthCheck({
 							</div>
 							<div className="flex items-center gap-2">
 								<span
-									className={`rounded-full px-2 py-1 text-xs ${getStatusColor(telegram_credential.status)}`}
+									className={`rounded-full px-2 py-1 text-xs ${getStatusColor(telegram_credential.credential_status)}`}
 								>
-									{telegram_credential.status}
+									{telegram_credential.credential_status}
 								</span>
-								{getStatusIcon(telegram_credential.status)}
+								{getStatusIcon(telegram_credential.credential_status)}
 								<div>
 									<TooltipProvider>
 										<Tooltip>
@@ -184,18 +184,18 @@ export function TelegramHealthCheck({
 					<div className="mb-4 flex items-center justify-between">
 						<h4 className="font-medium text-sm">{t.common.status}</h4>
 						<span
-							className={`rounded-full px-2 py-1 text-xs ${getStatusColor(telegram_credential.status)}`}
+							className={`rounded-full px-2 py-1 text-xs ${getStatusColor(telegram_credential.credential_status)}`}
 						>
-							{telegram_credential.status}
+							{telegram_credential.credential_status}
 						</span>
 					</div>
 
-					{telegram_credential?.status === "invalid" ||
-					(telegram_credential?.status === "disconnected" &&
+					{telegram_credential?.credential_status === "invalid" ||
+					(telegram_credential?.credential_status === "disconnected" &&
 						telegram_credential?.error_message) ? (
 						<div
 							className={`mb-4 rounded-md border p-3 ${
-								telegram_credential?.status === "invalid"
+								telegram_credential?.credential_status === "invalid"
 									? "border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-900/20"
 									: "border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-900/20"
 							}`}
@@ -203,7 +203,7 @@ export function TelegramHealthCheck({
 							<div className="flex items-start">
 								<AlertCircle
 									className={`mt-0.5 mr-2 h-5 w-5 shrink-0 ${
-										telegram_credential?.status === "invalid"
+										telegram_credential?.credential_status === "invalid"
 											? "text-red-500 dark:text-red-400"
 											: "text-amber-500 dark:text-amber-400"
 									}`}
@@ -211,18 +211,18 @@ export function TelegramHealthCheck({
 								<div>
 									<h5
 										className={`font-medium text-sm ${
-											telegram_credential?.status === "invalid"
+											telegram_credential?.credential_status === "invalid"
 												? "text-red-800 dark:text-red-400"
 												: "text-amber-800 dark:text-amber-400"
 										}`}
 									>
-										{telegram_credential?.status === "invalid"
+										{telegram_credential?.credential_status === "invalid"
 											? t.common.invalidCredentials
 											: t.common.errorDetails}
 									</h5>
 									<p
 										className={`text-sm ${
-											telegram_credential?.status === "invalid"
+											telegram_credential?.credential_status === "invalid"
 												? "text-red-700 dark:text-red-300"
 												: "text-amber-700 dark:text-amber-300"
 										}`}

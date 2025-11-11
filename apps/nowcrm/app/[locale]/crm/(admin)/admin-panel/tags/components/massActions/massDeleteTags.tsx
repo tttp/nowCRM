@@ -2,11 +2,14 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import TagService from "@/lib/services/new_type/tag.service";
 
-export async function MassDeleteTag(
-	organizationTypes: number[],
+import { DocumentId } from "@nowcrm/services";
+
+import { tagsService, StandardResponse } from "@nowcrm/services/server";
+import { handleError } from "@nowcrm/services/server";
+
+export async function MassDeleteTags(
+	tags: DocumentId[],
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -17,8 +20,8 @@ export async function MassDeleteTag(
 		};
 	}
 	try {
-		const unpublishPromises = organizationTypes.map((id) =>
-			TagService.unPublish(id),
+		const unpublishPromises = tags.map((id) =>
+			tagsService.delete(id, session?.jwt),
 		);
 		await Promise.all(unpublishPromises);
 		return {
@@ -27,11 +30,6 @@ export async function MassDeleteTag(
 			success: true,
 		};
 	} catch (error) {
-		console.error("Error deleting tags:", error);
-		return {
-			data: null,
-			status: 500,
-			success: false,
-		};
+		return handleError(error);
 	}
 }

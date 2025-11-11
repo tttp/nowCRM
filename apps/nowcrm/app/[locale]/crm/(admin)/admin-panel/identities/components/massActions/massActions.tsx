@@ -5,11 +5,12 @@ import {
 	massActionsGenerator,
 } from "@/components/generativeComponents/MassActionsGenerator";
 import { MassDeleteIdentities } from "./massDeleteIdentities";
+import { DocumentId } from "@nowcrm/services";
 
 const actionsConfig: ActionsConfig = {
 	deleteContacts: {
 		label: "Delete", // e.g., "Delete"
-		onAction: async (selectedRows: number[]) => {
+		onAction: async (selectedRows: DocumentId[]) => {
 			return await MassDeleteIdentities(selectedRows);
 		},
 		successMessage: "Identities deleted",

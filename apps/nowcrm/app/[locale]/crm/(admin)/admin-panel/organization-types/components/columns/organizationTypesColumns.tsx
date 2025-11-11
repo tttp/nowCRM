@@ -12,9 +12,9 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { MediaType } from "@/lib/types/new_type/media_type";
+import { OrganizationType } from "@nowcrm/services";
 
-const DeleteAction: React.FC<{ organizationType: MediaType }> = ({
+const DeleteAction: React.FC<{ organizationType: OrganizationType }> = ({
 	organizationType,
 }) => {
 	const t = useMessages();
@@ -32,7 +32,11 @@ const DeleteAction: React.FC<{ organizationType: MediaType }> = ({
 						const { deleteOrganizationTypeAction } = await import(
 							"./deleteOrganizationType"
 						);
-						await deleteOrganizationTypeAction(organizationType.id);
+						const res = await deleteOrganizationTypeAction(organizationType.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete organization type");
+							return;
+						}
 						toast.success(t.Admin.MediaType.toast.delete);
 						router.refresh();
 					}}
@@ -47,7 +51,7 @@ const DeleteAction: React.FC<{ organizationType: MediaType }> = ({
 	);
 };
 
-export const columns: ColumnDef<MediaType>[] = [
+export const columns: ColumnDef<OrganizationType>[] = [
 	{
 		id: "select",
 		header: ({ table }) => (

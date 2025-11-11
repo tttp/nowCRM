@@ -1,11 +1,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import campaignService from "@/lib/services/new_type/campaign.service";
+import { DocumentId } from "@nowcrm/services";
+import { campaignsService, handleError, StandardResponse } from "@nowcrm/services/server";
 
 export async function MassDeleteCampaigns(
-	campaigns: number[],
+	campaigns: DocumentId[],
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -17,7 +17,7 @@ export async function MassDeleteCampaigns(
 	}
 	try {
 		const unpublishPromises = campaigns.map((id) =>
-			campaignService.unPublish(id),
+			campaignsService.delete(session?.jwt, id.toString()),
 		);
 		await Promise.all(unpublishPromises);
 		return {
@@ -26,11 +26,6 @@ export async function MassDeleteCampaigns(
 			success: true,
 		};
 	} catch (error) {
-		console.error("Error deleting campaigns:", error);
-		return {
-			data: null,
-			status: 500,
-			success: false,
-		};
+		return handleError(error);
 	}
 }

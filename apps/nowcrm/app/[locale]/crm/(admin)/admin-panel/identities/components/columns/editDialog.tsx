@@ -31,7 +31,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { Identity } from "@/lib/types/new_type/identity";
+import { Identity } from "@nowcrm/services";
 
 interface EditIdentityDialogProps {
 	identity: Identity;
@@ -88,7 +88,7 @@ export default function EditIdentityDialog({
 			"@/lib/actions/identities/update-identity"
 		);
 
-		const result = await updateIdentity(identity.id, values);
+		const result = await updateIdentity(identity.documentId, values);
 		setIsLoading(false);
 
 		if (!result.success) {

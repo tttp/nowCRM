@@ -3,8 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import organizationTypeService from "@/lib/services/new_type/ogranization_type.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
+import { organizationTypesService } from "@nowcrm/services/server";
 import { columns } from "./components/columns/organizationTypesColumns";
 import CreateOrganizationTypeDialog from "./components/createDialog";
 import OrganizationTypeMassActions from "./components/massActions/massActions";
@@ -23,7 +23,7 @@ export default async function Page(props: {
 		sortOrder = "desc",
 	} = searchParams;
 	const session = await auth();
-	const response = await organizationTypeService.find({
+	const response = await organizationTypesService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {

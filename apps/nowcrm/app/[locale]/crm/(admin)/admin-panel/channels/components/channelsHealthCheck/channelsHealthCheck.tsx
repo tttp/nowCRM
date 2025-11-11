@@ -20,8 +20,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { createSettingCredential } from "@/lib/actions/settings/credentials/create-settings-credentials";
-import { CommunicationChannel } from "@/lib/static/channel-icons";
-import type { Settings } from "@/lib/types/new_type/settings";
+import { CommunicationChannel, Setting } from "@nowcrm/services";
 import { EmailHealthCheck } from "./channels/email";
 import { LinkedInHealthCheck } from "./channels/linkedIn";
 import { SmsHealthCheck } from "./channels/sms";
@@ -32,7 +31,7 @@ import { WhatsAppHealthCheck } from "./channels/whatsapp";
 import { WordpressHealthCheck } from "./channels/wordpress";
 
 interface ChannelSettingsFormProps {
-	settings: Settings;
+		settings: Setting;
 }
 
 export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
@@ -101,7 +100,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 				if (!linkedInCredential) {
 					await createSettingCredential(
 						CommunicationChannel.LINKEDIN.toLowerCase(),
-						settings.id,
+						settings.documentId,
 					);
 					credentialsCreated = true;
 				}
@@ -109,7 +108,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 				if (!smsCredential) {
 					await createSettingCredential(
 						CommunicationChannel.SMS.toLowerCase(),
-						settings.id,
+						settings.documentId,
 					);
 					credentialsCreated = true;
 				}
@@ -117,7 +116,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 				if (!whatsAppCredential) {
 					await createSettingCredential(
 						CommunicationChannel.WHATSAPP.toLowerCase(),
-						settings.id,
+						settings.documentId,
 					);
 					credentialsCreated = true;
 				}
@@ -125,7 +124,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 				if (!twitterCredential) {
 					await createSettingCredential(
 						CommunicationChannel.TWITTER.toLowerCase(),
-						settings.id,
+						settings.documentId,
 					);
 					credentialsCreated = true;
 				}
@@ -133,7 +132,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 				if (!telegramCredential) {
 					await createSettingCredential(
 						CommunicationChannel.TELEGRAM.toLowerCase(),
-						settings.id,
+						settings.documentId,
 					);
 					credentialsCreated = true;
 				}
@@ -141,7 +140,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 				if (!wordpressCredential) {
 					await createSettingCredential(
 						CommunicationChannel.BLOG.toLowerCase(),
-						settings.id,
+						settings.documentId,
 					);
 					credentialsCreated = true;
 				}
@@ -149,7 +148,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 				if (!unipileCredential) {
 					await createSettingCredential(
 						CommunicationChannel.UNIPILE.toLowerCase(),
-						settings.id,
+						settings.documentId,
 					);
 					credentialsCreated = true;
 				}
@@ -164,7 +163,7 @@ export function ChannelHealthCheck({ settings }: ChannelSettingsFormProps) {
 		}
 
 		createMissingCredentials();
-	}, [linkedInCredential, whatsAppCredential, settings.id, router]);
+	}, [linkedInCredential, whatsAppCredential, settings.documentId, router]);
 
 	return (
 		<Card>

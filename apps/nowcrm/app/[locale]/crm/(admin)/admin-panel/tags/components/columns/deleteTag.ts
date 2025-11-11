@@ -2,11 +2,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import TagService from "@/lib/services/new_type/tag.service";
 
+import { DocumentId } from "@nowcrm/services";
+import { handleError, tagsService, StandardResponse } from "@nowcrm/services/server";
 export async function deleteTag(
-	tagId: number,
+	tagId: DocumentId,
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -18,10 +18,9 @@ export async function deleteTag(
 	}
 
 	try {
-		const response = await TagService.delete(tagId);
+		const response = await tagsService.delete(tagId, session?.jwt);
 		return response;
 	} catch (error) {
-		console.log(error);
-		throw new Error("Failed to delete tag");
+			return handleError(error);
 	}
 }

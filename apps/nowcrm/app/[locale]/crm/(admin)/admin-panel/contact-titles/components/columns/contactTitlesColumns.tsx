@@ -11,7 +11,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { ContactTitle } from "@/lib/types/new_type/contact_title";
+import { ContactTitle } from "@nowcrm/services";
 import EditContactTitleDialog from "./editDialog";
 
 const DeleteAction: React.FC<{ contactTitle: ContactTitle }> = ({
@@ -33,7 +33,11 @@ const DeleteAction: React.FC<{ contactTitle: ContactTitle }> = ({
 						const { deleteContactTitleAction } = await import(
 							"./deleteContactTitle"
 						);
-						await deleteContactTitleAction(contactTitle.id);
+						const res = await deleteContactTitleAction(contactTitle.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete contact title");
+							return;
+						}
 						toast.success(t.common.actions.delete);
 						router.refresh();
 					}}

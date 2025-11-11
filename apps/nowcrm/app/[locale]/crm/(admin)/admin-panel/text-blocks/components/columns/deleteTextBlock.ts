@@ -2,11 +2,11 @@
 "use server";
 
 import { auth } from "@/auth";
-import type { StandardResponse } from "@/lib/services/common/response.service";
-import textBlockService from "@/lib/services/new_type/text_blocks.service";
 
+import { DocumentId } from "@nowcrm/services";
+import { handleError, textblocksService, StandardResponse } from "@nowcrm/services/server";
 export async function deleteTextBlock(
-	textblockId: number,
+	textblockId: DocumentId,
 ): Promise<StandardResponse<null>> {
 	const session = await auth();
 	if (!session) {
@@ -18,10 +18,9 @@ export async function deleteTextBlock(
 	}
 
 	try {
-		const response = await textBlockService.unPublish(textblockId);
+		const response = await textblocksService.delete(textblockId, session?.jwt);
 		return response;
 	} catch (error) {
-		console.log(error);
-		throw new Error("Failed to delete organization type");
+		return handleError(error);
 	}
 }

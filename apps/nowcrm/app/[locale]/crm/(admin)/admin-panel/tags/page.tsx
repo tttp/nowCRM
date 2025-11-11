@@ -3,8 +3,8 @@ import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import tagService from "@/lib/services/new_type/tag.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
+import { tagsService } from "@nowcrm/services/server";
 import { columns } from "./components/columns/tagColumns";
 import CreateOrganizationTypeDialog from "./components/createDialog";
 import OrganizationTypeMassActions from "./components/massActions/massActions";
@@ -24,7 +24,7 @@ export default async function Page(props: {
 	} = searchParams;
 	const session = await auth();
 
-	const response = await tagService.find({
+	const response = await tagsService.find(session?.jwt, {
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {
 			page,

@@ -11,7 +11,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Industry } from "@/lib/types/new_type/industry";
+import { Industry } from "@nowcrm/services";
 
 const DeleteAction: React.FC<{ industry: Industry }> = ({ industry }) => {
 	const t = useMessages();
@@ -28,7 +28,11 @@ const DeleteAction: React.FC<{ industry: Industry }> = ({ industry }) => {
 					onClick={async () => {
 						const { default: toast } = await import("react-hot-toast");
 						const { deleteIndustryAction } = await import("./deleteIndustry");
-						await deleteIndustryAction(industry.id);
+						const res = await deleteIndustryAction(industry.documentId);
+						if(!res.success) {
+							toast.error(res.errorMessage ?? "Failed to delete industry");
+							return;
+						}
 						toast.success(t.common.actions.delete);
 						router.refresh();
 					}}

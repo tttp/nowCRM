@@ -28,7 +28,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { updateContactSalutation } from "@/lib/actions/contact-salutations/update-contact-salutation";
-import type { ContactSalutation } from "@/lib/types/new_type/contact_salutation";
+import { ContactSalutation } from "@nowcrm/services";
 
 interface EditContactSalutationDialogProps {
 	contactSalutation: ContactSalutation;
@@ -58,7 +58,7 @@ export default function EditContactSalutationDialog({
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		const { default: toast } = await import("react-hot-toast");
 		const res = await updateContactSalutation(
-			contactSalutation.id,
+			contactSalutation.documentId,
 			values.name,
 		);
 		if (!res.success) {

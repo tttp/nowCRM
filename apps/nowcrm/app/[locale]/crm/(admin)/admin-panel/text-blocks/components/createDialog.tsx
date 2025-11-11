@@ -33,7 +33,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { LanguageKeys } from "@/lib/static/languages";
+import { LanguageKeys } from "@nowcrm/services";
 
 export default function CreateTextBlockDialog() {
 	const t = useMessages().Admin.TextBlock;

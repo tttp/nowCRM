@@ -6,12 +6,12 @@ import {
 	massActionsGenerator,
 } from "@/components/generativeComponents/MassActionsGenerator";
 import { MassDeleteCampaignCategories } from "./massDeleteCampaignCategories";
-
+import { DocumentId } from "@nowcrm/services";
 // Define the actions configuration for campaign categories
 const actionsConfig: ActionsConfig = {
-	deleteContacts: {
+	deleteCampaignCategories: {
 		label: "Delete",
-		onAction: async (selectedRows: number[]) => {
+		onAction: async (selectedRows: DocumentId[]) => {
 			return await MassDeleteCampaignCategories(selectedRows);
 		},
 		successMessage: "Campaign categories deleted",

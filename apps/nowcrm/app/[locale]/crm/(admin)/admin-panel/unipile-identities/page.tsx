@@ -2,11 +2,11 @@ import type { Session } from "next-auth";
 import { auth } from "@/auth";
 import DataTable from "@/components/dataTable/dataTable";
 import ErrorMessage from "@/components/ErrorMessage";
-import unipleIdentityService from "@/lib/services/new_type/unipile_identity.service";
-import type { PaginationParams } from "@/lib/types/common/paginationParams";
+import { PaginationParams } from "@nowcrm/services";
 import { columns } from "./components/columns/unipileIdentityColumns";
 import CreateIdentityDialog from "./components/createDialog";
 import IdentitityMassActions from "./components/massActions/massActions";
+import { unipileIdentitiesService } from "@nowcrm/services/server";
 
 export default async function Page(props: {
 	searchParams: Promise<PaginationParams>;
@@ -20,7 +20,7 @@ export default async function Page(props: {
 		sortOrder = "desc",
 	} = searchParams;
 	const session = await auth();
-	const response = await unipleIdentityService.find({
+	const response = await unipileIdentitiesService.find(session?.jwt, {
 		populate: "*",
 		sort: [`${sortBy}:${sortOrder}` as any],
 		pagination: {
