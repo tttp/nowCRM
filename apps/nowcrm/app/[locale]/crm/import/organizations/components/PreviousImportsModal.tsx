@@ -20,8 +20,7 @@ import {
 	getImportProgressMap,
 	getPreviousImports,
 } from "@/lib/actions/import/fetch-import";
-import type { ImportRecord } from "@/lib/types/new_type/import";
-
+import type { ImportRecord } from "@nowcrm/services";
 interface PreviousImportsModalProps {
 	isOpen: boolean;
 	onClose: () => void;
