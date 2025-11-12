@@ -161,13 +161,13 @@ export const columns: ColumnDef<Composition>[] = [
 		accessorKey: "composition_status",
 		header: "Status",
 		cell: ({ row }) => {
-			const status = row.original.composition_status.toLowerCase();
+			const status = row.original.composition_status?.toLowerCase();
 
 			return (
 				<div
 					className={cn("rounded-full px-2 py-1 text-center font-medium", {
 						"border border-red-800/25 bg-red-100 text-red-800 dark:border-text-red-200/25 dark:bg-red-900 dark:text-red-200":
-							status.includes("error"),
+							status?.includes("error"),
 						"border border-yellow-800/25 bg-yellow-100 text-yellow-800 dark:border-yellow-200/25 dark:bg-yellow-900 dark:text-yellow-200":
 							status === "pending",
 						"border border-green-800/25 bg-green-100 text-green-800 dark:border-green-200/25 dark:bg-green-900 dark:text-green-200":
