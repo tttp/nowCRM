@@ -26,7 +26,7 @@ class FormsService extends BaseService<FormEntity, Form_FormEntity> {
 		const url = `${envServices.STRAPI_URL}${API_ROUTES_STRAPI.FORM_SUBMIT}`;
 
 		const formData = new FormData();
-		formData.append("formId", (payload.formId));
+		formData.append("formId", payload.formId);
 		formData.append("identifier", payload.identifier);
 
 		for (const [key, value] of Object.entries(payload.formData)) {

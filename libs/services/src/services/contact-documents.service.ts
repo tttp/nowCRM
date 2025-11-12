@@ -6,7 +6,7 @@ import type {
 import BaseService from "./common/base.service";
 
 class ContactDocumentsService extends BaseService<
-	ContactDocument,	
+	ContactDocument,
 	Form_ContactDocument
 > {
 	public constructor() {

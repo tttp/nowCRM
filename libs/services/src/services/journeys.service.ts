@@ -13,7 +13,7 @@ import { journeyStepsService } from "./journey-steps.service";
 
 class JourneysService extends BaseService<Journey, Form_Journey> {
 	public constructor() {
-			super(API_ROUTES_STRAPI.JOURNEYS);
+		super(API_ROUTES_STRAPI.JOURNEYS);
 	}
 
 	async duplicate(

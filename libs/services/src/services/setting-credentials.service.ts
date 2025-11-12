@@ -1,7 +1,7 @@
 import { API_ROUTES_STRAPI } from "../api-routes/api-routes-strapi";
 import type {
 	Form_SettingCredential,
-	SettingCredential,	
+	SettingCredential,
 } from "../types/setting-credential";
 import BaseService from "./common/base.service";
 

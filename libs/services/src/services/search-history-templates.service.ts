@@ -1,7 +1,7 @@
 import { API_ROUTES_STRAPI } from "../api-routes/api-routes-strapi";
 import type {
 	Form_SearchHistoryTemplate,
-	SearchHistoryTemplate,	
+	SearchHistoryTemplate,
 } from "../types/search-history-template";
 import BaseService from "./common/base.service";
 

@@ -7,7 +7,7 @@ import BaseService from "./common/base.service";
 
 class UnipileIdentitiesService extends BaseService<
 	UnipileIdentity,
-	Form_UnipileIdentity	
+	Form_UnipileIdentity
 > {
 	public constructor() {
 		super(API_ROUTES_STRAPI.UNIPILE_IDENTITIES);
