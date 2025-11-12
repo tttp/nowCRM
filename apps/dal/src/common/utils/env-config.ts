@@ -22,7 +22,6 @@ export const env = cleanEnv(process.env, {
 	DAL_JOB_CONCURRENCY: num({ devDefault: testOnly(1) }),
 	DAL_WORKER_COUNT: num({ devDefault: testOnly(4) }),
 	DAL_REDIS_HOST: host({ devDefault: testOnly("localhost") }),
-	DAL_REDIS_PASSWORD: str({ devDefault: testOnly("default") }),
 	DAL_JOB_COMPLETED_LIFE_TIME_DAYS: num({ devDefault: testOnly(1) }),
 	DAL_JOB_FAIL_LIFE_TIME_DAYS: num({ devDefault: testOnly(1) }),
 	DAL_DATABASE_CLIENT: str({ devDefault: testOnly("postgresql") }),

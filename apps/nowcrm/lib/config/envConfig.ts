@@ -11,6 +11,7 @@ const processEnv = {
 	CRM_STRAPI_API_TOKEN: process.env.CRM_STRAPI_API_TOKEN || "",
 	COMPOSER_URL: process.env.COMPOSER_URL || "",
 	DAL_URL: process.env.DAL_URL || "",
+	JOURNEYS_URL: process.env.JOURNEYS_URL || "",
 	CRM_TOTP_ENCRYPTION_KEY: process.env.CRM_TOTP_ENCRYPTION_KEY || "",
 	NT_STACK_VERSION: process.env.NT_STACK_VERSION || "",
 	TEST_RUN: process.env.TEST_RUN || false,
@@ -63,6 +64,9 @@ export const env = cleanEnv(processEnv, {
 	CRM_STRAPI_API_TOKEN: NotEmptyStringValidator(),
 	CRM_TOTP_ENCRYPTION_KEY: NotEmptyStringValidator(),
 	NT_STACK_VERSION: NotEmptyStringValidator(),
+	JOURNEYS_URL: URLValidator({
+		devDefault: testOnly("http://localhost:3010/"),
+	}),
 	DAL_URL: URLValidator({
 		devDefault: testOnly("http://localhost:6001/api/"),
 	}),

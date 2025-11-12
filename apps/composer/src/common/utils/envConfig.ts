@@ -23,7 +23,6 @@ export const env = cleanEnv(process.env, {
 
 	COMPOSER_REDIS_PORT: port({ devDefault: testOnly(6379) }),
 	COMPOSER_REDIS_HOST: host({ devDefault: testOnly("localhost") }),
-	COMPOSER_REDIS_PASSWORD: str({ devDefault: testOnly("default") }),
 
 	COMPOSER_OPENAI_API_KEY: str({ devDefault: testOnly("") }),
 	COMPOSER_ANTHROPIC_KEY: str({ devDefault: testOnly("") }),
