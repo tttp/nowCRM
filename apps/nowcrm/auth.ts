@@ -70,7 +70,6 @@ export const { handlers, signIn, signOut, auth }: any = NextAuth({
           if (!loginRes.success || !loginRes.data?.user) {
             throw new Error(loginRes.errorMessage || "Login failed");
           }
-
           const user = loginRes.data.user;
 
           if (user && (!user.is2FAEnabled || !user.totpSecret)) {
@@ -89,8 +88,6 @@ export const { handlers, signIn, signOut, auth }: any = NextAuth({
   },
  callbacks: {
     jwt: async ({ token }) => {
-
-
       const {usersService} = await import('@nowcrm/services/server')
       const searchRes = await usersService.find(
         env.CRM_STRAPI_API_TOKEN,

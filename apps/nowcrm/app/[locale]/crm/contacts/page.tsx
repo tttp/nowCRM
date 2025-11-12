@@ -26,6 +26,7 @@ export default async function Page(props: {
 
 	const session = await auth();
 
+
 	const response = await contactsService.find(session?.jwt, {
 		fields: [
 			"id",
@@ -61,7 +62,7 @@ export default async function Page(props: {
 		pagination: { page, pageSize },
 		filters: finalFilters,
 	});
-
+	console.log(response);
 	if (!response.success || !response.data || !response.meta) {
 		return <ErrorMessage response={response} />;
 	}

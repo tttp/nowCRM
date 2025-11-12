@@ -247,7 +247,7 @@ class UsersService extends BaseService<User, Form_User> {
 				};
 			}
 
-			await this.update(data.user.id, { jwt_token: data.jwt }, userData.token);
+			await this.update(data.user.id, { jwt_token: data.jwt }, userData.token,true);
 
 			return {
 				data: data,
