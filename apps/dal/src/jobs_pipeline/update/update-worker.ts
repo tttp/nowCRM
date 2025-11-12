@@ -66,10 +66,12 @@ export const startUpdateWorker = () => {
 
 				const preview = failedItems
 					.slice(0, 5)
-					.map(({ documentId, error }: { documentId: string; error: string }) => ({
-						documentId,
-						error,
-					}));
+					.map(
+						({ documentId, error }: { documentId: string; error: string }) => ({
+							documentId,
+							error,
+						}),
+					);
 				logger.info(
 					`[${workerId}] DONE job ${job.id} — Bulk: ${bulkUpdated}, Relations: ${relationsLinked}, Failed: ${failedCount}, Sample errors: ${JSON.stringify(preview)}`,
 				);

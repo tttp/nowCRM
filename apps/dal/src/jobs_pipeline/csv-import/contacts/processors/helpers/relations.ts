@@ -316,7 +316,9 @@ export async function replaceRelations(job: Job) {
 
 	if (listId) {
 		linkMap.lists ||= [];
-		contacts.forEach((c) => linkMap.lists.push([c.id, listId]));
+		contacts.forEach((c) => {
+			linkMap.lists.push([c.id, listId]);
+		});
 	}
 
 	const client = await pool.connect();
@@ -395,17 +397,21 @@ export async function replaceOrgRelations(job: Job) {
 			if (Array.isArray(val)) {
 				val.forEach((rid: number) => {
 					if (typeof rid !== "number") return;
-					(linkMap[endpoint] ||= []).push([orgId, rid]);
+					linkMap[endpoint] ||= [];
+					linkMap[endpoint].push([orgId, rid]);
 				});
 			} else if (typeof val === "number") {
-				(linkMap[endpoint] ||= []).push([orgId, val]);
+				linkMap[endpoint] ||= [];
+				linkMap[endpoint].push([orgId, val]);
 			}
 		}
 	}
 
 	if (listId) {
 		linkMap.lists ||= [];
-		organizations.forEach((o) => linkMap.lists.push([o.id, listId]));
+		organizations.forEach((o) => {
+			linkMap.lists.push([o.id, listId]);
+		});
 	}
 
 	const client = await pool.connect();

@@ -1,4 +1,4 @@
-import { DocumentId } from "@nowcrm/services";
+import type { DocumentId } from "@nowcrm/services";
 import { relationCache } from "../../../contacts/processors/helpers/cache";
 
 export function isOrganizationInCache(organization: any): boolean {
@@ -20,9 +20,10 @@ export function isOrganizationInCache(organization: any): boolean {
 	return false;
 }
 
-export function getCachedOrganizationId(
-	organization: any,
-): { id: number | null; documentId: DocumentId | null } {
+export function getCachedOrganizationId(organization: any): {
+	id: number | null;
+	documentId: DocumentId | null;
+} {
 	const organizationsCache = relationCache.organizations;
 	if (!organizationsCache) return { id: null, documentId: null };
 

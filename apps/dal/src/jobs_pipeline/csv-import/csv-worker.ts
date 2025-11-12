@@ -1,3 +1,4 @@
+import type { DocumentId } from "@nowcrm/services";
 import { Worker } from "bullmq";
 import { env } from "@/common/utils/env-config";
 import { logger } from "@/logger";
@@ -6,7 +7,6 @@ import { contactsQueue } from "./contacts/contacts-queue";
 import { createList } from "./contacts/processors/contacts/list";
 import { loadRelationDictionaries } from "./contacts/processors/helpers/cache";
 import { organizationsQueue } from "./orgs/organizations-queue";
-import { DocumentId } from "@nowcrm/services";
 
 const redisConnection = {
 	host: env.DAL_REDIS_HOST,

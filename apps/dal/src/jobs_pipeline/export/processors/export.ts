@@ -36,9 +36,9 @@ export const exportEntityItems = async (
 			for (const item of pageItems) {
 				const attrs = item.attributes || item;
 				const flat: Record<string, any> = {
-					id: item.id,               
+					id: item.id,
 					documentId: item.documentId,
-				  };
+				};
 
 				for (const [key, value] of Object.entries(attrs)) {
 					if (

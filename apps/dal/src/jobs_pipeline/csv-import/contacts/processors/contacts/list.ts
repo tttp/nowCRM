@@ -66,7 +66,10 @@ export const createList = async (
 			relationCache.lists = new Map();
 		}
 		//check here
-		relationCache.lists.set(finalListData.name, { id: listId, documentId: null });
+		relationCache.lists.set(finalListData.name, {
+			id: listId,
+			documentId: null,
+		});
 
 		if (contactIds.length > 0) {
 			const updatePromises = contactIds.map(async (contactId) => {
@@ -117,7 +120,9 @@ export const createList = async (
 			linkedContacts: linkedContacts.length > 0 ? linkedContacts : undefined,
 		};
 	} catch (error: any) {
-		console.error(`Error creating list "${finalListData.name}": ${error.message}`);
+		console.error(
+			`Error creating list "${finalListData.name}": ${error.message}`,
+		);
 		throw error;
 	}
 };

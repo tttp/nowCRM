@@ -1,6 +1,9 @@
 import { pool } from "./db";
 
-export const relationCache: Record<string, Map<string, { id: number | null; documentId: string | null }>> = {};
+export const relationCache: Record<
+	string,
+	Map<string, { id: number | null; documentId: string | null }>
+> = {};
 export const listContactsMap: Map<number, number[]> = new Map();
 
 const relationFields: Record<string, string> = {
@@ -46,7 +49,10 @@ export async function loadRelationDictionaries() {
 					return;
 				}
 
-				const map = new Map<string, { id: number; documentId: string | null }>();
+				const map = new Map<
+					string,
+					{ id: number; documentId: string | null }
+				>();
 
 				for (const row of res.rows) {
 					if (table === "contacts") {
@@ -62,7 +68,10 @@ export async function loadRelationDictionaries() {
 						for (const key of keys) {
 							const normalizedKey = key.trim().toLowerCase();
 							if (!map.has(normalizedKey)) {
-								map.set(normalizedKey, { id: row.id, documentId: row.document_id ?? null });
+								map.set(normalizedKey, {
+									id: row.id,
+									documentId: row.document_id ?? null,
+								});
 							}
 						}
 					} else {
@@ -73,7 +82,10 @@ export async function loadRelationDictionaries() {
 							name.trim() !== "" &&
 							!map.has(name)
 						) {
-							map.set(name, { id: row.id, documentId: row.document_id ?? null });
+							map.set(name, {
+								id: row.id,
+								documentId: row.document_id ?? null,
+							});
 						} else if (table === "job_titles") {
 						}
 					}

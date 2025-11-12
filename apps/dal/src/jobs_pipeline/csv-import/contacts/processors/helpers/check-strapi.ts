@@ -1,6 +1,6 @@
 import { env } from "@/common/utils/env-config";
 
-const STRAPI_HEALTH_ENDPOINT = env.STRAPI_URL.replace(/\/?api\/?$/, '');
+const STRAPI_HEALTH_ENDPOINT = env.STRAPI_URL.replace(/\/?api\/?$/, "");
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 

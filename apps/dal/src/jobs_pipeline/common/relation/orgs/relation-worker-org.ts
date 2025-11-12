@@ -114,18 +114,21 @@ export const startOrgRelationsWorkers = async () => {
 										`bulkCreate failed for ${entity}: ${resp?.message || "no message"}`,
 									);
 								}
-								 const items = Array.isArray(resp.items) ? resp.items : [];
+								const items = Array.isArray(resp.items) ? resp.items : [];
 								if (items.length !== batch.length) {
-								logger.warn(
-									`bulkCreate for ${entity}: returned ${items.length}/${batch.length} items`
-								);
+									logger.warn(
+										`bulkCreate for ${entity}: returned ${items.length}/${batch.length} items`,
+									);
 								}
 								batch.forEach((n, idx) => {
-								const created = items[idx];
-								if (created) {
-									cache.set(n, { id: created.id, documentId: created.documentId });
-								}
-							});
+									const created = items[idx];
+									if (created) {
+										cache.set(n, {
+											id: created.id,
+											documentId: created.documentId,
+										});
+									}
+								});
 							} catch (err: any) {
 								logger.error(
 									{

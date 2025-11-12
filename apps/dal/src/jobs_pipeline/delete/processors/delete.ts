@@ -52,9 +52,9 @@ export const deleteEntityItems = async (
 			if (!response.ok) {
 				const msg = `HTTP ${response.status} ${response.statusText}`;
 				failedCount += batch.length;
-				batch.forEach((item) =>
-					failedItems.push({ id: item.documentId, error: msg }),
-				);
+				batch.forEach((item) => {
+					failedItems.push({ id: item.documentId, error: msg });
+				});
 				logger.error(`Batch ${batchIndex + 1} failed: ${msg}`);
 				continue;
 			}
@@ -69,20 +69,20 @@ export const deleteEntityItems = async (
 				);
 			} else {
 				failedCount += batch.length;
-				batch.forEach((item) =>
+				batch.forEach((item) => {
 					failedItems.push({
 						id: item.documentId,
 						error: data.message || "Batch delete failed",
-					}),
-				);
+					});
+				});
 				logger.error(`Batch ${batchIndex + 1} failed: ${data.message}`);
 			}
 		} catch (error: any) {
 			failedCount += batch.length;
 			const message = error?.message || "Unknown error";
-			batch.forEach((item) =>
-				failedItems.push({ id: item.documentId, error: message }),
-			);
+			batch.forEach((item) => {
+				failedItems.push({ id: item.documentId, error: message });
+			});
 			logger.error(`Batch ${batchIndex + 1} failed: ${message}`);
 		}
 	}

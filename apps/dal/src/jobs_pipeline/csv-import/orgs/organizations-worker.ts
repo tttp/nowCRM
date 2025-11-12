@@ -1,5 +1,6 @@
 import http from "node:http";
 import https from "node:https";
+import type { DocumentId } from "@nowcrm/services";
 import { Worker as BullWorker, type Job } from "bullmq";
 import pLimit from "p-limit";
 import { pino } from "pino";
@@ -13,7 +14,6 @@ import { cleanEmptyStringsToNull } from "./processors/organizations/clean";
 import { validateEnumerations } from "./processors/organizations/enumerations";
 import { getCachedOrganizationId } from "./processors/organizations/iscache";
 import { sanitizeOrganizations } from "./processors/organizations/sanitize";
-import { DocumentId } from "@nowcrm/services";
 
 function buildFullOrgsArray(
 	originalOrgs: any[],
@@ -21,7 +21,7 @@ function buildFullOrgsArray(
 	existingOrgIds: DocumentId[],
 	newOrgs: any[],
 	createdIds: DocumentId[],
-):  Array<any & { documentId: DocumentId }> {
+): Array<any & { documentId: DocumentId }> {
 	const full: Array<any & { documentId: DocumentId }> = [];
 	let newIdx = 0;
 	let existingIdx = 0;
@@ -242,10 +242,10 @@ export const startOrganizationsWorkers = () => {
 				for (const org of uniqueOrgs) {
 					const cached = getCachedOrganizationId(org);
 					if (cached.documentId) {
-					  updateOrgs.push(org);
-					  existingOrgIds.push(cached.documentId);
+						updateOrgs.push(org);
+						existingOrgIds.push(cached.documentId);
 					} else {
-					  newOrgs.push(org);
+						newOrgs.push(org);
 					}
 				}
 				logger.info(
@@ -287,18 +287,21 @@ export const startOrganizationsWorkers = () => {
 						const docs = Array.isArray(body.ids) ? body.ids : [];
 						const ids = docs.map((d) => d.documentId);
 						const cacheMap =
-						relationCache.organizations ||
-						new Map<string, { id: number | null; documentId: DocumentId | null }>();
-					  
+							relationCache.organizations ||
+							new Map<
+								string,
+								{ id: number | null; documentId: DocumentId | null }
+							>();
+
 						for (let i = 0; i < ids.length && i < batch.length; i++) {
 							const name = (batch[i].name || "").trim().toLowerCase();
 							if (name && !cacheMap.has(name)) {
-							cacheMap.set(name, { id: null, documentId: ids[i] });
+								cacheMap.set(name, { id: null, documentId: ids[i] });
 							}
 						}
 						relationCache.organizations = cacheMap;
-					  
-					  createdIds.push(...ids);
+
+						createdIds.push(...ids);
 						successCount += ids.length;
 						recordResponseTime(Date.now() - batchStart, false);
 						onHttpSuccess();
@@ -382,20 +385,20 @@ export const startOrganizationsWorkers = () => {
 				await orgRelationsQueue.add("ensureRelations", {
 					organizations: fullOrgs,
 					listId,
-				  });
-				  
-				  if (updateOrgs.length) {
+				});
+
+				if (updateOrgs.length) {
 					const updatedFullOrgs = fullOrgs.filter((o) =>
-					  updateOrgs.includes(
-						organizations.find((org) => org === o || org.name === o.name),
-					  ),
+						updateOrgs.includes(
+							organizations.find((org) => org === o || org.name === o.name),
+						),
 					);
-				  
+
 					await orgRelationsQueue.add("replaceOrgRelations", {
-					  organizations: updatedFullOrgs,
-					  listId,
+						organizations: updatedFullOrgs,
+						listId,
 					});
-				  }
+				}
 
 				return {
 					successCount,

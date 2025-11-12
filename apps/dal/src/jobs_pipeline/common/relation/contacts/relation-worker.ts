@@ -115,21 +115,21 @@ export const startRelationsWorkers = async () => {
 
 								const items = Array.isArray(resp.items) ? resp.items : [];
 								if (items.length !== batchNames.length) {
-								logger.warn(
-									`bulkCreate for ${entity}: returned ${items.length}/${batchNames.length} items`,
-								);
+									logger.warn(
+										`bulkCreate for ${entity}: returned ${items.length}/${batchNames.length} items`,
+									);
 								}
 								//сheck here
 								batchNames.forEach((name, idx) => {
-								const created = items[idx];
+									const created = items[idx];
 									if (created) {
-									  cache.set(name, {
-										id: created.id,
-										documentId: created.documentId,
-									  });
+										cache.set(name, {
+											id: created.id,
+											documentId: created.documentId,
+										});
 									}
-								  });
-								} catch (err: any) {
+								});
+							} catch (err: any) {
 								logger.error(
 									{
 										jobId: job.id,

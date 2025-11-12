@@ -1,5 +1,6 @@
 import http from "node:http";
 import https from "node:https";
+import type { DocumentId } from "@nowcrm/services";
 import { Worker as BullWorker, type Job } from "bullmq";
 import pLimit from "p-limit";
 import { pino } from "pino";
@@ -15,7 +16,6 @@ import { getCachedContactId } from "./processors/contacts/iscache";
 import { sanitizeContacts } from "./processors/contacts/sanitize";
 import { relationCache } from "./processors/helpers/cache";
 import { waitForStrapi } from "./processors/helpers/check-strapi";
-import { DocumentId } from "@nowcrm/services";
 
 function buildFullContactsArray(
 	originalContacts: any[],
@@ -218,7 +218,6 @@ export const startContactsWorkers = () => {
 				const {
 					contacts = [],
 					type = "contacts",
-					filename,
 					listId,
 					subscribeAll = false,
 				} = job.data as {
@@ -247,12 +246,12 @@ export const startContactsWorkers = () => {
 				for (const contact of contacts) {
 					const cached = getCachedContactId(contact);
 					if (cached.documentId) {
-					  updateContacts.push(contact);
-					  existingContactIds.push(cached.documentId);
+						updateContacts.push(contact);
+						existingContactIds.push(cached.documentId);
 					} else {
-					  newContacts.push(contact);
+						newContacts.push(contact);
 					}
-				  }
+				}
 
 				logger.info(
 					`[${workerId}] Cache filter: ${newContacts.length} new, ${updateContacts.length} updated (${existingContactIds.length} IDs found)`,

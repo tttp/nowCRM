@@ -1,7 +1,7 @@
+import type { DocumentId } from "@nowcrm/services";
 import { env } from "@/common/utils/env-config";
 import { pool } from "@/jobs_pipeline/csv-import/contacts/processors/helpers/db";
 import { logger } from "@/server";
-import { DocumentId } from "@nowcrm/services";
 
 const RELATIONAL_FIELDS = new Set([
 	"organization",
@@ -164,7 +164,7 @@ export const updateEntityItems = async (
 			}
 			const key = JSON.stringify(payload);
 			if (!groups.has(key)) groups.set(key, { ids: [], payload });
-			groups.get(key)!.ids.push(it.documentId);
+			groups.get(key)?.ids.push(it.documentId);
 		}
 
 		for (const { ids: grpIds, payload } of groups.values()) {
@@ -185,8 +185,7 @@ export const updateEntityItems = async (
 						}),
 					},
 				);
-				if (!resp.ok)
-					throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
+				if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
 
 				const data = await resp.json();
 				if (data.success) {
@@ -197,7 +196,9 @@ export const updateEntityItems = async (
 			} catch (err: any) {
 				const msg = err?.message || "bulk-update error";
 				failed += grpIds.length;
-				grpIds.forEach((documentId) => failedItems.push({ documentId, error: msg }));
+				grpIds.forEach((documentId) => {
+					failedItems.push({ documentId, error: msg });
+				});
 				logger.error(`${batchInfo} bulk-update failed: ${msg}`);
 			}
 		}
@@ -221,11 +222,19 @@ export const updateEntityItems = async (
 						it.id,
 					);
 					const endpoint = toEndpoint(fieldKey);
-					for (const rid of ids) (linkMap[endpoint] ||= []).push([it.id, rid]);
+					if (!linkMap[endpoint]) {
+						linkMap[endpoint] = [];
+					}
+					for (const rid of ids) {
+						linkMap[endpoint].push([it.id, rid]);
+					}
 				} catch (err: any) {
 					const msg = err.message || String(err);
 					failed++;
-					failedItems.push({ documentId: it.documentId, error: `Field "${fieldKey}": ${msg}` });
+					failedItems.push({
+						documentId: it.documentId,
+						error: `Field "${fieldKey}": ${msg}`,
+					});
 					logger.error(
 						`${batchInfo} [Item ${it.id}] ${fieldKey} link failed: ${msg}`,
 					);
@@ -271,7 +280,7 @@ export const updateEntityItems = async (
 			lists: { table: "contacts_lists_lnk", relCol: "list_id" },
 		};
 
-		const DB_CHUNK_SIZE = 500;
+		const _DB_CHUNK_SIZE = 500;
 		for (const [endpoint, pairs] of Object.entries(linkMap)) {
 			const cfg = joinConfig[endpoint];
 			if (!cfg) continue;

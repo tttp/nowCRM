@@ -118,34 +118,33 @@ const massActionHandlers: Record<
 
 	update: async ({ entity, items, jobData }) => {
 		if (!jobData.update_data) {
-		  throw new Error("Missing update_data for update action");
+			throw new Error("Missing update_data for update action");
 		}
-	  
-		const { field, value } = jobData.update_data;
-	  
-		const enrichedItems = items.map((item) => ({
-		  id: item.id,              
-		  documentId: item.documentId,
-		  data: { [field]: value },
-		}));
-	  
-		console.log(
-		  `[update handler] entity=${entity}, update field=${field}, value=${JSON.stringify(value)}, items=${enrichedItems
-			.map((i) => i.documentId)
-			.join(", ")}`,
-		);
-	  
-		await updateQueue.add("updateBatch", {
-		  entity,
-		  items: enrichedItems,
-		  updateField: field,
-		  updateValue: value,
-		  userEmail: jobData.userEmail,
-		});
-	  },
-	  
 
-	update_subscription: async ({ entity, items, jobData }) => {
+		const { field, value } = jobData.update_data;
+
+		const enrichedItems = items.map((item) => ({
+			id: item.id,
+			documentId: item.documentId,
+			data: { [field]: value },
+		}));
+
+		console.log(
+			`[update handler] entity=${entity}, update field=${field}, value=${JSON.stringify(value)}, items=${enrichedItems
+				.map((i) => i.documentId)
+				.join(", ")}`,
+		);
+
+		await updateQueue.add("updateBatch", {
+			entity,
+			items: enrichedItems,
+			updateField: field,
+			updateValue: value,
+			userEmail: jobData.userEmail,
+		});
+	},
+
+	update_subscription: async ({ items, jobData }) => {
 		const { channelId, isSubscribe, addEvent } = jobData;
 
 		if (channelId === undefined || channelId === null) {
