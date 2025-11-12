@@ -175,8 +175,8 @@ export async function createStep(
 		if (!data.publishedAt) {
 			data.publishedAt = new Date();
 		}
-
-		return await journeyStepsService.create(data, session.jwt);
+		const res = await journeyStepsService.create(data, session.jwt);
+		return res;
 	} catch (error) {
 		return handleError(error);
 	}
@@ -196,6 +196,7 @@ export async function updateStep(
 		};
 	}
 	try {
+		console.log(stepId)
 		return await journeyStepsService.update(stepId, data, session.jwt);
 	} catch (error) {
 		return handleError(error);

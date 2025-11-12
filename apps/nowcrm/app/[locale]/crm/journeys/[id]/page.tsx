@@ -19,7 +19,8 @@ export default async function JourneyPage(props: {
 	const params = await props.params;
 	const journeyId = params.id;
 	const session = await auth();
-	if (checkDocumentId(journeyId)) {
+
+	if (!checkDocumentId(journeyId)) {
 		return notFound();
 	}
 
@@ -55,8 +56,6 @@ export default async function JourneyPage(props: {
 						composition: true,
 						contacts: true,
 						identity: true,
-						additional_data: true,
-						type: true,
 					},
 				},
 			},
@@ -94,18 +93,18 @@ interface LayoutNode {
 function buildGraph(steps: JourneyStep[]): Map<string, LayoutNode> {
 	const graph = new Map<string, LayoutNode>();
 	for (const step of steps) {
-		graph.set(`step-${step.id}`, {
-			id: `step-${step.id}`,
+		graph.set(`step-${step.documentId}`, {
+			id: `step-${step.documentId}`,
 			children: [],
 			parents: [],
 			step,
 		});
 	}
 	for (const step of steps) {
-		const sourceId = `step-${step.id}`;
+		const sourceId = `step-${step.documentId}`;
 		for (const conn of step.connections_from_this_step ?? []) {
 			if (!conn.target_step) continue;
-			const targetId = `step-${conn.target_step.id}`;
+			const targetId = `step-${conn.target_step.documentId}`;
 			graph.get(sourceId)?.children.push(targetId);
 			graph.get(targetId)?.parents.push(sourceId);
 		}
@@ -228,7 +227,7 @@ function convertJourneyToReactFlow(
 	}
 
 	journey.journey_steps.forEach((step: JourneyStep) => {
-		const position = positions.get(`step-${step.id}`) || { x: 100, y: 100 };
+		const position = positions.get(`step-${step.documentId}`) || { x: 100, y: 100 };
 
 		let config: any = {};
 		switch (step.type) {
@@ -237,19 +236,19 @@ function convertJourneyToReactFlow(
 					composition: step.composition
 						? {
 								label: step.composition.name,
-								value: step.composition.id.toString(),
+								value: step.composition.documentId,
 							}
 						: undefined,
 					identity: step.identity
 						? {
 								label: step.identity.name,
-								value: step.identity.id.toString(),
+								value: step.identity.documentId,
 							}
 						: undefined,
 					channel: step.channel
 						? {
 								label: step.channel.name,
-								value: step.channel.id.toString(),
+								value: step.channel.documentId,
 							}
 						: undefined,
 					trackConversion: false,
@@ -338,13 +337,13 @@ function convertJourneyToReactFlow(
 		}
 
 		nodes.push({
-			id: `step-${step.id}`,
+			id: `step-${step.documentId}`,
 			type: step.type,
 			position,
 			data: {
 				label: step.name,
 				type: step.type,
-				stepId: step.id,
+				stepId: step.documentId,
 				config,
 				hasContacts: step.contacts && step.contacts.length > 0,
 				hasIdentity: !!step.identity?.name,
@@ -357,7 +356,7 @@ function convertJourneyToReactFlow(
 					if (!connection.target_step) return;
 					const conditions =
 						connection.journey_step_rules?.map((rule) => ({
-							id: `condition-${rule.id}`,
+							id: `condition-${rule.documentId}`,
 							type: rule.condition,
 							operator: rule.condition_operator,
 							value: rule.condition_value?.includes("value")
@@ -378,9 +377,9 @@ function convertJourneyToReactFlow(
 						})) || [];
 
 					edges.push({
-						id: `e-step-${step.id}-step-${connection.target_step.id}`,
-						source: `step-${step.id}`,
-						target: `step-${connection.target_step.id}`,
+						id: `e-step-${step.documentId}-step-${connection.target_step.documentId}`,
+						source: `step-${step.documentId}`,
+						target: `step-${connection.target_step.documentId}`,
 						type: "default",
 						animated: false,
 						style: {
@@ -391,7 +390,7 @@ function convertJourneyToReactFlow(
 						data: {
 							conditions,
 							condition_type: connection.condition_type,
-							connectionId: connection.id,
+							connectionId: connection.documentId,
 							priority: connection.priority || 1,
 							sourceType: connection.source_step.type,
 						},
