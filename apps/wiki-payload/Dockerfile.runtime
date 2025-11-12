@@ -1,5 +1,7 @@
 FROM node:22-alpine AS builder
 
+ARG NEXT_PUBLIC_SERVER_URL=https://wiki.nowtec.solutions
+
 RUN apk add --no-cache libc6-compat postgresql postgresql-client su-exec
 
 WORKDIR /app
@@ -24,6 +26,9 @@ RUN set -e && \
     echo "Setting environment variables..." && \
     export DATABASE_URI=postgresql://postgres@localhost:5432/wikidb && \
     export PAYLOAD_SECRET=build-time-secret && \
+    export NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL} && \
+    echo "Creating migrations directory..." && \
+    mkdir -p /app/apps/wiki-payload/src/migrations && \
     echo "Generating initial Payload migration..." && \
     cd /app/apps/wiki-payload && pnpm payload migrate:create --name init && \
     echo "Applying Payload migrations..." && \
@@ -45,8 +50,11 @@ WORKDIR /app
 # Copy built application
 COPY --from=builder /app .
 
+# Enable pnpm for runtime
+RUN corepack enable pnpm
+
 EXPOSE 3000
 ENV NODE_ENV=production
 ENV PORT=3000
 
-CMD ["sh", "-c", "pnpm --filter wiki payload migrate && pnpm --filter wiki start"]
+CMD ["sh", "-c", "echo 'Running migrations...' && pnpm --filter wiki payload migrate; migration_exit=$?; if [ $migration_exit -eq 0 ]; then echo 'Migrations applied successfully'; else echo 'Migration exited with code' $migration_exit; fi; echo 'Starting application...' && pnpm --filter wiki start"]
