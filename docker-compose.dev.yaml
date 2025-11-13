@@ -91,7 +91,9 @@ services:
   nowcrm:
     container_name: nowcrm
     image: nowcrm
-    build: ./contactsapp/
+    build:
+      context: .
+      dockerfile: ./apps/nowcrm/Dockerfile
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -106,8 +108,9 @@ services:
       COMPOSER_URL: ${COMPOSER_URL}
       STRAPI_URL: ${STRAPI_URL}
       DAL_URL: ${DAL_URL}
+      JOURNEYS_URL: ${JOURNEYS_URL}
       CRM_TOTP_ENCRYPTION_KEY: ${CRM_TOTP_ENCRYPTION_KEY}
-      2FA_ENABLED: ${2FA_ENABLED}
+      twoFA_ENABLED: ${twoFA_ENABLED}
       TEST_RUN: ${TEST_RUN}
       NT_STACK_VERSION: ${NT_STACK_VERSION}
       S3_ACCESS_KEY: ${S3_ACCESS_KEY}

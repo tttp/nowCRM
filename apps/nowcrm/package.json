@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "biome check",
     "lint:fix": "biome check --fix --unsafe",
@@ -60,7 +60,7 @@
     "date-fns": "^4.1.0",
     "dotenv": "^16.5.0",
     "embla-carousel-react": "^8.6.0",
-    "envalid": "^8.0.0",
+    "envalid": "8.1.0",
     "eslint": "8.26.0",
     "eslint-config-next": "15.3.3",
     "file-saver": "^2.0.5",
