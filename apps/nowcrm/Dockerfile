@@ -1,54 +1,44 @@
-FROM node:22-slim AS base
+FROM node:24-alpine AS common-deps
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# ----------------------
-# Build stage
-# ----------------------
-FROM base AS build
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy only dependency manifests first (for caching)
-COPY pnpm-lock.yaml ./
-COPY pnpm-workspace.yaml ./
-COPY package.json ./
-COPY tsconfig.base.json ./
-COPY tsconfig.json ./
+# Copy only the necessary files for dependency resolution
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./tsconfig.base.json ./tsconfig.json /app/
 
-# Copy only required packages and apps
-COPY libs ./libs
-COPY apps/nowcrm ./apps/nowcrm
 
-# Install dependencies with cache mount
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+COPY ./apps/nowcrm/package.json /app/apps/nowcrm/
+COPY ./libs/services/package.json /app/libs/services/
 
-# Build the selected app (and any dependent workspaces)
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_PRIVATE_STANDALONE=true
-RUN pnpm run -r build
+RUN pnpm install --frozen-lockfile
 
-# ----------------------
-# Runtime stage
-# ----------------------
-FROM base AS runner
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_PRIVATE_STANDALONE=true
+FROM common-deps AS builder
+
+# Copy sourcecode after installing dependences to accelerate subsequents builds
+COPY ./apps/nowcrm /app/apps/nowcrm
+COPY ./libs/services /app/libs/services
+
+RUN pnpm --filter @nowcrm/nowcrm build
+
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+ENV NODE_ENV=production
 
-COPY --from=build /usr/src/app/apps/nowcrm/public ./public
-COPY --from=build --chown=nextjs:nodejs /usr/src/app/apps/nowcrm/.next/standalone ./
-COPY --from=build --chown=nextjs:nodejs /usr/src/app/apps/nowcrm/.next/static ./.next/static
+COPY --from=builder /app/apps/nowcrm/.next/standalone ./
+COPY --from=builder /app/apps/nowcrm/.next/static ./apps/nowcrm/.next/static
+COPY --from=builder /app/apps/nowcrm/public ./apps/nowcrm/public
 
-USER nextjs
+RUN chown -R node:node /app
+
+USER node
+
+WORKDIR /app/apps/nowcrm
 
 EXPOSE 3000
-ENV PORT=3000
-ENV HOSTNAME=0.0.0.0
 
 CMD ["node", "server.js"]
